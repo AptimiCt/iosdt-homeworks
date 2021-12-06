@@ -22,7 +22,6 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()

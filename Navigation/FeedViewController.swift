@@ -23,7 +23,6 @@ class FeedViewController: UIViewController, SetupViewProtocol {
                                    image: UIImage(systemName: "f.circle.fill"),
                                    tag: 0)
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
