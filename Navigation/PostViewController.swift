@@ -9,6 +9,16 @@ import UIKit
 
 class PostViewController: UIViewController, SetupViewProtocol {
 
+    var post: Post?
+    
+    init(post: Post) {
+        self.post = post
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +30,12 @@ class PostViewController: UIViewController, SetupViewProtocol {
                                              target: self,
                                              action: #selector(openInfoVC))
         view.backgroundColor = .blue
-        navigationItem.title = "Post"
+        navigationItem.title = post?.title
         navigationItem.setRightBarButton(leftButtonItem, animated: true)
     }
 
     @objc func openInfoVC(){
-        print(#function)
+        let infoVC = InfoViewController()
+        present(infoVC, animated: true, completion: nil)
     }
 }

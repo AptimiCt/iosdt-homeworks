@@ -18,6 +18,7 @@ class FeedViewController: UIViewController, SetupViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
+    let post = Post(title: "New Post")
     let tabBarItemLocal = UITabBarItem(title: "Feed",
                                    image: UIImage(systemName: "f.circle.fill"),
                                    tag: 0)
@@ -44,7 +45,7 @@ class FeedViewController: UIViewController, SetupViewProtocol {
     }
     
     @objc func pressed(){
-        let postViewController = PostViewController()
+        let postViewController = PostViewController(post: post)
         navigationController?.pushViewController(postViewController, animated: true)
     }
 }
