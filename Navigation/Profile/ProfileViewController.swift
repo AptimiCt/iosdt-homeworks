@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     }
     
     func setupView() {
-        view.backgroundColor =  .orange
+        view.backgroundColor =  .lightGray
         self.navigationItem.title = "Profile"
     }
 }
