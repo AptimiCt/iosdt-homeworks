@@ -21,6 +21,11 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     let tabBarItemLocal = UITabBarItem(title: "Profile",
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
+    let profileHeaderView = ProfileHeaderView()
+    
+    override func viewWillLayoutSubviews() {
+        profileHeaderView.frame = view.safeAreaLayoutGuide.layoutFrame
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,5 +35,12 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     func setupView() {
         view.backgroundColor =  .lightGray
         self.navigationItem.title = "Profile"
+        view.addSubview(profileHeaderView)
+        profileHeaderView.statusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+    }
+    
+    @objc func buttonPressed(){
+        guard let text = profileHeaderView.statusLabel.text else { return }
+        print(text)
     }
 }
