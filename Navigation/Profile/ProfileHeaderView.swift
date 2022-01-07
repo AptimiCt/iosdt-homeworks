@@ -81,18 +81,15 @@ class ProfileHeaderView: UIView {
             avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
             avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-            //avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor, multiplier: 1),
             avatarImageView.heightAnchor.constraint(equalToConstant: 100),
             
             fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
             fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 20),
             fullNameLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            //fullNameLabel.heightAnchor.constraint(equalToConstant: 18),
             
             statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -34),
             statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
             statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
-            //statusLabel.heightAnchor.constraint(equalToConstant: 14),
             
             setStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
@@ -101,6 +98,7 @@ class ProfileHeaderView: UIView {
             
         ]
         NSLayoutConstraint.activate(constraints)
+        
         self.setNeedsLayout()
         self.layoutIfNeeded()
     }

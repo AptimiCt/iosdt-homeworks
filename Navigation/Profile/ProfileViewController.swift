@@ -23,10 +23,6 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
                                        tag: 1)
     let profileHeaderView = ProfileHeaderView()
     
-    override func viewWillLayoutSubviews() {
-        profileHeaderView.frame = view.safeAreaLayoutGuide.layoutFrame
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -36,7 +32,26 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         view.backgroundColor =  .lightGray
         self.navigationItem.title = "Profile"
         view.addSubview(profileHeaderView)
-        profileHeaderView.setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        profileHeaderView.setStatusButton.addTarget(self,
+                                                    action: #selector(buttonPressed),
+                                                    for: .touchUpInside)
+        configureConstraints()
+    }
+    
+    func configureConstraints(){
+        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraints: [NSLayoutConstraint] = [
+            profileHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+        
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
     }
     
     @objc func buttonPressed(){
