@@ -12,10 +12,10 @@ class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(avatarImageView)
-        addSubview(stackView)
-        stackView.addSubview(nameLabel)
-        stackView.addSubview(statusLabel)
-        addSubview(statusButton)
+        addSubview(fullNameLabel)
+        addSubview(statusLabel)
+        addSubview(setStatusButton)
+        configureConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -23,16 +23,14 @@ class ProfileHeaderView: UIView {
     }
     
     let  avatarImageView: UIImageView = { let imageView = UIImageView(image: UIImage(named: "avatar"))
-        imageView.frame = CGRect(x: 16, y: 16, width: 100, height: 100)
         imageView.layer.cornerRadius = 50
         imageView.layer.borderWidth = 3
-        imageView.layer.borderColor = CGColor(red: 100, green: 2, blue: 24, alpha: 1)
+        imageView.layer.borderColor = UIColor.white.cgColor
         imageView.clipsToBounds = true
         return imageView
     }()
     
-    let statusButton: UIButton = { let button = UIButton()
-        button.frame = CGRect(x: 16, y: 132, width: 358, height: 50)
+    let setStatusButton: UIButton = { let button = UIButton()
         button.setTitle("Show status", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
@@ -48,24 +46,62 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    let nameLabel: UILabel = { let nameLabel = UILabel()
+    let fullNameLabel: UILabel = {
+        let nameLabel = UILabel()
         nameLabel.text = "Avatar"
         nameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         nameLabel.textColor = .black
-        nameLabel.frame = CGRect(x: 41, y: 0, width: 100, height: 30)
         return nameLabel
     }()
         
-    let statusLabel: UILabel = { let statusLabel = UILabel()
+    let statusLabel: UILabel = {
+        let statusLabel = UILabel()
         statusLabel.text = "Waiting for something..."
         statusLabel.font = .systemFont(ofSize: 14, weight: .regular)
         statusLabel.textColor = .gray
-        statusLabel.frame = CGRect(x: 41, y: 51, width: 200, height: 30)
         return statusLabel
     }()
     
-    let stackView: UIStackView = { let stackView = UIStackView()
-        stackView.frame.origin = CGPoint(x: 91, y: 27)
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
         return stackView
     }()
+    
+    
+    func configureConstraints(){
+        
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        setStatusButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraints: [NSLayoutConstraint] = [
+            avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
+            avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+            //avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor, multiplier: 1),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
+            
+            fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
+            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 20),
+            fullNameLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            //fullNameLabel.heightAnchor.constraint(equalToConstant: 18),
+            
+            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -34),
+            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
+            //statusLabel.heightAnchor.constraint(equalToConstant: 14),
+            
+            setStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
+            setStatusButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50)
+            
+        ]
+        NSLayoutConstraint.activate(constraints)
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+    }
 }

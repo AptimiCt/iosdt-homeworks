@@ -36,7 +36,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         view.backgroundColor =  .lightGray
         self.navigationItem.title = "Profile"
         view.addSubview(profileHeaderView)
-        profileHeaderView.statusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        profileHeaderView.setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
     @objc func buttonPressed(){
