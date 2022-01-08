@@ -22,6 +22,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
     let profileHeaderView = ProfileHeaderView()
+    let newButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +30,12 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     }
     
     func setupView() {
-        view.backgroundColor =  .lightGray
+        newButton.setTitle("newButton", for: .normal)
+        newButton.backgroundColor = .cyan
+        view.backgroundColor = .lightGray
         self.navigationItem.title = "Profile"
         view.addSubview(profileHeaderView)
+        view.addSubview(newButton)
         profileHeaderView.setStatusButton.addTarget(self,
                                                     action: #selector(buttonPressed),
                                                     for: .touchUpInside)
@@ -40,12 +44,17 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     
     func configureConstraints(){
         profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        newButton.translatesAutoresizingMaskIntoConstraints = false
         
         let constraints: [NSLayoutConstraint] = [
             profileHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
+            
+            newButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            newButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            newButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
         ]
         
         NSLayoutConstraint.activate(constraints)

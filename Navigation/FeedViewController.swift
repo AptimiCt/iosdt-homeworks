@@ -35,7 +35,10 @@ class FeedViewController: UIViewController, SetupViewProtocol {
     }
     
     func setupButton(){
-        let buttonToPost = UIButton(frame: CGRect(x: self.view.frame.width/2 - 100, y: self.view.frame.height/2 - 25, width: 200, height: 50))
+        let buttonToPost = UIButton(frame: CGRect(x: self.view.frame.width / 2 - 100,
+                                                  y: self.view.frame.height / 2 - 25,
+                                                  width: 200,
+                                                  height: 50))
         buttonToPost.backgroundColor = .red
         buttonToPost.layer.cornerRadius = 10
         buttonToPost.setTitle("post", for: .normal)

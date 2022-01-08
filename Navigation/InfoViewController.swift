@@ -13,12 +13,11 @@ class InfoViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemTeal
         setupButton()
-        
     }
     
     func setupButton(){
-        let alertButton = UIButton(frame: CGRect(x: self.view.bounds.width/2 - 100,
-                                                 y: self.view.bounds.height/2 - 25,
+        let alertButton = UIButton(frame: CGRect(x: self.view.bounds.width / 2 - 100,
+                                                 y: self.view.bounds.height / 2 - 25,
                                                  width: 200,
                                                  height: 50))
         alertButton.setTitle("Alert", for: .normal)

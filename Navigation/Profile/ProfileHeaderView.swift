@@ -22,7 +22,8 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let  avatarImageView: UIImageView = { let imageView = UIImageView(image: UIImage(named: "avatar"))
+    let  avatarImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "avatar"))
         imageView.layer.cornerRadius = 50
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
@@ -30,19 +31,17 @@ class ProfileHeaderView: UIView {
         return imageView
     }()
     
-    let setStatusButton: UIButton = { let button = UIButton()
+    let setStatusButton: UIButton = {
+        let button = UIButton()
         button.setTitle("Show status", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
-        
         button.layer.cornerRadius = 4
-        
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 4
         button.layer.shadowOffset.width = 4
         button.layer.shadowOffset.height = 4
-        
         return button
     }()
     
@@ -67,7 +66,6 @@ class ProfileHeaderView: UIView {
         stackView.axis = .vertical
         return stackView
     }()
-    
     
     func configureConstraints(){
         
@@ -95,7 +93,6 @@ class ProfileHeaderView: UIView {
             setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
             setStatusButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50)
-            
         ]
         NSLayoutConstraint.activate(constraints)
         
