@@ -23,10 +23,17 @@ class FeedViewController: UIViewController, SetupViewProtocol {
                                    image: UIImage(systemName: "f.circle.fill"),
                                    tag: 0)
     
+    let buttonToPostFirst = UIButton()
+    let buttonToPostSecond = UIButton()
+
+    let stackView = UIStackView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupButton()
+        setupButtons()
+        setupStack()
+        setupConstaints()
     }
     
     func setupView() {
@@ -34,18 +41,36 @@ class FeedViewController: UIViewController, SetupViewProtocol {
         self.navigationItem.title = "Feed"
     }
     
-    func setupButton(){
-        let buttonToPost = UIButton(frame: CGRect(x: self.view.frame.width / 2 - 100,
-                                                  y: self.view.frame.height / 2 - 25,
-                                                  width: 200,
-                                                  height: 50))
-        buttonToPost.backgroundColor = .red
-        buttonToPost.layer.cornerRadius = 10
-        buttonToPost.setTitle("post", for: .normal)
-        buttonToPost.addTarget(self, action: #selector(pressed), for: .touchUpInside)
-        view.addSubview(buttonToPost)
+    func setupButtons(){
+        buttonToPostFirst.translatesAutoresizingMaskIntoConstraints = false
+        buttonToPostSecond.translatesAutoresizingMaskIntoConstraints = false
+        buttonToPostFirst.backgroundColor = .red
+        buttonToPostFirst.layer.cornerRadius = 10
+        buttonToPostFirst.setTitle("First button", for: .normal)
+        buttonToPostFirst.addTarget(self, action: #selector(pressed), for: .touchUpInside)
+        
+        buttonToPostSecond.backgroundColor = .blue
+        buttonToPostSecond.layer.cornerRadius = 10
+        buttonToPostSecond.setTitle("Second button", for: .normal)
+        buttonToPostSecond.addTarget(self, action: #selector(pressed), for: .touchUpInside)
     }
     
+    func setupStack(){
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.addArrangedSubview(buttonToPostFirst)
+        stackView.addArrangedSubview(buttonToPostSecond)
+        view.addSubview(stackView)
+    }
+    
+    func setupConstaints(){
+        let constraints = [
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+    }
     @objc func pressed(){
         let postViewController = PostViewController(post: post)
         navigationController?.pushViewController(postViewController, animated: true)
