@@ -73,23 +73,32 @@ class ProfileHeaderView: UIView {
         setStatusButton.toAutoLayout()
         
         let constraints: [NSLayoutConstraint] = [
-            avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
-            avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
+            avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+                                                     constant: Constants.leadingMarginForAvatarImageView),
+            avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
+                                                 constant: Constants.topMarginForAvatarImageView),
+            avatarImageView.widthAnchor.constraint(equalToConstant: Constants.widthForAvatarImageView),
+            avatarImageView.heightAnchor.constraint(equalToConstant: Constants.heightForAvatarImageView),
             
-            fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
-            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 20),
-            fullNameLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor,
+                                                   constant: Constants.leadingMarginForfullNameLabel),
+            fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
+                                               constant: Constants.topMarginForfullNameLabel),
+            fullNameLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
+                                                    constant: Constants.trailingMarginForfullNameLabel),
             
-            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -34),
             statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
             statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
+            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor,
+                                                constant: Constants.bottomMarginForStatusLabel),
             
-            setStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50)
+            setStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+                                                     constant: Constants.leadingMarginForSetStatusButton),
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor,
+                                                 constant: Constants.topMarginForSetStatusButton),
+            setStatusButton.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
+                                                      constant: Constants.trailingMarginForSetStatusButton),
+            setStatusButton.heightAnchor.constraint(equalToConstant: Constants.heightForSetStatusButton)
         ]
         NSLayoutConstraint.activate(constraints)
         

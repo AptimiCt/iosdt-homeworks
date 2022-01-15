@@ -48,8 +48,8 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         
         let constraints: [NSLayoutConstraint] = [
             profileHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
             
             newButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),

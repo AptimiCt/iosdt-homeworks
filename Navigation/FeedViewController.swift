@@ -42,8 +42,8 @@ class FeedViewController: UIViewController, SetupViewProtocol {
     }
     
     func setupButtons(){
-        buttonToPostFirst.translatesAutoresizingMaskIntoConstraints = false
-        buttonToPostSecond.translatesAutoresizingMaskIntoConstraints = false
+        buttonToPostFirst.toAutoLayout()
+        buttonToPostSecond.toAutoLayout()
         buttonToPostFirst.backgroundColor = .red
         buttonToPostFirst.layer.cornerRadius = 10
         buttonToPostFirst.setTitle("First button", for: .normal)
@@ -56,7 +56,7 @@ class FeedViewController: UIViewController, SetupViewProtocol {
     }
     
     func setupStack(){
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.toAutoLayout()
         stackView.axis = .vertical
         stackView.spacing = 10
         stackView.addArrangedSubview(buttonToPostFirst)
