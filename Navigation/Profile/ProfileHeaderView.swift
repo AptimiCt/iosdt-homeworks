@@ -11,18 +11,17 @@ class ProfileHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(avatarImageView)
-        addSubview(stackView)
-        stackView.addSubview(nameLabel)
-        stackView.addSubview(statusLabel)
-        addSubview(statusButton)
+        stackView.addSubviews(nameLabel,statusLabel)
+        addSubviews(avatarImageView, stackView, statusButton)
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let  avatarImageView: UIImageView = { let imageView = UIImageView(image: UIImage(named: "avatar"))
+    let  avatarImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "avatar"))
         imageView.frame = CGRect(x: 16, y: 16, width: 100, height: 100)
         imageView.layer.cornerRadius = 50
         imageView.layer.borderWidth = 3
@@ -68,4 +67,11 @@ class ProfileHeaderView: UIView {
         stackView.frame.origin = CGPoint(x: 91, y: 27)
         return stackView
     }()
+}
+
+public extension UIView {
+    
+    func addSubviews(_ subviews: UIView...){
+        subviews.forEach { addSubview($0)}
+    }
 }
