@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB0B224A279343AD00C51B3D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B2249279343AD00C51B3D /* Constants.swift */; };
 		BB53FB24276A8F9D0094AF1D /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53FB23276A8F9D0094AF1D /* ProfileHeaderView.swift */; };
 		BBBBC9152753E9A6003DDF50 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */; };
 		BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBBC9162753E9DB003DDF50 /* ProfileViewController.swift */; };
@@ -16,12 +17,12 @@
 		BBD4136E275D894C00B6E978 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4136D275D894C00B6E978 /* Post.swift */; };
 		BBDC80302749E2FF000A302B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC802F2749E2FF000A302B /* AppDelegate.swift */; };
 		BBDC80322749E2FF000A302B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC80312749E2FF000A302B /* SceneDelegate.swift */; };
-		BBDC80342749E2FF000A302B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC80332749E2FF000A302B /* ViewController.swift */; };
 		BBDC80392749E301000A302B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBDC80382749E301000A302B /* Assets.xcassets */; };
 		BBDC803C2749E301000A302B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBDC803A2749E301000A302B /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB0B2249279343AD00C51B3D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BB53FB23276A8F9D0094AF1D /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		BBBBC9162753E9DB003DDF50 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -32,7 +33,6 @@
 		BBDC802C2749E2FF000A302B /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBDC802F2749E2FF000A302B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBDC80312749E2FF000A302B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BBDC80332749E2FF000A302B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BBDC80382749E301000A302B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBDC803B2749E301000A302B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBDC803D2749E301000A302B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,10 +85,10 @@
 				BBD4136B275D882000B6E978 /* InfoViewController.swift */,
 				BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */,
 				BB53FB22276A8F100094AF1D /* Profile */,
-				BBDC80332749E2FF000A302B /* ViewController.swift */,
 				BBDC80382749E301000A302B /* Assets.xcassets */,
 				BBDC803A2749E301000A302B /* LaunchScreen.storyboard */,
 				BBDC803D2749E301000A302B /* Info.plist */,
+				BB0B2249279343AD00C51B3D /* Constants.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -166,9 +166,9 @@
 				BBBBC9192753EA15003DDF50 /* SetupViewProtocol.swift in Sources */,
 				BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */,
 				BBD4136A275D721800B6E978 /* PostViewController.swift in Sources */,
-				BBDC80342749E2FF000A302B /* ViewController.swift in Sources */,
 				BBBBC9152753E9A6003DDF50 /* FeedViewController.swift in Sources */,
 				BBDC80302749E2FF000A302B /* AppDelegate.swift in Sources */,
+				BB0B224A279343AD00C51B3D /* Constants.swift in Sources */,
 				BBD4136E275D894C00B6E978 /* Post.swift in Sources */,
 				BB53FB24276A8F9D0094AF1D /* ProfileHeaderView.swift in Sources */,
 				BBD4136C275D882000B6E978 /* InfoViewController.swift in Sources */,

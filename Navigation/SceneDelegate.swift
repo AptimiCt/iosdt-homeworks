@@ -22,17 +22,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarController = UITabBarController()        
         let feedViewController = FeedViewController()
         let profileViewController = ProfileViewController()
+        let feedNavigationController = UINavigationController(rootViewController: feedViewController)
+        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
         
-        tabBarController.viewControllers = [UINavigationController(rootViewController: feedViewController),
-                                            UINavigationController(rootViewController: profileViewController)]
+        tabBarController.viewControllers = [feedNavigationController,profileNavigationController]
         
         if #available(iOS 15.0, *) {
-           let appearance = UITabBarAppearance()
-           appearance.configureWithOpaqueBackground()
-           appearance.backgroundColor = .white
-           
-           tabBarController.tabBar.standardAppearance = appearance
-           tabBarController.tabBar.scrollEdgeAppearance = tabBarController.tabBar.standardAppearance
+            let appearanceTabBar = UITabBarAppearance()
+            let appearanceNavigationBar = UINavigationBarAppearance()
+            appearanceTabBar.configureWithOpaqueBackground()
+            appearanceNavigationBar.configureWithOpaqueBackground()
+            appearanceTabBar.backgroundColor = .white
+            appearanceNavigationBar.backgroundColor = .white
+            tabBarController.tabBar.standardAppearance = appearanceTabBar
+            feedNavigationController.navigationBar.standardAppearance = appearanceNavigationBar
+            profileNavigationController.navigationBar.standardAppearance = appearanceNavigationBar
+            tabBarController.tabBar.scrollEdgeAppearance = tabBarController.tabBar.standardAppearance
+            feedNavigationController.navigationBar.scrollEdgeAppearance = feedNavigationController.navigationBar.standardAppearance
+            profileNavigationController.navigationBar.scrollEdgeAppearance = profileNavigationController.navigationBar.standardAppearance
         }
         
         window.rootViewController = tabBarController
