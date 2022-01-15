@@ -11,10 +11,7 @@ class ProfileHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(avatarImageView)
-        addSubview(fullNameLabel)
-        addSubview(statusLabel)
-        addSubview(setStatusButton)
+        addSubviews(avatarImageView, fullNameLabel, statusLabel, setStatusButton)
         configureConstraints()
     }
     
@@ -69,11 +66,11 @@ class ProfileHeaderView: UIView {
     
     func configureConstraints(){
         
-        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        setStatusButton.translatesAutoresizingMaskIntoConstraints = false
+        avatarImageView.toAutoLayout()
+        stackView.toAutoLayout()
+        fullNameLabel.toAutoLayout()
+        statusLabel.toAutoLayout()
+        setStatusButton.toAutoLayout()
         
         let constraints: [NSLayoutConstraint] = [
             avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -98,5 +95,16 @@ class ProfileHeaderView: UIView {
         
         self.setNeedsLayout()
         self.layoutIfNeeded()
+    }
+}
+
+public extension UIView {
+    
+    func toAutoLayout(){
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    func addSubviews(_ subviews: UIView...){
+        subviews.forEach { addSubview($0)}
     }
 }
