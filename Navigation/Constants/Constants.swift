@@ -8,6 +8,8 @@
 import UIKit
 
 struct Constants {
+    //MARK: - Constants for ProfileHeaderView
+    
     //MARK: - Constants for AvatarImageView
     static let leadingMarginForAvatarImageView: CGFloat = 16
     static let topMarginForAvatarImageView: CGFloat = 16
@@ -28,6 +30,28 @@ struct Constants {
     static let trailingMarginForSetStatusButton: CGFloat = -16
     static let heightForSetStatusButton: CGFloat = 50
     
+    //MARK: - Constants for ProfileViewController
+    
     //MARK: - Constants for profileHeaderView
     static let heightForProfileHeaderView: CGFloat = 220
+    
+    
+    //MARK: - Constants for LogInViewController
+    
+    //MARK: - Constants for logoImageView
+    
+    static let topMarginForLogoImageView: CGFloat = 120
+    static let heightForLogoImageView: CGFloat = 100
+    static let widthForLogoImageView: CGFloat = 100
+    
+    //MARK: - Constants for stackView
+    static let leadingMarginForStackView: CGFloat = 16
+    static let topMarginForStackView: CGFloat = 120
+    static let trailingMarginForStackView: CGFloat = -16
+    static let heightForStackView: CGFloat = 100
+    
+    //MARK: - Constants for loginButton
+    static let topMarginForLoginButton: CGFloat = 16
+    static let heightForLoginButton: CGFloat = 50
+    
 }

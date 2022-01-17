@@ -50,7 +50,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
             profileHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: Constants.heightForProfileHeaderView),
             
             newButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             newButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),

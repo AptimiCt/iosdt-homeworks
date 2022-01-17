@@ -19,7 +19,7 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let  avatarImageView: UIImageView = {
+    let avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "avatar"))
         imageView.layer.cornerRadius = 50
         imageView.layer.borderWidth = 3

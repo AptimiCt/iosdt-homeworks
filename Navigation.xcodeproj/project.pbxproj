@@ -51,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB38BC4E27944DE000FF4B2E /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				BB0B2249279343AD00C51B3D /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		BB53FB22276A8F100094AF1D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +88,7 @@
 		BBDC802E2749E2FF000A302B /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				BB38BC4E27944DE000FF4B2E /* Constants */,
 				BBBBC9182753EA15003DDF50 /* SetupViewProtocol.swift */,
 				BBDC802F2749E2FF000A302B /* AppDelegate.swift */,
 				BBDC80312749E2FF000A302B /* SceneDelegate.swift */,
@@ -91,7 +100,6 @@
 				BBDC80382749E301000A302B /* Assets.xcassets */,
 				BBDC803A2749E301000A302B /* LaunchScreen.storyboard */,
 				BBDC803D2749E301000A302B /* Info.plist */,
-				BB0B2249279343AD00C51B3D /* Constants.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
