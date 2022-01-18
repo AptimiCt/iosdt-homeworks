@@ -14,6 +14,10 @@ class LogInViewController: UIViewController {
         self.tabBarItem = tabBarItemLocal
     }
     
+    let scrollView = UIScrollView()
+    let contentView = UIView()
+    
+    
     let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         return imageView
@@ -79,30 +83,47 @@ class LogInViewController: UIViewController {
     }
     
     func setupView(){
+        scrollView.toAutoLayout()
+        contentView.toAutoLayout()
         logoImageView.toAutoLayout()
         stackView.toAutoLayout()
         loginButton.toAutoLayout()
         passwordTextView.toAutoLayout()
         
+        view.addSubviews(scrollView)
+        scrollView.addSubviews(contentView)
         stackView.addArrangedSubview(loginTextView)
         stackView.addArrangedSubview(passwordTextView)
-        view.addSubviews(logoImageView, stackView, loginButton)
+        contentView.addSubviews(logoImageView, stackView, loginButton)
+        
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
     func setupConstrains(){
         let constrains = [
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+            
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            logoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            logoImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,
                                                constant: Constants.topMarginForLogoImageView),
             logoImageView.heightAnchor.constraint(equalToConstant: Constants.heightForLogoImageView),
             logoImageView.widthAnchor.constraint(equalToConstant: Constants.widthForLogoImageView),
             
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                                constant: Constants.leadingMarginForStackView),
             stackView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,
                                            constant: Constants.topMarginForStackView),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                 constant: Constants.trailingMarginForStackView),
             stackView.heightAnchor.constraint(equalToConstant: Constants.heightForStackView),
             
@@ -113,7 +134,8 @@ class LogInViewController: UIViewController {
             loginButton.topAnchor.constraint(equalTo: stackView.bottomAnchor,
                                              constant: Constants.topMarginForLoginButton),
             loginButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-            loginButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton)
+            loginButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
+            loginButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16)
             
         ]
         
