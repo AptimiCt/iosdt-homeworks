@@ -8,7 +8,7 @@
 import UIKit
 
 struct Constants {
-    //MARK: - Constants for ProfileHeaderView
+    //MARK: - Constants for ProfileTableHederView
     
     //MARK: - Constants for AvatarImageView
     static let leadingMarginForAvatarImageView: CGFloat = 16

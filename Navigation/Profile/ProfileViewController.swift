@@ -11,6 +11,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
 
     init(){
         super.init(nibName: nil, bundle: nil)
+        view.backgroundColor = .white
         self.tabBarItem = tabBarItemLocal
     }
     
@@ -21,8 +22,15 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     let tabBarItemLocal = UITabBarItem(title: "Profile",
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
-    let profileHeaderView = ProfileHeaderView()
-    let newButton = UIButton()
+    let profileTableHederView = ProfileHeaderView()
+    
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.toAutoLayout()
+        return tableView
+    }()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,41 +38,24 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     }
     
     func setupView() {
-        newButton.setTitle("newButton", for: .normal)
-        newButton.backgroundColor = .cyan
-        view.backgroundColor = .lightGray
-        self.navigationItem.title = "Profile"
-        view.addSubview(profileHeaderView)
-        view.addSubview(newButton)
-        profileHeaderView.setStatusButton.addTarget(self,
-                                                    action: #selector(buttonPressed),
-                                                    for: .touchUpInside)
-        configureConstraints()
+        //configureConstraints()
     }
     
     func configureConstraints(){
-        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        newButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        view.addSubview(tableView)
+        profileTableHederView.toAutoLayout()
+    
         let constraints: [NSLayoutConstraint] = [
-            profileHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: Constants.heightForProfileHeaderView),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            newButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            newButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            newButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
         ]
         
         NSLayoutConstraint.activate(constraints)
         
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
-    }
-    
-    @objc func buttonPressed(){
-        guard let text = profileHeaderView.statusLabel.text else { return }
-        print(text)
     }
 }
