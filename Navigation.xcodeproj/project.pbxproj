@@ -10,6 +10,7 @@
 		BB0B224A279343AD00C51B3D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B2249279343AD00C51B3D /* Constants.swift */; };
 		BB38BC4D2794180600FF4B2E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38BC4C2794180600FF4B2E /* LogInViewController.swift */; };
 		BB53FB24276A8F9D0094AF1D /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */; };
+		BBAE6844279E0E830031743C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAE6843279E0E830031743C /* Storage.swift */; };
 		BBBBC9152753E9A6003DDF50 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */; };
 		BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBBC9162753E9DB003DDF50 /* ProfileViewController.swift */; };
 		BBBBC9192753EA15003DDF50 /* SetupViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBBC9182753EA15003DDF50 /* SetupViewProtocol.swift */; };
@@ -26,6 +27,7 @@
 		BB0B2249279343AD00C51B3D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BB38BC4C2794180600FF4B2E /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
+		BBAE6843279E0E830031743C /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		BBBBC9162753E9DB003DDF50 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BBBBC9182753EA15003DDF50 /* SetupViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewProtocol.swift; sourceTree = "<group>"; };
@@ -69,6 +71,22 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		BBAE6841279E0D580031743C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BBD4136D275D894C00B6E978 /* Post.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BBAE6842279E0E6F0031743C /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				BBAE6843279E0E830031743C /* Storage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		BBDC80232749E2FF000A302B = {
 			isa = PBXGroup;
 			children = (
@@ -88,12 +106,13 @@
 		BBDC802E2749E2FF000A302B /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				BBAE6842279E0E6F0031743C /* Storage */,
 				BB38BC4E27944DE000FF4B2E /* Constants */,
 				BBBBC9182753EA15003DDF50 /* SetupViewProtocol.swift */,
 				BBDC802F2749E2FF000A302B /* AppDelegate.swift */,
 				BBDC80312749E2FF000A302B /* SceneDelegate.swift */,
 				BBD41369275D721800B6E978 /* PostViewController.swift */,
-				BBD4136D275D894C00B6E978 /* Post.swift */,
+				BBAE6841279E0D580031743C /* Model */,
 				BBD4136B275D882000B6E978 /* InfoViewController.swift */,
 				BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */,
 				BB53FB22276A8F100094AF1D /* Profile */,
@@ -179,6 +198,7 @@
 				BB38BC4D2794180600FF4B2E /* LogInViewController.swift in Sources */,
 				BBD4136A275D721800B6E978 /* PostViewController.swift in Sources */,
 				BBBBC9152753E9A6003DDF50 /* FeedViewController.swift in Sources */,
+				BBAE6844279E0E830031743C /* Storage.swift in Sources */,
 				BBDC80302749E2FF000A302B /* AppDelegate.swift in Sources */,
 				BB0B224A279343AD00C51B3D /* Constants.swift in Sources */,
 				BBD4136E275D894C00B6E978 /* Post.swift in Sources */,
