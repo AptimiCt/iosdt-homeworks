@@ -30,7 +30,7 @@ class PostViewController: UIViewController, SetupViewProtocol {
                                              target: self,
                                              action: #selector(openInfoVC))
         view.backgroundColor = .blue
-        navigationItem.title = post?.title
+        navigationItem.title = post?.author
         navigationItem.setRightBarButton(leftButtonItem, animated: true)
     }
 

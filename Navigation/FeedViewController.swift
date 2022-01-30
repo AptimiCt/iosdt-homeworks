@@ -18,7 +18,7 @@ class FeedViewController: UIViewController, SetupViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let post = Post(title: "New Post")
+    let post = Post(author: "Post", description: "Post", image: "bars", likes: 1, views: 1)
     let tabBarItemLocal = UITabBarItem(title: "Feed",
                                    image: UIImage(systemName: "f.circle.fill"),
                                    tag: 0)
