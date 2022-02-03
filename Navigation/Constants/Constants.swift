@@ -9,6 +9,30 @@ import UIKit
 
 struct Constants {
     //MARK: - Constants for ProfileTableHederView
+    static let screenWeight = UIScreen.main.bounds.width
+    
+    //MARK: - Constants for PostTableViewCell
+    //MARK: - Constants for authorLabel
+    static let leadingMarginForAuthorLabel: CGFloat = 16
+    static let topMarginForAuthorLabel: CGFloat = 16
+    static let trailingMarginForAuthorLabel: CGFloat = -16
+    static let bottomForForAuthorLabel: CGFloat = -16
+    
+    //MARK: - Constants for descriptionLabel
+    static let leadingMarginForDescriptionLabel: CGFloat = 16
+    static let topMarginForDescriptionLabel: CGFloat = 16
+    static let trailingMarginForDescriptionLabel: CGFloat = -16
+    static let bottomForForDescriptionLabel: CGFloat = -16
+    
+    //MARK: - Constants for likesLabel
+    static let leadingMarginForLikesLabel: CGFloat = 16
+    static let trailingMarginForLikesLabel: CGFloat = -16
+    static let bottomForForLikesLabel: CGFloat = -16
+    
+    //MARK: - Constants for viewsLabel
+    static let topMarginForViewsLabel: CGFloat = 16
+    static let trailingMarginForViewsLabel: CGFloat = -16
+    static let bottomForForViewsLabel: CGFloat = -16
     
     //MARK: - Constants for AvatarImageView
     static let leadingMarginForAvatarImageView: CGFloat = 16

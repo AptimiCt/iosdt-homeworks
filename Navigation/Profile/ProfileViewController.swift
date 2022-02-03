@@ -30,37 +30,35 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         return tableView
     }()
     
-    let cellForPost = String(describing: UITableViewCell.self)
+    let cellForPost = String(describing: PostTableViewCell.self)
     
-    var localStorage = Storage.posts
+    var localStorage:[Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.dataSource = self
-        tableView.delegate = self
+        localStorage = Storage.posts
         setupView()
     }
     
     func setupView() {
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         configureConstraints()
     }
     
     func configureConstraints(){
         view.addSubview(tableView)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellForPost)
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: cellForPost)
         let constraints: [NSLayoutConstraint] = [
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ]
         
         NSLayoutConstraint.activate(constraints)
-        
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
     }
 }
 
@@ -70,11 +68,10 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: cellForPost)
-        cell.textLabel?.text = localStorage[indexPath.row].author
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellForPost, for: indexPath) as! PostTableViewCell
+        cell.post = localStorage[indexPath.row]
         return cell
-    }
-    
+    }    
 }
 
 extension ProfileViewController: UITableViewDelegate {
@@ -85,7 +82,11 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        220
+        Constants.heightForProfileHeaderView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.selectionStyle = .none
     }
 }
 

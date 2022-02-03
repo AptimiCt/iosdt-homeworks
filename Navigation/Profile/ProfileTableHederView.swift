@@ -109,9 +109,6 @@ extension ProfileHeaderView{
                 setStatusButton.heightAnchor.constraint(equalToConstant: Constants.heightForSetStatusButton)
             ]
             NSLayoutConstraint.activate(constraints)
-            
-            self.setNeedsLayout()
-            self.layoutIfNeeded()
         }
 }
 
