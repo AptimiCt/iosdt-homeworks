@@ -31,18 +31,18 @@ class ProfileHeaderView: UIView {
     }()
     
     let setStatusButton: UIButton = {
-    let button = UIButton()
-    button.setTitle("Show status", for: .normal)
-    button.setTitleColor(.white, for: .normal)
-    button.backgroundColor = .systemBlue
-    button.layer.cornerRadius = 4
-    button.layer.shadowColor = UIColor.black.cgColor
-    button.layer.shadowOpacity = 0.7
-    button.layer.shadowRadius = 4
-    button.layer.shadowOffset.width = 4
-    button.layer.shadowOffset.height = 4
-    return button
-}()
+        let button = UIButton()
+        button.setTitle("Show status", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 4
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.7
+        button.layer.shadowRadius = 4
+        button.layer.shadowOffset.width = 4
+        button.layer.shadowOffset.height = 4
+        return button
+    }()
     
     let fullNameLabel: UILabel = {
         let nameLabel = UILabel()

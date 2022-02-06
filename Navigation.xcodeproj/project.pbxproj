@@ -18,7 +18,8 @@
 		BBD4136C275D882000B6E978 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4136B275D882000B6E978 /* InfoViewController.swift */; };
 		BBD4136E275D894C00B6E978 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4136D275D894C00B6E978 /* Post.swift */; };
 		BBD735C827A72CAE002397A0 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD735C727A72CAE002397A0 /* PostTableViewCell.swift */; };
-		BBD735CA27AEDB05002397A0 /* PhotosName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD735C927AEDB05002397A0 /* PhotosName.swift */; };
+		BBD735CA27AEDB05002397A0 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD735C927AEDB05002397A0 /* Photos.swift */; };
+		BBD735CD27AEE22A002397A0 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD735CC27AEE22A002397A0 /* PhotosTableViewCell.swift */; };
 		BBDC80302749E2FF000A302B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC802F2749E2FF000A302B /* AppDelegate.swift */; };
 		BBDC80322749E2FF000A302B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC80312749E2FF000A302B /* SceneDelegate.swift */; };
 		BBDC80392749E301000A302B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBDC80382749E301000A302B /* Assets.xcassets */; };
@@ -37,7 +38,8 @@
 		BBD4136B275D882000B6E978 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		BBD4136D275D894C00B6E978 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		BBD735C727A72CAE002397A0 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
-		BBD735C927AEDB05002397A0 /* PhotosName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosName.swift; sourceTree = "<group>"; };
+		BBD735C927AEDB05002397A0 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
+		BBD735CC27AEE22A002397A0 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		BBDC802C2749E2FF000A302B /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBDC802F2749E2FF000A302B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBDC80312749E2FF000A302B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,7 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				BBAE6843279E0E830031743C /* Storage.swift */,
-				BBD735C927AEDB05002397A0 /* PhotosName.swift */,
+				BBD735C927AEDB05002397A0 /* Photos.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -99,6 +101,14 @@
 				BBD735C727A72CAE002397A0 /* PostTableViewCell.swift */,
 			);
 			path = Post;
+			sourceTree = "<group>";
+		};
+		BBD735CB27AEE206002397A0 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				BBD735CC27AEE22A002397A0 /* PhotosTableViewCell.swift */,
+			);
+			path = Photos;
 			sourceTree = "<group>";
 		};
 		BBDC80232749E2FF000A302B = {
@@ -120,6 +130,7 @@
 		BBDC802E2749E2FF000A302B /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				BBD735CB27AEE206002397A0 /* Photos */,
 				BBD735C627A72C95002397A0 /* Post */,
 				BBAE6842279E0E6F0031743C /* Storage */,
 				BB38BC4E27944DE000FF4B2E /* Constants */,
@@ -207,8 +218,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBD735CD27AEE22A002397A0 /* PhotosTableViewCell.swift in Sources */,
 				BBBBC9192753EA15003DDF50 /* SetupViewProtocol.swift in Sources */,
-				BBD735CA27AEDB05002397A0 /* PhotosName.swift in Sources */,
+				BBD735CA27AEDB05002397A0 /* Photos.swift in Sources */,
 				BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */,
 				BBD735C827A72CAE002397A0 /* PostTableViewCell.swift in Sources */,
 				BB38BC4D2794180600FF4B2E /* LogInViewController.swift in Sources */,
