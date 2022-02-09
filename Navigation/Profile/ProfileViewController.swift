@@ -106,7 +106,10 @@ extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.selectionStyle = .none
+        let nvc = PhotosViewController()
+        navigationController?.pushViewController(nvc, animated: true)
     }
+    
 }
 
 extension ProfileViewController: ProfileHeaderViewDelegate {

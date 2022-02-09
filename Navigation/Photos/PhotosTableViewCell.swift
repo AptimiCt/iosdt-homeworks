@@ -77,15 +77,15 @@ class PhotosTableViewCell: UITableViewCell {
                                                  constant: Constants.leadingMarginForPhotosLabel),
             photosLabel.topAnchor.constraint(equalTo: contentView.topAnchor,
                                              constant: Constants.topMarginForPhotosLabel),
-        photosLabel.trailingAnchor.constraint(lessThanOrEqualTo: arrowButton.leadingAnchor,
-                                              constant: Constants.screenWeight - 100),
-        
-        arrowButton.centerYAnchor.constraint(equalTo: photosLabel.centerYAnchor),
+            photosLabel.trailingAnchor.constraint(lessThanOrEqualTo: arrowButton.leadingAnchor,
+                                                  constant: Constants.screenWeight - 100),
+            
+            arrowButton.centerYAnchor.constraint(equalTo: photosLabel.centerYAnchor),
             arrowButton.topAnchor.constraint(equalTo: contentView.topAnchor,
                                              constant: Constants.topMarginForArrowButton),
             arrowButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                   constant: Constants.trailingMarginForArrowButton),
-        
+            
             firstPhoto.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                                 constant: Constants.leadingMarginForFirstPhoto),
             firstPhoto.topAnchor.constraint(equalTo: photosLabel.bottomAnchor,
@@ -94,32 +94,32 @@ class PhotosTableViewCell: UITableViewCell {
                                                  constant: Constants.trailingMarginForFirstPhoto),
             firstPhoto.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
                                                constant: Constants.bottomForFirstPhoto),
-        firstPhoto.widthAnchor.constraint(equalToConstant: (Constants.screenWeight - 48) / 4),
-        firstPhoto.heightAnchor.constraint(equalTo: firstPhoto.widthAnchor),
-        
-        secondPhoto.topAnchor.constraint(equalTo: firstPhoto.topAnchor),
+            firstPhoto.widthAnchor.constraint(equalToConstant: (Constants.screenWeight - 48) / 4),
+            firstPhoto.heightAnchor.constraint(equalTo: firstPhoto.widthAnchor),
+            
+            secondPhoto.topAnchor.constraint(equalTo: firstPhoto.topAnchor),
             secondPhoto.trailingAnchor.constraint(equalTo: thirdPhoto.leadingAnchor,
                                                   constant: Constants.trailingMarginForSecondPhoto),
             secondPhoto.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
                                                 constant: Constants.bottomForSecondPhoto),
-        secondPhoto.widthAnchor.constraint(equalToConstant: (Constants.screenWeight - 48) / 4),
-        secondPhoto.heightAnchor.constraint(equalTo: secondPhoto.widthAnchor),
-        
-        thirdPhoto.topAnchor.constraint(equalTo: firstPhoto.topAnchor),
+            secondPhoto.widthAnchor.constraint(equalToConstant: (Constants.screenWeight - 48) / 4),
+            secondPhoto.heightAnchor.constraint(equalTo: secondPhoto.widthAnchor),
+            
+            thirdPhoto.topAnchor.constraint(equalTo: firstPhoto.topAnchor),
             thirdPhoto.trailingAnchor.constraint(equalTo: fourthPhoto.leadingAnchor,
                                                  constant: Constants.trailingMarginForThirdPhoto),
             thirdPhoto.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
                                                constant: Constants.bottomForThirdPhoto),
-        thirdPhoto.widthAnchor.constraint(equalToConstant: (Constants.screenWeight - 48) / 4),
-        thirdPhoto.heightAnchor.constraint(equalTo: thirdPhoto.widthAnchor),
-        
-        fourthPhoto.topAnchor.constraint(equalTo: firstPhoto.topAnchor),
+            thirdPhoto.widthAnchor.constraint(equalToConstant: (Constants.screenWeight - 48) / 4),
+            thirdPhoto.heightAnchor.constraint(equalTo: thirdPhoto.widthAnchor),
+            
+            fourthPhoto.topAnchor.constraint(equalTo: firstPhoto.topAnchor),
             fourthPhoto.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                   constant: Constants.trailingMarginForFourthPhoto),
             fourthPhoto.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
                                                 constant: Constants.bottomForFourthPhoto),
-        fourthPhoto.widthAnchor.constraint(equalToConstant: (Constants.screenWeight - 48) / 4),
-        fourthPhoto.heightAnchor.constraint(equalTo: fourthPhoto.widthAnchor)
+            fourthPhoto.widthAnchor.constraint(equalToConstant: (Constants.screenWeight - 48) / 4),
+            fourthPhoto.heightAnchor.constraint(equalTo: fourthPhoto.widthAnchor)
         ]
         
         NSLayoutConstraint.activate(constraints)
