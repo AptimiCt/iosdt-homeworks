@@ -8,11 +8,6 @@
 import UIKit
 
 class ProfileViewController: UIViewController, SetupViewProtocol {
-
-    struct Cells {
-        static let cellForPost = String(describing: PostTableViewCell.self)
-        static let cellForSection = String(describing: PhotosTableViewCell.self)
-    }
     
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -27,6 +22,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     let tabBarItemLocal = UITabBarItem(title: "Profile",
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
+    
     let profileTableHederView = ProfileHeaderView()
     
     let tableView: UITableView = {
@@ -75,7 +71,8 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForSection, for: indexPath) as! PhotosTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForSection,
+                                                     for: indexPath) as! PhotosTableViewCell
             cell.photos = photos
             return cell
         }
@@ -106,10 +103,11 @@ extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.selectionStyle = .none
-        let nvc = PhotosViewController()
-        navigationController?.pushViewController(nvc, animated: true)
+        if indexPath.section == 0 {
+            let nvc = PhotosViewController()
+            navigationController?.pushViewController(nvc, animated: true)
+        }
     }
-    
 }
 
 extension ProfileViewController: ProfileHeaderViewDelegate {

@@ -156,8 +156,7 @@ class LogInViewController: UIViewController {
     }
     
     @objc func loginButtonTapped(){
-//        let profileViewController = ProfileViewController()
-        let profileViewController = PhotosViewController()
+        let profileViewController = ProfileViewController()
         navigationController?.pushViewController(profileViewController, animated: true)
         navigationController?.navigationBar.isHidden = false
     }

@@ -11,7 +11,7 @@ class PhotosViewController: UIViewController {
     
     private let text = "Photo Gallery"
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    private let collectionReuseIdentifier = String(describing: UICollectionViewCell.self)
+    
     var photos: [UIImage] = []
     
     init() {
@@ -25,25 +25,31 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         title = text
-        //photos = Photos.fetchPhotos()
+        photos = Photos.fetchPhotos()
         setupDelegate()
         setupView()
-        self.collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: collectionReuseIdentifier)
+        self.collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: Cells.cellForCollection)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
 }
 
 extension PhotosViewController {
-     func setupDelegate(){
+    func setupDelegate(){
         collectionView.dataSource = self
         collectionView.delegate = self
     }
-     func setupView() {
+    func setupView() {
         view.addSubview(collectionView)
         collectionView.pin(to: view)
     }
 }
-
 
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -51,7 +57,7 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier,
+        let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.cellForCollection,
                                                                 for: indexPath) as! PhotosCollectionViewCell
         collectionCell.photoImageView.image = photos[indexPath.item]
         return collectionCell
