@@ -19,6 +19,7 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - vars
     weak var delegate: ProfileHeaderViewDelegate?
     
     let avatarImageView: UIImageView = {
@@ -27,6 +28,7 @@ class ProfileHeaderView: UIView {
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -35,6 +37,7 @@ class ProfileHeaderView: UIView {
         button.setTitle("Show status", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
+        button.setTitleColor(.red, for: .highlighted)
         button.layer.cornerRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
@@ -66,10 +69,13 @@ class ProfileHeaderView: UIView {
         return stackView
     }()
     
+    //MARK: - funcs
     @objc func didTapedStatusButton(){
         self.delegate?.didTapedButton()
     }
 }
+
+//MARK: - extension
 extension ProfileHeaderView{
     func configureConstraints(){
             
@@ -79,7 +85,6 @@ extension ProfileHeaderView{
             statusLabel.toAutoLayout()
             setStatusButton.toAutoLayout()
             setStatusButton.addTarget(self, action: #selector(didTapedStatusButton), for: .touchUpInside)
-        
             let constraints: [NSLayoutConstraint] = [
                 avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
                                                          constant: Constants.leadingMarginForAvatarImageView),
@@ -111,17 +116,6 @@ extension ProfileHeaderView{
             NSLayoutConstraint.activate(constraints)
         }
 }
-
-//public extension UIView {
-//    
-//    func toAutoLayout(){
-//        translatesAutoresizingMaskIntoConstraints = false
-//    }
-//    
-//    func addSubviews(_ subviews: UIView...){
-//        subviews.forEach { addSubview($0)}
-//    }
-//}
 
 protocol ProfileHeaderViewDelegate: AnyObject {
     func didTapedButton()

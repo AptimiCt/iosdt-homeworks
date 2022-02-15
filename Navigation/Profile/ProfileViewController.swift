@@ -19,6 +19,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
+//MARK: - vars
     let tabBarItemLocal = UITabBarItem(title: "Profile",
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
@@ -34,6 +35,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     var localStorage:[Post] = []
     var photos: [UIImage] = []
     
+//MARK: - funcs
     override func viewDidLoad() {
         super.viewDidLoad()
         localStorage = Storage.posts
@@ -62,8 +64,13 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         
         NSLayoutConstraint.activate(constraints)
     }
+    
+    @objc func tapOnAvatar(sender: UITapGestureRecognizer){
+            print("tap: \(sender.location(in: self.view))")
+    }
 }
 
+//MARK: - extensions
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         section == 0 ? 1 : localStorage.count
@@ -92,6 +99,8 @@ extension ProfileViewController: UITableViewDelegate {
         if section == 0 {
             let profileTableHederView = ProfileHeaderView(frame: .zero)
             profileTableHederView.delegate = self
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnAvatar))
+            profileTableHederView.avatarImageView.addGestureRecognizer(tapGesture)
             return profileTableHederView
         }
         return nil
