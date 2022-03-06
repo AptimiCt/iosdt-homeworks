@@ -6,7 +6,7 @@
 //
 
 import UIKit
-    
+
 class ProfileHeaderView: UIView {
     
     override init(frame: CGRect) {
@@ -54,7 +54,7 @@ class ProfileHeaderView: UIView {
         nameLabel.textColor = .black
         return nameLabel
     }()
-        
+    
     let statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.text = "Waiting for something..."
@@ -78,43 +78,43 @@ class ProfileHeaderView: UIView {
 //MARK: - extension
 extension ProfileHeaderView{
     func configureConstraints(){
+        
+        avatarImageView.toAutoLayout()
+        stackView.toAutoLayout()
+        fullNameLabel.toAutoLayout()
+        statusLabel.toAutoLayout()
+        setStatusButton.toAutoLayout()
+        setStatusButton.addTarget(self, action: #selector(didTapedStatusButton), for: .touchUpInside)
+        let constraints: [NSLayoutConstraint] = [
+            avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+                                                     constant: Constants.leadingMarginForAvatarImageView),
+            avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
+                                                 constant: Constants.topMarginForAvatarImageView),
+            avatarImageView.widthAnchor.constraint(equalToConstant: Constants.widthForAvatarImageView),
+            avatarImageView.heightAnchor.constraint(equalToConstant: Constants.heightForAvatarImageView),
             
-            avatarImageView.toAutoLayout()
-            stackView.toAutoLayout()
-            fullNameLabel.toAutoLayout()
-            statusLabel.toAutoLayout()
-            setStatusButton.toAutoLayout()
-            setStatusButton.addTarget(self, action: #selector(didTapedStatusButton), for: .touchUpInside)
-            let constraints: [NSLayoutConstraint] = [
-                avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
-                                                         constant: Constants.leadingMarginForAvatarImageView),
-                avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
-                                                     constant: Constants.topMarginForAvatarImageView),
-                avatarImageView.widthAnchor.constraint(equalToConstant: Constants.widthForAvatarImageView),
-                avatarImageView.heightAnchor.constraint(equalToConstant: Constants.heightForAvatarImageView),
-                
-                fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor,
-                                                       constant: Constants.leadingMarginForfullNameLabel),
-                fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
-                                                   constant: Constants.topMarginForfullNameLabel),
-                fullNameLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
-                                                        constant: Constants.trailingMarginForfullNameLabel),
-                
-                statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-                statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
-                statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor,
-                                                    constant: Constants.bottomMarginForStatusLabel),
-                
-                setStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
-                                                         constant: Constants.leadingMarginForSetStatusButton),
-                setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor,
-                                                     constant: Constants.topMarginForSetStatusButton),
-                setStatusButton.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
-                                                          constant: Constants.trailingMarginForSetStatusButton),
-                setStatusButton.heightAnchor.constraint(equalToConstant: Constants.heightForSetStatusButton)
-            ]
-            NSLayoutConstraint.activate(constraints)
-        }
+            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor,
+                                                   constant: Constants.leadingMarginForfullNameLabel),
+            fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
+                                               constant: Constants.topMarginForfullNameLabel),
+            fullNameLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
+                                                    constant: Constants.trailingMarginForfullNameLabel),
+            
+            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
+            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor,
+                                                constant: Constants.bottomMarginForStatusLabel),
+            
+            setStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+                                                     constant: Constants.leadingMarginForSetStatusButton),
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor,
+                                                 constant: Constants.topMarginForSetStatusButton),
+            setStatusButton.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
+                                                      constant: Constants.trailingMarginForSetStatusButton),
+            setStatusButton.heightAnchor.constraint(equalToConstant: Constants.heightForSetStatusButton)
+        ]
+        NSLayoutConstraint.activate(constraints)
+    }
 }
 
 protocol ProfileHeaderViewDelegate: AnyObject {

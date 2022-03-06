@@ -20,12 +20,12 @@ class FeedViewController: UIViewController, SetupViewProtocol {
     
     let post = Post(author: "Post", description: "Post", image: "bars", likes: 1, views: 1)
     let tabBarItemLocal = UITabBarItem(title: "Feed",
-                                   image: UIImage(systemName: "f.circle.fill"),
-                                   tag: 0)
+                                       image: UIImage(systemName: "f.circle.fill"),
+                                       tag: 0)
     
     let buttonToPostFirst = UIButton()
     let buttonToPostSecond = UIButton()
-
+    
     let stackView = UIStackView()
     
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ class FeedViewController: UIViewController, SetupViewProtocol {
         setupView()
         setupButtons()
         setupStack()
-        setupConstaints()
+        setupConstraints()
     }
     
     func setupView() {
@@ -64,13 +64,14 @@ class FeedViewController: UIViewController, SetupViewProtocol {
         view.addSubview(stackView)
     }
     
-    func setupConstaints(){
+    func setupConstraints(){
         let constraints = [
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }
+    
     @objc func pressed(){
         let postViewController = PostViewController(post: post)
         navigationController?.pushViewController(postViewController, animated: true)

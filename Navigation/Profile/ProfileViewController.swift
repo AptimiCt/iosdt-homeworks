@@ -24,12 +24,20 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
     
-    let profileTableHederView = ProfileHeaderView()
+    let profileTableHeaderView = ProfileHeaderView()
     
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.toAutoLayout()
         return tableView
+    }()
+    
+    let subView: UIView = {
+        let subView = UIView(frame: .zero)
+        subView.backgroundColor = .black
+        subView.layer.opacity = 0
+        subView.toAutoLayout()
+        return subView
     }()
     
     var localStorage:[Post] = []
@@ -66,7 +74,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     }
     
     @objc func tapOnAvatar(sender: UITapGestureRecognizer){
-            print("tap: \(sender.location(in: self.view))")
+        print("Тап на аватаре")
     }
 }
 
@@ -97,11 +105,11 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            let profileTableHederView = ProfileHeaderView(frame: .zero)
-            profileTableHederView.delegate = self
+            
+            profileTableHeaderView.delegate = self
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnAvatar))
-            profileTableHederView.avatarImageView.addGestureRecognizer(tapGesture)
-            return profileTableHederView
+            profileTableHeaderView.avatarImageView.addGestureRecognizer(tapGesture)
+            return profileTableHeaderView
         }
         return nil
     }
@@ -121,7 +129,7 @@ extension ProfileViewController: UITableViewDelegate {
 
 extension ProfileViewController: ProfileHeaderViewDelegate {
     func didTapedButton() {
-        guard let status = self.profileTableHederView.statusLabel.text else { return }
+        guard let status = self.profileTableHeaderView.statusLabel.text else { return }
         print("\(status)")
     }
 }
