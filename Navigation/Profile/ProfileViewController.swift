@@ -8,9 +8,25 @@
 import UIKit
 
 class ProfileViewController: UIViewController, SetupViewProtocol {
-
+    
+    let tabBarItemLocal = UITabBarItem(title: "Profile",
+                                       image: UIImage(systemName: "person.crop.circle.fill"),
+                                       tag: 1)
+    let profileTableHeaderView = ProfileHeaderView()
+    
+    let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.toAutoLayout()
+        return tableView
+    }()
+    
+    let cellForPost = String(describing: PostTableViewCell.self)
+    
+    var localStorage:[Post] = []
+    
     init(){
         super.init(nibName: nil, bundle: nil)
+        view.backgroundColor = .white
         self.tabBarItem = tabBarItemLocal
     }
     
@@ -18,53 +34,65 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let tabBarItemLocal = UITabBarItem(title: "Profile",
-                                       image: UIImage(systemName: "person.crop.circle.fill"),
-                                       tag: 1)
-    let profileHeaderView = ProfileHeaderView()
-    let newButton = UIButton()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        localStorage = Storage.posts
         setupView()
     }
     
     func setupView() {
-        newButton.setTitle("newButton", for: .normal)
-        newButton.backgroundColor = .cyan
-        view.backgroundColor = .lightGray
-        self.navigationItem.title = "Profile"
-        view.addSubview(profileHeaderView)
-        view.addSubview(newButton)
-        profileHeaderView.setStatusButton.addTarget(self,
-                                                    action: #selector(buttonPressed),
-                                                    for: .touchUpInside)
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         configureConstraints()
     }
     
     func configureConstraints(){
-        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        newButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        view.addSubview(tableView)
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: cellForPost)
         let constraints: [NSLayoutConstraint] = [
-            profileHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: Constants.heightForProfileHeaderView),
-            
-            newButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            newButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            newButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ]
         
         NSLayoutConstraint.activate(constraints)
-        
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
+    }
+}
+
+extension ProfileViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        localStorage.count
     }
     
-    @objc func buttonPressed(){
-        guard let text = profileHeaderView.statusLabel.text else { return }
-        print(text)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellForPost, for: indexPath) as! PostTableViewCell
+        cell.post = localStorage[indexPath.row]
+        return cell
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let profileTableHeaderView = ProfileHeaderView(frame: .zero)
+        profileTableHeaderView.delegate = self
+        return profileTableHeaderView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        Constants.heightForProfileHeaderView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.selectionStyle = .none
+    }
+}
+
+extension ProfileViewController: ProfileHeaderViewDelegate {
+    func didTapedButton() {
+        guard let status = self.profileTableHeaderView.statusLabel.text else { return }
+        print("\(status)")
     }
 }

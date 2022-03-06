@@ -6,18 +6,11 @@
 //
 
 import UIKit
-    
+
 class ProfileHeaderView: UIView {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubviews(avatarImageView, fullNameLabel, statusLabel, setStatusButton)
-        configureConstraints()
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    weak var delegate: ProfileHeaderViewDelegate?
     
     let avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "avatar"))
@@ -49,7 +42,7 @@ class ProfileHeaderView: UIView {
         nameLabel.textColor = .black
         return nameLabel
     }()
-        
+    
     let statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.text = "Waiting for something..."
@@ -64,6 +57,21 @@ class ProfileHeaderView: UIView {
         return stackView
     }()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubviews(avatarImageView, fullNameLabel, statusLabel, setStatusButton)
+        configureConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func didTapedStatusButton(){
+        self.delegate?.didTapedButton()
+    }
+}
+extension ProfileHeaderView{
     func configureConstraints(){
         
         avatarImageView.toAutoLayout()
@@ -71,6 +79,7 @@ class ProfileHeaderView: UIView {
         fullNameLabel.toAutoLayout()
         statusLabel.toAutoLayout()
         setStatusButton.toAutoLayout()
+        setStatusButton.addTarget(self, action: #selector(didTapedStatusButton), for: .touchUpInside)
         
         let constraints: [NSLayoutConstraint] = [
             avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
@@ -101,9 +110,6 @@ class ProfileHeaderView: UIView {
             setStatusButton.heightAnchor.constraint(equalToConstant: Constants.heightForSetStatusButton)
         ]
         NSLayoutConstraint.activate(constraints)
-        
-        self.setNeedsLayout()
-        self.layoutIfNeeded()
     }
 }
 
@@ -116,4 +122,8 @@ public extension UIView {
     func addSubviews(_ subviews: UIView...){
         subviews.forEach { addSubview($0)}
     }
+}
+
+protocol ProfileHeaderViewDelegate: AnyObject {
+    func didTapedButton()
 }
