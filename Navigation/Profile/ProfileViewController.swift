@@ -8,21 +8,11 @@
 import UIKit
 
 class ProfileViewController: UIViewController, SetupViewProtocol {
-
-    init(){
-        super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = .white
-        self.tabBarItem = tabBarItemLocal
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     let tabBarItemLocal = UITabBarItem(title: "Profile",
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
-    let profileTableHederView = ProfileHeaderView()
+    let profileTableHeaderView = ProfileHeaderView()
     
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -33,6 +23,16 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     let cellForPost = String(describing: PostTableViewCell.self)
     
     var localStorage:[Post] = []
+    
+    init(){
+        super.init(nibName: nil, bundle: nil)
+        view.backgroundColor = .white
+        self.tabBarItem = tabBarItemLocal
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,14 +71,14 @@ extension ProfileViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellForPost, for: indexPath) as! PostTableViewCell
         cell.post = localStorage[indexPath.row]
         return cell
-    }    
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let profileTableHederView = ProfileHeaderView(frame: .zero)
-        profileTableHederView.delegate = self
-        return profileTableHederView
+        let profileTableHeaderView = ProfileHeaderView(frame: .zero)
+        profileTableHeaderView.delegate = self
+        return profileTableHeaderView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -92,7 +92,7 @@ extension ProfileViewController: UITableViewDelegate {
 
 extension ProfileViewController: ProfileHeaderViewDelegate {
     func didTapedButton() {
-        guard let status = self.profileTableHederView.statusLabel.text else { return }
+        guard let status = self.profileTableHeaderView.statusLabel.text else { return }
         print("\(status)")
     }
 }
