@@ -158,7 +158,6 @@ class LogInViewController: UIViewController {
     @objc func loginButtonTapped(){
         let profileViewController = ProfileViewController()
         navigationController?.pushViewController(profileViewController, animated: true)
-        navigationController?.navigationBar.isHidden = false
     }
     
     @objc func keyboardWillShow(notification: NSNotification){
