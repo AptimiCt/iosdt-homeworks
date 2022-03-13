@@ -9,17 +9,8 @@ import UIKit
 
 class ProfileViewController: UIViewController, SetupViewProtocol {
     
-    init(){
-        super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = .white
-        self.tabBarItem = tabBarItemLocal
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-//MARK: - vars
+    //MARK: - vars
     let tabBarItemLocal = UITabBarItem(title: "Profile",
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
@@ -43,7 +34,18 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     var localStorage:[Post] = []
     var photos: [UIImage] = []
     
-//MARK: - funcs
+    //MARK: - funcs
+    
+    init(){
+        super.init(nibName: nil, bundle: nil)
+        view.backgroundColor = .white
+        self.tabBarItem = tabBarItemLocal
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         localStorage = Storage.posts

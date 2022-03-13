@@ -9,15 +9,6 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubviews(avatarImageView, fullNameLabel, statusLabel, setStatusButton)
-        configureConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     //MARK: - vars
     weak var delegate: ProfileHeaderViewDelegate?
@@ -69,7 +60,19 @@ class ProfileHeaderView: UIView {
         return stackView
     }()
     
+    
     //MARK: - funcs
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubviews(avatarImageView, fullNameLabel, statusLabel, setStatusButton)
+        configureConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     @objc func didTapedStatusButton(){
         self.delegate?.didTapedButton()
     }

@@ -8,7 +8,7 @@
 import UIKit
 
 class PostViewController: UIViewController, SetupViewProtocol {
-
+    
     var post: Post?
     
     init(post: Post) {
@@ -33,7 +33,7 @@ class PostViewController: UIViewController, SetupViewProtocol {
         navigationItem.title = post?.author
         navigationItem.setRightBarButton(leftButtonItem, animated: true)
     }
-
+    
     @objc func openInfoVC(){
         let infoVC = InfoViewController()
         present(infoVC, animated: true, completion: nil)

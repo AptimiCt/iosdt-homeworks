@@ -9,15 +9,6 @@ import UIKit
 
 class FeedViewController: UIViewController, SetupViewProtocol {
     
-    init(){
-        super.init(nibName: nil, bundle: nil)
-        self.tabBarItem = tabBarItemLocal
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     let post = Post(author: "Post", description: "Post", image: "bars", likes: 1, views: 1)
     let tabBarItemLocal = UITabBarItem(title: "Feed",
                                        image: UIImage(systemName: "f.circle.fill"),
@@ -27,6 +18,15 @@ class FeedViewController: UIViewController, SetupViewProtocol {
     let buttonToPostSecond = UIButton()
     
     let stackView = UIStackView()
+    
+    init(){
+        super.init(nibName: nil, bundle: nil)
+        self.tabBarItem = tabBarItemLocal
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

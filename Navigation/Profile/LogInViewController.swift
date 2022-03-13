@@ -9,11 +9,6 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
-    init(){
-        super.init(nibName: nil, bundle: nil)
-        self.tabBarItem = tabBarItemLocal
-    }
-    
     let scrollView = UIScrollView()
     let contentView = UIView()
     
@@ -67,13 +62,18 @@ class LogInViewController: UIViewController {
         return button
     }()
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     let tabBarItemLocal = UITabBarItem(title: "Profile",
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
+    
+    init(){
+        super.init(nibName: nil, bundle: nil)
+        self.tabBarItem = tabBarItemLocal
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         navigationController?.navigationBar.isHidden = true
@@ -158,7 +158,6 @@ class LogInViewController: UIViewController {
     @objc func loginButtonTapped(){
         let profileViewController = ProfileViewController()
         navigationController?.pushViewController(profileViewController, animated: true)
-        navigationController?.navigationBar.isHidden = false
     }
     
     @objc func keyboardWillShow(notification: NSNotification){
@@ -167,9 +166,9 @@ class LogInViewController: UIViewController {
         scrollView.contentInset.bottom = keyboardSize.height
         scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
     }
+    
     @objc func keyboardWillHide(notification: NSNotification){
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
     }
-    
 }
