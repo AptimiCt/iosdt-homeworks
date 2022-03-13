@@ -8,6 +8,22 @@
 import UIKit
 
 class ProfileViewController: UIViewController, SetupViewProtocol {
+
+    
+    let tabBarItemLocal = UITabBarItem(title: "Profile",
+                                       image: UIImage(systemName: "person.crop.circle.fill"),
+                                       tag: 1)
+
+    let profileTableHeaderView = ProfileHeaderView()
+    
+    let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.toAutoLayout()
+        return tableView
+    }()
+    
+    var localStorage:[Post] = []
+    var photos: [UIImage] = []
     
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -18,21 +34,6 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    let tabBarItemLocal = UITabBarItem(title: "Profile",
-                                       image: UIImage(systemName: "person.crop.circle.fill"),
-                                       tag: 1)
-    
-    let profileTableHederView = ProfileHeaderView()
-    
-    let tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.toAutoLayout()
-        return tableView
-    }()
-    
-    var localStorage:[Post] = []
-    var photos: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +82,7 @@ extension ProfileViewController: UITableViewDataSource {
         cell.post = localStorage[indexPath.row]
         return cell
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         2
     }
@@ -89,10 +90,11 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
         if section == 0 {
-            let profileTableHederView = ProfileHeaderView(frame: .zero)
-            profileTableHederView.delegate = self
-            return profileTableHederView
+            let profileTableHeaderView = ProfileHeaderView(frame: .zero)
+            profileTableHeaderView.delegate = self
+            return profileTableHeaderView
         }
         return nil
     }
@@ -112,7 +114,7 @@ extension ProfileViewController: UITableViewDelegate {
 
 extension ProfileViewController: ProfileHeaderViewDelegate {
     func didTapedButton() {
-        guard let status = self.profileTableHederView.statusLabel.text else { return }
+        guard let status = self.profileTableHeaderView.statusLabel.text else { return }
         print("\(status)")
     }
 }
