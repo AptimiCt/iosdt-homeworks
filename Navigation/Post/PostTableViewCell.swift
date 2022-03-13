@@ -90,7 +90,7 @@ extension PostTableViewCell {
                                              constant: Constants.topMarginForAuthorLabel),
             authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                   constant: Constants.trailingMarginForAuthorLabel),
-            authorLabel.bottomAnchor.constraint(equalTo: postImageView.topAnchor, constant: Constants.bottomForForAuthorLabel),
+            authorLabel.bottomAnchor.constraint(equalTo: postImageView.topAnchor, constant: Constants.bottomForAuthorLabel),
             
             postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -102,17 +102,17 @@ extension PostTableViewCell {
             descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor,
                                                   constant: Constants.topMarginForDescriptionLabel),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMarginForDescriptionLabel),
-            descriptionLabel.bottomAnchor.constraint(equalTo: likesLabel.topAnchor, constant: Constants.bottomForForDescriptionLabel),
+            descriptionLabel.bottomAnchor.constraint(equalTo: likesLabel.topAnchor, constant: Constants.bottomForDescriptionLabel),
             
             likesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMarginForLikesLabel),
             likesLabel.trailingAnchor.constraint(lessThanOrEqualTo: viewsLabel.leadingAnchor, constant: Constants.trailingMarginForLikesLabel),
-            likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomForForLikesLabel),
+            likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomForLikesLabel),
             likesLabel.widthAnchor.constraint(lessThanOrEqualToConstant: Constants.screenWeight / 2 - 48),
             
             viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constants.topMarginForViewsLabel),
             viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                  constant: Constants.trailingMarginForViewsLabel),
-            viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomForForViewsLabel),
+            viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomForViewsLabel),
             viewsLabel.widthAnchor.constraint(lessThanOrEqualToConstant: Constants.screenWeight / 2 - 48),
         ]
         NSLayoutConstraint.activate(constraints)
