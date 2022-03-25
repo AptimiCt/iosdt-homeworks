@@ -23,7 +23,7 @@ class LogInViewController: UIViewController {
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Email or iphone"
+        textField.placeholder = "Email or iPhone"
         textField.textColor = .black
         textField.font = .systemFont(ofSize: 16)
         textField.autocapitalizationType = .none

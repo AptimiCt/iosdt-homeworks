@@ -11,9 +11,12 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     
     
     //MARK: - vars
-    let tabBarItemLocal = UITabBarItem(title: "Profile",
-                                       image: UIImage(systemName: "person.crop.circle.fill"),
-                                       tag: 1)
+    private let tabBarItemProfileView = UITabBarItem(title: "Profile",
+                                                     image: UIImage(systemName: "person.crop.circle.fill"),
+                                                     tag: 1)
+    
+    private var avatar: UIImageView?
+    private var offsetAvatar: CGFloat = 0
     
     let profileTableHeaderView = ProfileHeaderView()
     
@@ -23,14 +26,6 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         return tableView
     }()
     
-    let subView: UIView = {
-        let subView = UIView(frame: .zero)
-        subView.backgroundColor = .black
-        subView.layer.opacity = 0
-        subView.toAutoLayout()
-        return subView
-    }()
-    
     var localStorage:[Post] = []
     var photos: [UIImage] = []
     
@@ -38,8 +33,8 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     
     init(){
         super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = .white
-        self.tabBarItem = tabBarItemLocal
+        view.backgroundColor = .systemGray6
+        self.tabBarItem = tabBarItemProfileView
     }
     
     required init?(coder: NSCoder) {
@@ -75,8 +70,78 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         NSLayoutConstraint.activate(constraints)
     }
     
-    @objc func tapOnAvatar(sender: UITapGestureRecognizer){
-        print("Тап на аватаре")
+    @objc private func tapOnAvatar(sender: UITapGestureRecognizer){
+        
+        let duration: TimeInterval = 0.8
+        offsetAvatar = tableView.contentOffset.y
+        
+        self.avatar = sender.view as? UIImageView
+        guard let avatar = avatar else { return }
+        
+        profileTableHeaderView.closeButton.addTarget(self, action: #selector(closeButtonTaped), for: .touchUpInside)
+        
+        tableViewInteraction(to: false)
+        avatar.isUserInteractionEnabled = false
+        
+        if offsetAvatar != 0 {
+            profileTableHeaderView.closeButtonTopAnchor?.constant += offsetAvatar
+        }
+        
+        let moveCenter = CGAffineTransform(translationX: Constants.screenWeight / 2 - avatar.frame.width / 2 - 16, y: Constants.screenWeight / 2 + avatar.frame.width + 16 + offsetAvatar)
+
+        let scale = self.view.frame.width / avatar.frame.width
+        let scaleToHeight = CGAffineTransform(scaleX: scale, y: scale)
+       
+        UIView.animateKeyframes(withDuration: duration, delay: 0, options: []) {
+            
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.62) {
+                self.profileTableHeaderView.backgroundView.alpha = 0.5
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.62) {
+                
+                avatar.transform = scaleToHeight.concatenating(moveCenter)
+                avatar.layer.cornerRadius = 0
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.63, relativeDuration: 0.37) {
+                
+                self.profileTableHeaderView.closeButton.alpha = 1
+            }
+        }
+        
+    }
+    
+    @objc private func closeButtonTaped(){
+        
+        guard let avatar = avatar else { return }
+        
+        UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: []) {
+            
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.37) {
+                self.profileTableHeaderView.closeButton.alpha = 0
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.37, relativeDuration: 0.62) {
+                self.profileTableHeaderView.backgroundView.alpha = 0
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.37, relativeDuration: 0.62) {
+                self.avatar?.layer.cornerRadius = 50
+                avatar.transform = .identity
+                self.view.layoutIfNeeded()
+            }
+        }
+        tableViewInteraction(to: true)
+        avatar.isUserInteractionEnabled = true
+        if offsetAvatar != 0 {
+            profileTableHeaderView.closeButtonTopAnchor?.constant -= offsetAvatar
+        }
+    }
+    
+    private func tableViewInteraction(to toggle: Bool){
+        tableView.allowsSelection = toggle
+        tableView.isScrollEnabled = toggle
     }
 }
 
