@@ -10,6 +10,15 @@ import UIKit
 class ProfileHeaderView: UIView {
     
     
+    //MARK: - vars
+    var heightAvatar: NSLayoutConstraint?
+    var widthAvatar: NSLayoutConstraint?
+    var leadingAvatar: NSLayoutConstraint?
+    var topAvatar: NSLayoutConstraint?
+    var trailingAvatar: NSLayoutConstraint?
+    var bottomAvatar: NSLayoutConstraint?
+    var closeButtonTopAnchor: NSLayoutConstraint?
+    
     weak var delegate: ProfileHeaderViewDelegate?
     
     let avatarImageView: UIImageView = {
@@ -18,6 +27,7 @@ class ProfileHeaderView: UIView {
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -26,6 +36,7 @@ class ProfileHeaderView: UIView {
         button.setTitle("Show status", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
+        button.setTitleColor(.red, for: .highlighted)
         button.layer.cornerRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
@@ -51,15 +62,31 @@ class ProfileHeaderView: UIView {
         return statusLabel
     }()
     
-    let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        return stackView
+    lazy var backgroundView: UIView = {
+        let backgroundView = UIView(frame: UIScreen.main.bounds)
+        backgroundView.alpha = 0
+        backgroundView.backgroundColor = .black
+        
+        backgroundView.toAutoLayout()
+        return backgroundView
     }()
+    
+    lazy var closeButton: UIButton = {
+        let closeButton = UIButton()
+        closeButton.alpha = 0
+        closeButton.tintColor = .red
+        closeButton.setBackgroundImage(UIImage(systemName: "xmark.circle"), for: .normal)
+        closeButton.toAutoLayout()
+        return closeButton
+    }()
+    
+    //MARK: - funcs
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubviews(avatarImageView, fullNameLabel, statusLabel, setStatusButton)
+        addSubviews(fullNameLabel, statusLabel, setStatusButton, backgroundView, closeButton, avatarImageView)
+        constraintForBackground()
+        constraintsForCloseButton()
         configureConstraints()
     }
     
@@ -71,30 +98,52 @@ class ProfileHeaderView: UIView {
         self.delegate?.didTapedButton()
     }
 }
+
+//MARK: - extension
 extension ProfileHeaderView{
+    
+    fileprivate func constraintForBackground() {
+        backgroundView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        backgroundView.widthAnchor.constraint(equalToConstant: Constants.screenWeight).isActive = true
+        backgroundView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height).isActive = true
+    }
+    
+    fileprivate func constraintsForCloseButton() {
+        closeButtonTopAnchor = closeButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8)
+        closeButtonTopAnchor?.isActive = true
+        closeButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -8).isActive = true
+        closeButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    }
+    
     func configureConstraints(){
         
         avatarImageView.toAutoLayout()
-        stackView.toAutoLayout()
         fullNameLabel.toAutoLayout()
         statusLabel.toAutoLayout()
         setStatusButton.toAutoLayout()
+        
         setStatusButton.addTarget(self, action: #selector(didTapedStatusButton), for: .touchUpInside)
         
+        leadingAvatar = avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+                                                 constant: Constants.leadingMarginForAvatarImageView)
+        topAvatar = avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
+                                             constant: Constants.topMarginForAvatarImageView)
+        trailingAvatar = avatarImageView.trailingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor,
+                                               constant: Constants.leadingMarginForFullNameLabel)
+        bottomAvatar = avatarImageView.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor,
+                                             constant: -Constants.topMarginForSetStatusButton)
+        widthAvatar = avatarImageView.widthAnchor.constraint(equalToConstant: Constants.widthForAvatarImageView)
+        heightAvatar = avatarImageView.heightAnchor.constraint(equalToConstant: Constants.heightForAvatarImageView)
+        
         let constraints: [NSLayoutConstraint] = [
-            avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
-                                                     constant: Constants.leadingMarginForAvatarImageView),
-            avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
-                                                 constant: Constants.topMarginForAvatarImageView),
-            avatarImageView.widthAnchor.constraint(equalToConstant: Constants.widthForAvatarImageView),
-            avatarImageView.heightAnchor.constraint(equalToConstant: Constants.heightForAvatarImageView),
-            
-            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor,
-                                                   constant: Constants.leadingMarginForfullNameLabel),
+            leadingAvatar, topAvatar, trailingAvatar, bottomAvatar, heightAvatar, widthAvatar,
+    
             fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
-                                               constant: Constants.topMarginForfullNameLabel),
+                                               constant: Constants.topMarginForFullNameLabel),
             fullNameLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
-                                                    constant: Constants.trailingMarginForfullNameLabel),
+                                                    constant: Constants.trailingMarginForFullNameLabel),
             
             statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
             statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
@@ -108,21 +157,12 @@ extension ProfileHeaderView{
             setStatusButton.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
                                                       constant: Constants.trailingMarginForSetStatusButton),
             setStatusButton.heightAnchor.constraint(equalToConstant: Constants.heightForSetStatusButton)
-        ]
+            
+        ].compactMap { $0 }
+        
         NSLayoutConstraint.activate(constraints)
     }
 }
-
-//public extension UIView {
-//    
-//    func toAutoLayout(){
-//        translatesAutoresizingMaskIntoConstraints = false
-//    }
-//    
-//    func addSubviews(_ subviews: UIView...){
-//        subviews.forEach { addSubview($0)}
-//    }
-//}
 
 protocol ProfileHeaderViewDelegate: AnyObject {
     func didTapedButton()

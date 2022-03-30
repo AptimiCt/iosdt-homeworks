@@ -8,20 +8,21 @@
 import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
-
+    
     private let photosLabel = UILabel()
     private let arrowButton = UIButton()
     private let firstPhoto = UIImageView()
     private let secondPhoto = UIImageView()
     private let thirdPhoto = UIImageView()
     private let fourthPhoto = UIImageView()
+    
     var photos: [UIImage]? {
         didSet{
-            guard let tempatePhoto = UIImage(systemName: "photo") else { return }
-            firstPhoto.image = photos?[0] ?? tempatePhoto
-            secondPhoto.image = photos?[1] ?? tempatePhoto
-            thirdPhoto.image = photos?[2] ?? tempatePhoto
-            fourthPhoto.image = photos?[3] ?? tempatePhoto
+            guard let templatePhoto = UIImage(systemName: "photo") else { return }
+            firstPhoto.image = photos?[0] ?? templatePhoto
+            secondPhoto.image = photos?[1] ?? templatePhoto
+            thirdPhoto.image = photos?[2] ?? templatePhoto
+            fourthPhoto.image = photos?[3] ?? templatePhoto
         }
     }
     

@@ -41,9 +41,9 @@ struct Constants {
     static let widthForAvatarImageView: CGFloat = 100
     
     //MARK: - for fullNameLabel
-    static let leadingMarginForfullNameLabel: CGFloat = 20
-    static let topMarginForfullNameLabel: CGFloat = 27
-    static let trailingMarginForfullNameLabel: CGFloat = -16
+    static let leadingMarginForFullNameLabel: CGFloat = -20
+    static let topMarginForFullNameLabel: CGFloat = 27
+    static let trailingMarginForFullNameLabel: CGFloat = 16
     
     //MARK: - for statusLabel
     static let bottomMarginForStatusLabel: CGFloat = -34

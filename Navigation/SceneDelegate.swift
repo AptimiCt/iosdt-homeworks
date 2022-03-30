@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let profileNavigationController = UINavigationController(rootViewController: logInViewController)
         
         tabBarController.viewControllers = [feedNavigationController,profileNavigationController]
-        
+        tabBarController.selectedIndex = 1
         if #available(iOS 15.0, *) {
             let appearanceTabBar = UITabBarAppearance()
             let appearanceNavigationBar = UINavigationBarAppearance()
