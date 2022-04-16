@@ -34,7 +34,11 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     
     init(){
         super.init(nibName: nil, bundle: nil)
+        #if DEBUG
         view.backgroundColor = .systemGray6
+        #else
+        view.backgroundColor = .red
+        #endif
         self.tabBarItem = tabBarItemProfileView
     }
     
