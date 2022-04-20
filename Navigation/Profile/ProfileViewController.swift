@@ -41,13 +41,14 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - override funcs
     override func viewDidLoad() {
         super.viewDidLoad()
         localStorage = Storage.posts
         photos = Photos.fetchPhotos()
         setupView()
     }
-    
+    //MARK: - funcs
     func setupView() {
         
         tableView.dataSource = self
@@ -82,10 +83,6 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         
         tableViewInteraction(to: false)
         avatar.isUserInteractionEnabled = false
-        
-        if offsetAvatar != 0 {
-            profileTableHeaderView.closeButtonTopAnchor?.constant += offsetAvatar
-        }
         
         let moveCenter = CGAffineTransform(translationX: Constants.screenWeight / 2 - avatar.frame.width / 2 - 16, y: Constants.screenWeight / 2 + avatar.frame.width + 16 + offsetAvatar)
 
@@ -134,9 +131,6 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         }
         tableViewInteraction(to: true)
         avatar.isUserInteractionEnabled = true
-        if offsetAvatar != 0 {
-            profileTableHeaderView.closeButtonTopAnchor?.constant -= offsetAvatar
-        }
     }
     
     private func tableViewInteraction(to toggle: Bool){

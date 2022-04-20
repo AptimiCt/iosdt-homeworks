@@ -6,19 +6,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileHeaderView: UIView {
     
     
     //MARK: - vars
-    var heightAvatar: NSLayoutConstraint?
-    var widthAvatar: NSLayoutConstraint?
-    var leadingAvatar: NSLayoutConstraint?
-    var topAvatar: NSLayoutConstraint?
-    var trailingAvatar: NSLayoutConstraint?
-    var bottomAvatar: NSLayoutConstraint?
-    var closeButtonTopAnchor: NSLayoutConstraint?
-    
     weak var delegate: ProfileHeaderViewDelegate?
     
     let avatarImageView: UIImageView = {
@@ -85,16 +78,15 @@ class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews(fullNameLabel, statusLabel, setStatusButton, backgroundView, closeButton, avatarImageView)
-        constraintForBackground()
-        constraintsForCloseButton()
-        configureConstraints()
+        setStatusButton.addTarget(self, action: #selector(didTapedStatusButton), for: .touchUpInside)
+        snpConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func didTapedStatusButton(){
+    @objc private func didTapedStatusButton(){
         self.delegate?.didTapedButton()
     }
 }
@@ -102,65 +94,37 @@ class ProfileHeaderView: UIView {
 //MARK: - extension
 extension ProfileHeaderView{
     
-    fileprivate func constraintForBackground() {
-        backgroundView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        backgroundView.widthAnchor.constraint(equalToConstant: Constants.screenWeight).isActive = true
-        backgroundView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height).isActive = true
-    }
-    
-    fileprivate func constraintsForCloseButton() {
-        closeButtonTopAnchor = closeButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8)
-        closeButtonTopAnchor?.isActive = true
-        closeButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -8).isActive = true
-        closeButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
-        closeButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
-    }
-    
-    func configureConstraints(){
-        
-        avatarImageView.toAutoLayout()
-        fullNameLabel.toAutoLayout()
-        statusLabel.toAutoLayout()
-        setStatusButton.toAutoLayout()
-        
-        setStatusButton.addTarget(self, action: #selector(didTapedStatusButton), for: .touchUpInside)
-        
-        leadingAvatar = avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
-                                                 constant: Constants.leadingMarginForAvatarImageView)
-        topAvatar = avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
-                                             constant: Constants.topMarginForAvatarImageView)
-        trailingAvatar = avatarImageView.trailingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor,
-                                               constant: Constants.leadingMarginForFullNameLabel)
-        bottomAvatar = avatarImageView.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor,
-                                             constant: -Constants.topMarginForSetStatusButton)
-        widthAvatar = avatarImageView.widthAnchor.constraint(equalToConstant: Constants.widthForAvatarImageView)
-        heightAvatar = avatarImageView.heightAnchor.constraint(equalToConstant: Constants.heightForAvatarImageView)
-        
-        let constraints: [NSLayoutConstraint] = [
-            leadingAvatar, topAvatar, trailingAvatar, bottomAvatar, heightAvatar, widthAvatar,
-    
-            fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
-                                               constant: Constants.topMarginForFullNameLabel),
-            fullNameLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
-                                                    constant: Constants.trailingMarginForFullNameLabel),
-            
-            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-            statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
-            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor,
-                                                constant: Constants.bottomMarginForStatusLabel),
-            
-            setStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
-                                                     constant: Constants.leadingMarginForSetStatusButton),
-            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor,
-                                                 constant: Constants.topMarginForSetStatusButton),
-            setStatusButton.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
-                                                      constant: Constants.trailingMarginForSetStatusButton),
-            setStatusButton.heightAnchor.constraint(equalToConstant: Constants.heightForSetStatusButton)
-            
-        ].compactMap { $0 }
-        
-        NSLayoutConstraint.activate(constraints)
+    fileprivate func snpConstraints() {
+        backgroundView.snp.makeConstraints { make in
+            make.leading.top.trailing.bottom.equalToSuperview()
+        }
+        closeButton.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(8)
+            make.trailing.equalTo(self.backgroundView.snp.trailing).offset(-8)
+            make.width.height.equalTo(35)
+        }
+        avatarImageView.snp.makeConstraints { make in
+            make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(Constants.leadingMarginForAvatarImageView)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(Constants.topMarginForAvatarImageView)
+            make.trailing.equalTo(fullNameLabel.snp.leading).offset(Constants.leadingMarginForFullNameLabel)
+            make.bottom.equalTo(setStatusButton.snp.top).offset(-Constants.topMarginForSetStatusButton)
+            make.width.height.equalTo(Constants.heightForAvatarImageView)
+        }
+        fullNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(Constants.topMarginForFullNameLabel)
+            make.trailing.greaterThanOrEqualTo(self.safeAreaLayoutGuide.snp.trailing).offset(Constants.trailingMarginForFullNameLabel)
+        }
+        statusLabel.snp.makeConstraints { make in
+            make.leading.equalTo(fullNameLabel.snp.leading)
+            make.trailing.equalTo(fullNameLabel.snp.trailing)
+            make.bottom.equalTo(setStatusButton.snp.top).offset(Constants.bottomMarginForStatusLabel)
+        }
+        setStatusButton.snp.makeConstraints { make in
+            make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(Constants.leadingMarginForSetStatusButton)
+            make.top.equalTo(avatarImageView.snp.bottom).offset(Constants.topMarginForSetStatusButton)
+            make.trailing.greaterThanOrEqualTo(self.safeAreaLayoutGuide.snp.trailing).offset(Constants.trailingMarginForSetStatusButton)
+            make.height.equalTo(Constants.heightForSetStatusButton)
+        }
     }
 }
 
