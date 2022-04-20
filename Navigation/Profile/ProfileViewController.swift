@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class ProfileViewController: UIViewController, SetupViewProtocol {
     
@@ -153,13 +154,13 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForSection,
-                                                     for: indexPath) as! PhotosTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForSection,
+                                                           for: indexPath) as? PhotosTableViewCell else { return UITableViewCell() }
             cell.photos = photos
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForPost) as! PostTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForPost) as? PostTableViewCell else { return UITableViewCell() }
         cell.post = localStorage[indexPath.row]
         return cell
     }
