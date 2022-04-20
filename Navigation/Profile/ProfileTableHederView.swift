@@ -12,6 +12,9 @@ class ProfileHeaderView: UIView {
     
     
     //MARK: - vars
+    
+    var closeButtonTopAnchor: Constraint? = nil
+    
     weak var delegate: ProfileHeaderViewDelegate?
     
     let avatarImageView: UIImageView = {
@@ -24,7 +27,7 @@ class ProfileHeaderView: UIView {
         return imageView
     }()
     
-    let setStatusButton: UIButton = {
+    private let setStatusButton: UIButton = {
         let button = UIButton()
         button.setTitle("Show status", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -39,7 +42,7 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    let fullNameLabel: UILabel = {
+    private let fullNameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Avatar"
         nameLabel.font = .systemFont(ofSize: 18, weight: .bold)
@@ -73,8 +76,7 @@ class ProfileHeaderView: UIView {
         return closeButton
     }()
     
-    //MARK: - funcs
-    
+    //MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews(fullNameLabel, statusLabel, setStatusButton, backgroundView, closeButton, avatarImageView)
@@ -85,7 +87,7 @@ class ProfileHeaderView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //MARK: - @objc private func
     @objc private func didTapedStatusButton(){
         self.delegate?.didTapedButton()
     }
@@ -95,11 +97,13 @@ class ProfileHeaderView: UIView {
 extension ProfileHeaderView{
     
     fileprivate func snpConstraints() {
+        
         backgroundView.snp.makeConstraints { make in
-            make.leading.top.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(UIScreen.main.bounds.height)
         }
         closeButton.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(8)
+            self.closeButtonTopAnchor = make.top.equalTo(backgroundView.snp.top).offset(8).constraint
             make.trailing.equalTo(self.backgroundView.snp.trailing).offset(-8)
             make.width.height.equalTo(35)
         }
