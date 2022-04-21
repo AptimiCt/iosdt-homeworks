@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
     
@@ -14,7 +15,12 @@ class PostTableViewCell: UITableViewCell {
             guard let author = post?.author else { return }
             authorLabel.text = author
             guard let image = post?.image else { return }
-            postImageView.image = UIImage(named: image)
+            guard let sourceImage = UIImage(named: image) else { return }
+            let imageProcessor = ImageProcessor()
+            let filter = ColorFilter.AllCases().randomElement() ?? .sepia(intensity: 3)
+            imageProcessor.processImage(sourceImage: sourceImage, filter: filter) { image in
+                postImageView.image = image
+            }
             descriptionLabel.text = post?.description
             guard let likes = post?.likes else { return }
             likesLabel.text = "Likes: \(likes)"
