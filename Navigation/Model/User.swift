@@ -1,0 +1,24 @@
+//
+//  User.swift
+//  Navigation
+//
+//  Created by Александр Востриков on 23.04.2022.
+//
+
+import Foundation
+
+protocol UserService{
+    func userService(fullName: String) -> User
+}
+
+final class User {
+    private let fullName: String
+    private var avatar: String
+    private var status: String
+    
+    init(fullName: String, avatar: String, status: String){
+        self.fullName = fullName
+        self.avatar = avatar
+        self.status = status
+    }
+}
