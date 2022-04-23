@@ -56,7 +56,7 @@ class ProfileHeaderView: UIView {
     
     let statusLabel: UILabel = {
         let statusLabel = UILabel()
-        statusLabel.text = "Waiting for something..."
+        statusLabel.text = Constants.status
         statusLabel.font = .systemFont(ofSize: 14, weight: .regular)
         statusLabel.textColor = .gray
         return statusLabel

@@ -8,11 +8,12 @@
 import Foundation
 
 protocol UserService{
-    func userService(fullName: String) -> User
+    func userService(loginName: String) -> User?
 }
 
 final class User {
-    private let fullName: String
+    
+    let fullName: String
     private var avatar: String
     private var status: String
     

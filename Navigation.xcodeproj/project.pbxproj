@@ -27,6 +27,7 @@
 		BBDC80392749E301000A302B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBDC80382749E301000A302B /* Assets.xcassets */; };
 		BBDC803C2749E301000A302B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBDC803A2749E301000A302B /* LaunchScreen.storyboard */; };
 		BBF45AE8281358A300B7EA16 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF45AE7281358A300B7EA16 /* User.swift */; };
+		BBF45AEA28135CEF00B7EA16 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF45AE928135CEF00B7EA16 /* CurrentUserService.swift */; };
 		BBF7295027B4238100D737EF /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF7294F27B4238100D737EF /* PhotosCollectionViewCell.swift */; };
 		BBF7295327B45F8100D737EF /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF7295227B45F8100D737EF /* Cells.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		BBDC803B2749E301000A302B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBDC803D2749E301000A302B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBF45AE7281358A300B7EA16 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BBF45AE928135CEF00B7EA16 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		BBF7294F27B4238100D737EF /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		BBF7295227B45F8100D737EF /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +102,7 @@
 			children = (
 				BBD4136D275D894C00B6E978 /* Post.swift */,
 				BBF45AE7281358A300B7EA16 /* User.swift */,
+				BBF45AE928135CEF00B7EA16 /* CurrentUserService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBD735CD27AEE22A002397A0 /* PhotosTableViewCell.swift in Sources */,
+				BBF45AEA28135CEF00B7EA16 /* CurrentUserService.swift in Sources */,
 				BBA2D94827AFD2D2002AC2A1 /* PhotosViewController.swift in Sources */,
 				BBBBC9192753EA15003DDF50 /* SetupViewProtocol.swift in Sources */,
 				BBD735CA27AEDB05002397A0 /* Photos.swift in Sources */,
