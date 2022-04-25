@@ -102,4 +102,8 @@ struct Constants {
     //MARK: - for fourthPhoto
     static let trailingMarginForFourthPhoto: CGFloat = -12
     static let bottomForFourthPhoto: CGFloat = -12
+    
+    //MARK: - for Checker
+    static let login = "Avatar".hash
+    static let password = "StrongPassword".hash
 }
