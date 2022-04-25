@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     
     private var avatar: UIImageView?
     private var offsetAvatar: CGFloat = 0
+    private var userService: UserService
     
     let profileTableHeaderView = ProfileHeaderView()
     
@@ -29,12 +30,17 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     var localStorage:[Post] = []
     var photos: [UIImage] = []
     
-    //MARK: - funcs
+    //MARK: - init
     
-    init(){
+    init(loginName: String, userService: UserService) {
+        self.userService = userService
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .systemGray6
         self.tabBarItem = tabBarItemProfileView
+        guard let user = self.userService.userService(loginName: loginName) else { return }
+        profileTableHeaderView.fullNameLabel.text = user.fullName
+        profileTableHeaderView.avatarImageView.image = UIImage(named: user.avatar)
+        profileTableHeaderView.statusLabel.text = user.status
     }
     
     required init?(coder: NSCoder) {
@@ -153,13 +159,13 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForSection,
-                                                     for: indexPath) as! PhotosTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForSection,
+                                                           for: indexPath) as? PhotosTableViewCell else { return UITableViewCell()}
             cell.photos = photos
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForPost) as! PostTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForPost) as? PostTableViewCell else { return UITableViewCell()}
         cell.post = localStorage[indexPath.row]
         return cell
     }

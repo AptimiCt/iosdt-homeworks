@@ -14,8 +14,8 @@ protocol UserService{
 final class User {
     
     let fullName: String
-    private var avatar: String
-    private var status: String
+    var avatar: String
+    var status: String
     
     init(fullName: String, avatar: String, status: String){
         self.fullName = fullName
