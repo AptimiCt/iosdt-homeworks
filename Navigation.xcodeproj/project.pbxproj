@@ -20,6 +20,7 @@
 		BBD4136C275D882000B6E978 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4136B275D882000B6E978 /* InfoViewController.swift */; };
 		BBD4136E275D894C00B6E978 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4136D275D894C00B6E978 /* Post.swift */; };
 		BBD68B7D281726C0007BD77E /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD68B7C281726C0007BD77E /* Checker.swift */; };
+		BBD68B7F281742B1007BD77E /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD68B7E281742B1007BD77E /* LoginInspector.swift */; };
 		BBD735C827A72CAE002397A0 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD735C727A72CAE002397A0 /* PostTableViewCell.swift */; };
 		BBD735CA27AEDB05002397A0 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD735C927AEDB05002397A0 /* Photos.swift */; };
 		BBD735CD27AEE22A002397A0 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD735CC27AEE22A002397A0 /* PhotosTableViewCell.swift */; };
@@ -45,6 +46,7 @@
 		BBD4136B275D882000B6E978 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		BBD4136D275D894C00B6E978 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		BBD68B7C281726C0007BD77E /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		BBD68B7E281742B1007BD77E /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		BBD735C727A72CAE002397A0 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		BBD735C927AEDB05002397A0 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		BBD735CC27AEE22A002397A0 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				BBF7295227B45F8100D737EF /* Cells.swift */,
 				BBD68B7C281726C0007BD77E /* Checker.swift */,
+				BBD68B7E281742B1007BD77E /* LoginInspector.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBD68B7F281742B1007BD77E /* LoginInspector.swift in Sources */,
 				BBD735CD27AEE22A002397A0 /* PhotosTableViewCell.swift in Sources */,
 				BBD68B7D281726C0007BD77E /* Checker.swift in Sources */,
 				BBA2D94827AFD2D2002AC2A1 /* PhotosViewController.swift in Sources */,

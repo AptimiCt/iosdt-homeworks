@@ -19,6 +19,13 @@ class Checker {
         if self.login == login.hash && self.password == pass.hash {
             return true
         }
+        print("Введены не корректные данные")
         return false
+    }
+}
+
+extension Checker: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return self
     }
 }

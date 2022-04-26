@@ -7,18 +7,25 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func checker(for password: String, login: String) -> Bool
+}
+
 class LogInViewController: UIViewController {
     
-    let scrollView = UIScrollView()
-    let contentView = UIView()
+    //MARK: - vars
+    weak var delegate: LoginViewControllerDelegate?
+    
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     
     
-    let logoImageView: UIImageView = {
+    private let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         return imageView
     }()
     
-    let loginTextView: UITextField = {
+    private let loginTextView: UITextField = {
         let textField = UITextField()
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.lightGray.cgColor
@@ -30,7 +37,7 @@ class LogInViewController: UIViewController {
         return textField
     }()
     
-    let passwordTextView: UITextField = {
+    private let passwordTextView: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
         textField.layer.borderColor = UIColor.lightGray.cgColor
@@ -42,7 +49,7 @@ class LogInViewController: UIViewController {
         return textField
     }()
     
-    let stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.layer.borderColor = UIColor.lightGray.cgColor
@@ -52,7 +59,7 @@ class LogInViewController: UIViewController {
         return stackView
     }()
     
-    let loginButton: UIButton = {
+    private let loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Log In", for: .normal)
         button.titleLabel?.textColor = .white
@@ -62,10 +69,11 @@ class LogInViewController: UIViewController {
         return button
     }()
     
-    let tabBarItemLocal = UITabBarItem(title: "Profile",
+    private let tabBarItemLocal = UITabBarItem(title: "Profile",
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
     
+    //MARK: - init
     init(){
         super.init(nibName: nil, bundle: nil)
         self.tabBarItem = tabBarItemLocal
@@ -75,6 +83,7 @@ class LogInViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - override funcs
     override func viewDidLoad() {
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .white
@@ -93,7 +102,8 @@ class LogInViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    func setupView(){
+    //MARK: - funcs
+    private func setupView(){
         scrollView.toAutoLayout()
         contentView.toAutoLayout()
         logoImageView.toAutoLayout()
@@ -112,7 +122,7 @@ class LogInViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
-    func setupConstrains(){
+    private func setupConstrains(){
         let constrains = [
             
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -155,19 +165,24 @@ class LogInViewController: UIViewController {
         NSLayoutConstraint.activate(constrains)
     }
     
-    @objc func loginButtonTapped(){
-        let profileViewController = ProfileViewController()
-        navigationController?.pushViewController(profileViewController, animated: true)
+    //MARK: - @objc funcs
+    @objc
+    private func loginButtonTapped(){
+        guard let check = self.delegate?.checker(for: passwordTextView.text!, login: loginTextView.text!) else { return }
+            let profileViewController = ProfileViewController()
+            navigationController?.pushViewController(profileViewController, animated: true)
     }
     
-    @objc func keyboardWillShow(notification: NSNotification){
+    @objc
+    private func keyboardWillShow(notification: NSNotification){
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
         scrollView.contentInset.bottom = keyboardSize.height
         scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
     }
     
-    @objc func keyboardWillHide(notification: NSNotification){
+    @objc
+    private func keyboardWillHide(notification: NSNotification){
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
     }

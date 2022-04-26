@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ProfileHeaderViewDelegate: AnyObject {
+    func didTapedButton()
+}
+
 class ProfileHeaderView: UIView {
     
     
@@ -80,7 +84,7 @@ class ProfileHeaderView: UIView {
         return closeButton
     }()
     
-    //MARK: - funcs
+    //MARK: - init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -164,6 +168,4 @@ extension ProfileHeaderView{
     }
 }
 
-protocol ProfileHeaderViewDelegate: AnyObject {
-    func didTapedButton()
-}
+
