@@ -106,4 +106,6 @@ struct Constants {
     //MARK: - for Checker
     static let login = "Avatar".hash
     static let password = "StrongPassword".hash
+    static let titleAlert = "Ошибка ввода"
+    static let message = "Введены не корректные данные"
 }

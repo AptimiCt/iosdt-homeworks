@@ -176,6 +176,11 @@ class LoginViewController: UIViewController {
         if check {
             let profileViewController = ProfileViewController()
             navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
+            let actionOk = UIAlertAction(title: "Ok", style: .default)
+            alert.addAction(actionOk)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
