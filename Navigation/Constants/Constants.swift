@@ -59,7 +59,7 @@ struct Constants {
     static let heightForProfileHeaderView: CGFloat = 220
     
     
-    //MARK: - Constants for LogInViewController
+    //MARK: - Constants for LoginViewController
     //MARK: - for logoImageView
     
     static let topMarginForLogoImageView: CGFloat = 120

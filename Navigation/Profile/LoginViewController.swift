@@ -1,20 +1,20 @@
 //
-//  LogInViewController.swift
+//  LoginViewController.swift
 //  Navigation
 //
 //  Created by Александр Востриков on 16.01.2022.
 //
 
 import UIKit
-
+//MARK: - protocol
 protocol LoginViewControllerDelegate: AnyObject {
-    func checker(for password: String, login: String) -> Bool
+    func checkerLoginInspector(for password: String, login: String) -> Bool
 }
 
-class LogInViewController: UIViewController {
+class LoginViewController: UIViewController {
     
     //MARK: - vars
-    weak var delegate: LoginViewControllerDelegate?
+    var delegate: LoginViewControllerDelegate?
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -85,6 +85,7 @@ class LogInViewController: UIViewController {
     
     //MARK: - override funcs
     override func viewDidLoad() {
+        super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .white
         setupView()
@@ -98,6 +99,7 @@ class LogInViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -168,9 +170,13 @@ class LogInViewController: UIViewController {
     //MARK: - @objc funcs
     @objc
     private func loginButtonTapped(){
-        guard let check = self.delegate?.checker(for: passwordTextView.text!, login: loginTextView.text!) else { return }
+        
+        guard let passwordText = passwordTextView.text, let loginText = loginTextView.text else { return }
+        guard let check = delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
+        if check {
             let profileViewController = ProfileViewController()
             navigationController?.pushViewController(profileViewController, animated: true)
+        }
     }
     
     @objc

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BB0B224A279343AD00C51B3D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B2249279343AD00C51B3D /* Constants.swift */; };
-		BB38BC4D2794180600FF4B2E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38BC4C2794180600FF4B2E /* LogInViewController.swift */; };
+		BB38BC4D2794180600FF4B2E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38BC4C2794180600FF4B2E /* LoginViewController.swift */; };
 		BB53FB24276A8F9D0094AF1D /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */; };
 		BBA2D94827AFD2D2002AC2A1 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2D94727AFD2D2002AC2A1 /* PhotosViewController.swift */; };
 		BBA2D94B27AFE082002AC2A1 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2D94A27AFE082002AC2A1 /* UIView+Ext.swift */; };
@@ -34,7 +34,7 @@
 
 /* Begin PBXFileReference section */
 		BB0B2249279343AD00C51B3D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		BB38BC4C2794180600FF4B2E /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		BB38BC4C2794180600FF4B2E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
 		BBA2D94727AFD2D2002AC2A1 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		BBA2D94A27AFE082002AC2A1 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 			children = (
 				BBBBC9162753E9DB003DDF50 /* ProfileViewController.swift */,
 				BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */,
-				BB38BC4C2794180600FF4B2E /* LogInViewController.swift */,
+				BB38BC4C2794180600FF4B2E /* LoginViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -260,7 +260,7 @@
 				BBD735CA27AEDB05002397A0 /* Photos.swift in Sources */,
 				BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */,
 				BBD735C827A72CAE002397A0 /* PostTableViewCell.swift in Sources */,
-				BB38BC4D2794180600FF4B2E /* LogInViewController.swift in Sources */,
+				BB38BC4D2794180600FF4B2E /* LoginViewController.swift in Sources */,
 				BBA2D94B27AFE082002AC2A1 /* UIView+Ext.swift in Sources */,
 				BBD4136A275D721800B6E978 /* PostViewController.swift in Sources */,
 				BBBBC9152753E9A6003DDF50 /* FeedViewController.swift in Sources */,

@@ -8,7 +8,8 @@
 import Foundation
 
 class Checker {
-    public static var shared = Checker()
+    
+    static var shared = Checker()
     
     private let login = Constants.login
     private let password = Constants.password
@@ -19,13 +20,6 @@ class Checker {
         if self.login == login.hash && self.password == pass.hash {
             return true
         }
-        print("Введены не корректные данные")
         return false
-    }
-}
-
-extension Checker: NSCopying {
-    func copy(with zone: NSZone? = nil) -> Any {
-        return self
     }
 }
