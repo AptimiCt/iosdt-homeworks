@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController, SetupViewProtocol {
     
@@ -35,7 +36,11 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     init(loginName: String, userService: UserService) {
         self.userService = userService
         super.init(nibName: nil, bundle: nil)
+        #if DEBUG
         view.backgroundColor = .systemGray6
+        #else
+        view.backgroundColor = .red
+        #endif
         self.tabBarItem = tabBarItemProfileView
         guard let user = self.userService.userService(loginName: loginName) else { return }
         profileTableHeaderView.fullNameLabel.text = user.fullName
@@ -47,13 +52,14 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - override funcs
     override func viewDidLoad() {
         super.viewDidLoad()
         localStorage = Storage.posts
         photos = Photos.fetchPhotos()
         setupView()
     }
-    
+    //MARK: - funcs
     func setupView() {
         
         tableView.dataSource = self
@@ -90,7 +96,9 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         avatar.isUserInteractionEnabled = false
         
         if offsetAvatar != 0 {
-            profileTableHeaderView.closeButtonTopAnchor?.constant += offsetAvatar
+                profileTableHeaderView.closeButtonTopAnchor?.update(offset: offsetAvatar + 8)
+        } else {
+            profileTableHeaderView.closeButtonTopAnchor?.update(offset: -offsetAvatar+8)
         }
         
         let moveCenter = CGAffineTransform(translationX: Constants.screenWeight / 2 - avatar.frame.width / 2 - 16, y: Constants.screenWeight / 2 + avatar.frame.width + 16 + offsetAvatar)
@@ -140,9 +148,6 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         }
         tableViewInteraction(to: true)
         avatar.isUserInteractionEnabled = true
-        if offsetAvatar != 0 {
-            profileTableHeaderView.closeButtonTopAnchor?.constant -= offsetAvatar
-        }
     }
     
     private func tableViewInteraction(to toggle: Bool){
@@ -160,12 +165,12 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForSection,
-                                                           for: indexPath) as? PhotosTableViewCell else { return UITableViewCell()}
+                                                           for: indexPath) as? PhotosTableViewCell else { return UITableViewCell() }
             cell.photos = photos
             return cell
         }
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForPost) as? PostTableViewCell else { return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForPost) as? PostTableViewCell else { return UITableViewCell() }
         cell.post = localStorage[indexPath.row]
         return cell
     }
