@@ -18,7 +18,7 @@ class ProfileHeaderView: UIView {
     weak var delegate: ProfileHeaderViewDelegate?
     
     let avatarImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "avatar"))
+        let imageView = UIImageView()
         imageView.layer.cornerRadius = 50
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
@@ -42,9 +42,8 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    private let fullNameLabel: UILabel = {
+    let fullNameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.text = "Avatar"
         nameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         nameLabel.textColor = .black
         return nameLabel
@@ -52,7 +51,7 @@ class ProfileHeaderView: UIView {
     
     let statusLabel: UILabel = {
         let statusLabel = UILabel()
-        statusLabel.text = "Waiting for something..."
+        statusLabel.text = Constants.status
         statusLabel.font = .systemFont(ofSize: 14, weight: .regular)
         statusLabel.textColor = .gray
         return statusLabel
@@ -62,7 +61,6 @@ class ProfileHeaderView: UIView {
         let backgroundView = UIView(frame: UIScreen.main.bounds)
         backgroundView.alpha = 0
         backgroundView.backgroundColor = .black
-        
         backgroundView.toAutoLayout()
         return backgroundView
     }()
@@ -77,6 +75,7 @@ class ProfileHeaderView: UIView {
     }()
     
     //MARK: - init
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews(fullNameLabel, statusLabel, setStatusButton, backgroundView, closeButton, avatarImageView)

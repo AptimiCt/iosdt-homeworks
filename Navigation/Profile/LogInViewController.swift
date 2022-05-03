@@ -156,7 +156,14 @@ class LogInViewController: UIViewController {
     }
     
     @objc func loginButtonTapped(){
-        let profileViewController = ProfileViewController()
+        guard let loginName = loginTextView.text else { return }
+        #if DEBUG
+        let userService = TestUserService()
+        #else
+        let userService = CurrentUserService()
+        guard userService.userService(loginName: loginName) != nil else { return }
+        #endif
+        let profileViewController = ProfileViewController(loginName: loginName, userService: userService)
         navigationController?.pushViewController(profileViewController, animated: true)
     }
     

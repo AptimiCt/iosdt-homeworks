@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     
     private var avatar: UIImageView?
     private var offsetAvatar: CGFloat = 0
+    private var userService: UserService
     
     let profileTableHeaderView = ProfileHeaderView()
     
@@ -32,7 +33,8 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     
     //MARK: - init
     
-    init(){
+    init(loginName: String, userService: UserService) {
+        self.userService = userService
         super.init(nibName: nil, bundle: nil)
         #if DEBUG
         view.backgroundColor = .systemGray6
@@ -40,6 +42,10 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         view.backgroundColor = .red
         #endif
         self.tabBarItem = tabBarItemProfileView
+        guard let user = self.userService.userService(loginName: loginName) else { return }
+        profileTableHeaderView.fullNameLabel.text = user.fullName
+        profileTableHeaderView.avatarImageView.image = UIImage(named: user.avatar)
+        profileTableHeaderView.statusLabel.text = user.status
     }
     
     required init?(coder: NSCoder) {

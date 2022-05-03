@@ -102,4 +102,9 @@ struct Constants {
     //MARK: - for fourthPhoto
     static let trailingMarginForFourthPhoto: CGFloat = -12
     static let bottomForFourthPhoto: CGFloat = -12
+    
+    //MARK: - Constant string
+    static let fullName = "Джейк Салли"
+    static let avatar = "avatar"
+    static let status = "Waiting for something..."
 }
