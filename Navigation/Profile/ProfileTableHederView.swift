@@ -42,7 +42,7 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    private let fullNameLabel: UILabel = {
+    let fullNameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         nameLabel.textColor = .black
