@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     var localStorage:[Post] = []
     var photos: [UIImage] = []
     
-    //MARK: - funcs
+    //MARK: - init
     
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -46,13 +46,14 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - override funcs
     override func viewDidLoad() {
         super.viewDidLoad()
         localStorage = Storage.posts
         photos = Photos.fetchPhotos()
         setupView()
     }
-    
+    //MARK: - funcs
     func setupView() {
         
         tableView.dataSource = self
@@ -89,7 +90,9 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         avatar.isUserInteractionEnabled = false
         
         if offsetAvatar != 0 {
-            profileTableHeaderView.closeButtonTopAnchor?.constant += offsetAvatar
+                profileTableHeaderView.closeButtonTopAnchor?.update(offset: offsetAvatar + 8)
+        } else {
+            profileTableHeaderView.closeButtonTopAnchor?.update(offset: -offsetAvatar+8)
         }
         
         let moveCenter = CGAffineTransform(translationX: Constants.screenWeight / 2 - avatar.frame.width / 2 - 16, y: Constants.screenWeight / 2 + avatar.frame.width + 16 + offsetAvatar)
@@ -139,9 +142,6 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         }
         tableViewInteraction(to: true)
         avatar.isUserInteractionEnabled = true
-        if offsetAvatar != 0 {
-            profileTableHeaderView.closeButtonTopAnchor?.constant -= offsetAvatar
-        }
     }
     
     private func tableViewInteraction(to toggle: Bool){
@@ -158,13 +158,13 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForSection,
-                                                     for: indexPath) as! PhotosTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForSection,
+                                                           for: indexPath) as? PhotosTableViewCell else { return UITableViewCell() }
             cell.photos = photos
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForPost) as! PostTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForPost) as? PostTableViewCell else { return UITableViewCell() }
         cell.post = localStorage[indexPath.row]
         return cell
     }
