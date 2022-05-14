@@ -104,8 +104,13 @@ struct Constants {
     static let bottomForFourthPhoto: CGFloat = -12
     
     //MARK: - for Checker
-    static let login = "Avatar".hash
+    static let login = "Джейк Салли".hash
     static let password = "StrongPassword".hash
     static let titleAlert = "Ошибка ввода"
     static let message = "Введены не корректные данные"
+
+    //MARK: - Constant string
+    static let fullName = "Джейк Салли"
+    static let avatar = "avatar"
+    static let status = "Waiting for something..."
 }

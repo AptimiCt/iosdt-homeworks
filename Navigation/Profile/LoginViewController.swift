@@ -172,9 +172,15 @@ class LoginViewController: UIViewController {
     private func loginButtonTapped(){
         
         guard let passwordText = passwordTextView.text, let loginText = loginTextView.text else { return }
-        guard let check = delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
+        #if DEBUG
+            let check = true
+            let userService = TestUserService()
+        #else
+            guard let check = delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
+            let userService = CurrentUserService()
+        #endif
         if check {
-            let profileViewController = ProfileViewController()
+            let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
             navigationController?.pushViewController(profileViewController, animated: true)
         } else {
             let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
