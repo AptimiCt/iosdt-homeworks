@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+protocol ProfileHeaderViewDelegate: AnyObject {
+    func didTapedButton()
+}
+
 class ProfileHeaderView: UIView {
     
     
@@ -131,6 +135,4 @@ extension ProfileHeaderView{
     }
 }
 
-protocol ProfileHeaderViewDelegate: AnyObject {
-    func didTapedButton()
-}
+
