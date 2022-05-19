@@ -59,7 +59,7 @@ struct Constants {
     static let heightForProfileHeaderView: CGFloat = 220
     
     
-    //MARK: - Constants for LogInViewController
+    //MARK: - Constants for LoginViewController
     //MARK: - for logoImageView
     
     static let topMarginForLogoImageView: CGFloat = 120
@@ -103,6 +103,12 @@ struct Constants {
     static let trailingMarginForFourthPhoto: CGFloat = -12
     static let bottomForFourthPhoto: CGFloat = -12
     
+    //MARK: - for Checker
+    static let login = "Джейк Салли".hash
+    static let password = "StrongPassword".hash
+    static let titleAlert = "Ошибка ввода"
+    static let message = "Введены не корректные данные"
+
     //MARK: - Constant string
     static let fullName = "Джейк Салли"
     static let avatar = "avatar"
