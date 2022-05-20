@@ -6,14 +6,17 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
+    //MARK: - vars
     private let text = "Photo Gallery"
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private var imagePublisherFacade: ImagePublisherFacade?
+    private var photos: [UIImage] = []
     
-    var photos: [UIImage] = []
-    
+    //MARK: - init
     init() {
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .white
@@ -22,10 +25,12 @@ class PhotosViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //MARK: - override func
     override func viewDidLoad() {
+        super.viewDidLoad()
         title = text
-        photos = Photos.fetchPhotos()
+        imagePublisherFacade = ImagePublisherFacade()
+        imagePublisherFacade?.addImagesWithTimer(time: 1, repeat: 20, userImages: Photos.fetchPhotos())
         setupDelegate()
         setupView()
         self.collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: Cells.cellForCollection)
@@ -33,13 +38,17 @@ class PhotosViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
+        imagePublisherFacade?.subscribe(self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        imagePublisherFacade?.removeSubscription(for: self)
+        imagePublisherFacade?.rechargeImageLibrary()
     }
 }
 
+//MARK: - extension
 extension PhotosViewController {
     func setupDelegate(){
         collectionView.dataSource = self
@@ -72,5 +81,12 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    }
+}
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        photos = images
+        collectionView.reloadData()
     }
 }

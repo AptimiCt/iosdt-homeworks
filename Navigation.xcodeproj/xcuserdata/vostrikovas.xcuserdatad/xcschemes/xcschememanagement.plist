@@ -16,6 +16,8 @@
 		</dict>
 		<key>StorageService.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
@@ -23,6 +25,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>BBDC802B2749E2FF000A302B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BBFECF44280A3A9E002018F3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
