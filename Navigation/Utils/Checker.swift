@@ -9,7 +9,7 @@ import Foundation
 
 class Checker {
     
-    static var shared = Checker()
+    static let shared = Checker()
     
     private let login = Constants.login
     private let password = Constants.password
