@@ -183,8 +183,6 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            
-            profileTableHeaderView.delegate = self
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnAvatar))
             profileTableHeaderView.avatarImageView.addGestureRecognizer(tapGesture)
             return profileTableHeaderView
@@ -202,12 +200,5 @@ extension ProfileViewController: UITableViewDelegate {
             let nvc = PhotosViewController()
             navigationController?.pushViewController(nvc, animated: true)
         }
-    }
-}
-
-extension ProfileViewController: ProfileHeaderViewDelegate {
-    func didTapedButton() {
-        guard let status = self.profileTableHeaderView.statusLabel.text else { return }
-        print("\(status)")
     }
 }

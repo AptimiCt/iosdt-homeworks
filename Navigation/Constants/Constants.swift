@@ -113,4 +113,5 @@ struct Constants {
     static let fullName = "Джейк Салли"
     static let avatar = "avatar"
     static let status = "Waiting for something..."
+    static let showStatus = "Show status"
 }

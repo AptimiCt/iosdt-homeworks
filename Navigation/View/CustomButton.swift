@@ -7,15 +7,14 @@
 
 import UIKit
 
-class CustomButton: UIButton {
+final class CustomButton: UIButton {
     
-    let title: String
-    let titleColor: UIColor
-
+    var action: (() -> Void)?
+    
     init(title: String, titleColor: UIColor) {
-        self.title = title
-        self.titleColor = titleColor
         super.init(frame: .zero)
+        self.setTitle(title, for: .normal)
+        self.setTitleColor(titleColor, for: .normal)
         self.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
@@ -24,6 +23,6 @@ class CustomButton: UIButton {
     }
     
     @objc private func buttonTapped(){
-        
+        action?()
     }
 }

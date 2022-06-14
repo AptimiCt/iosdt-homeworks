@@ -31,10 +31,8 @@ class ProfileHeaderView: UIView {
         return imageView
     }()
     
-    private let setStatusButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Show status", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+    private let setStatusButton: CustomButton = {
+        let button = CustomButton(title: Constants.showStatus, titleColor: .white)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.red, for: .highlighted)
         button.layer.cornerRadius = 4
@@ -79,20 +77,23 @@ class ProfileHeaderView: UIView {
     }()
     
     //MARK: - init
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews(fullNameLabel, statusLabel, setStatusButton, backgroundView, closeButton, avatarImageView)
-        setStatusButton.addTarget(self, action: #selector(didTapedStatusButton), for: .touchUpInside)
         snpConstraints()
+        tapSetStatusButton()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    //MARK: - @objc private func
-    @objc private func didTapedStatusButton(){
-        self.delegate?.didTapedButton()
+    
+    //MARK: - private func
+    private func tapSetStatusButton(){
+        setStatusButton.action = {
+            guard let status = self.statusLabel.text else { return }
+            print("\(status)")
+        }
     }
 }
 
