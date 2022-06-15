@@ -58,6 +58,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         localStorage = Storage.posts
         photos = Photos.fetchPhotos()
         setupView()
+        closeButtonTaped()
     }
     //MARK: - funcs
     func setupView() {
@@ -89,8 +90,6 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         
         self.avatar = sender.view as? UIImageView
         guard let avatar = avatar else { return }
-        
-        profileTableHeaderView.closeButton.addTarget(self, action: #selector(closeButtonTaped), for: .touchUpInside)
         
         tableViewInteraction(to: false)
         avatar.isUserInteractionEnabled = false
@@ -126,28 +125,29 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         
     }
     
-    @objc private func closeButtonTaped(){
-        
-        guard let avatar = avatar else { return }
-        
-        UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: []) {
+    private func closeButtonTaped(){
+        profileTableHeaderView.closeButton.action = {
+            guard let avatar = self.avatar else { return }
             
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.37) {
-                self.profileTableHeaderView.closeButton.alpha = 0
+            UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: []) {
+                
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.37) {
+                    self.profileTableHeaderView.closeButton.alpha = 0
+                }
+                
+                UIView.addKeyframe(withRelativeStartTime: 0.37, relativeDuration: 0.62) {
+                    self.profileTableHeaderView.backgroundView.alpha = 0
+                }
+                
+                UIView.addKeyframe(withRelativeStartTime: 0.37, relativeDuration: 0.62) {
+                    self.avatar?.layer.cornerRadius = 50
+                    avatar.transform = .identity
+                    self.view.layoutIfNeeded()
+                }
             }
-            
-            UIView.addKeyframe(withRelativeStartTime: 0.37, relativeDuration: 0.62) {
-                self.profileTableHeaderView.backgroundView.alpha = 0
-            }
-            
-            UIView.addKeyframe(withRelativeStartTime: 0.37, relativeDuration: 0.62) {
-                self.avatar?.layer.cornerRadius = 50
-                avatar.transform = .identity
-                self.view.layoutIfNeeded()
-            }
+            self.tableViewInteraction(to: true)
+            avatar.isUserInteractionEnabled = true
         }
-        tableViewInteraction(to: true)
-        avatar.isUserInteractionEnabled = true
     }
     
     private func tableViewInteraction(to toggle: Bool){

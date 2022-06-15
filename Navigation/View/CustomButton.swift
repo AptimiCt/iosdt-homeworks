@@ -11,7 +11,7 @@ final class CustomButton: UIButton {
     
     var action: (() -> Void)?
     
-    init(title: String, titleColor: UIColor) {
+    init(title: String? = nil, titleColor: UIColor? = nil) {
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
         self.setTitleColor(titleColor, for: .normal)

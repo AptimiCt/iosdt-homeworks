@@ -67,8 +67,8 @@ class ProfileHeaderView: UIView {
         return backgroundView
     }()
     
-    lazy var closeButton: UIButton = {
-        let closeButton = UIButton()
+    lazy var closeButton: CustomButton = {
+        let closeButton = CustomButton(title: nil, titleColor: nil)
         closeButton.alpha = 0
         closeButton.tintColor = .red
         closeButton.setBackgroundImage(UIImage(systemName: "xmark.circle"), for: .normal)
@@ -90,8 +90,8 @@ class ProfileHeaderView: UIView {
     
     //MARK: - private func
     private func tapSetStatusButton(){
-        setStatusButton.action = {
-            guard let status = self.statusLabel.text else { return }
+        setStatusButton.action = { [weak self] in
+            guard let status = self?.statusLabel.text else { return }
             print("\(status)")
         }
     }

@@ -8,18 +8,20 @@
 import UIKit
 import StorageService
 
-class FeedViewController: UIViewController, SetupViewProtocol {
+class FeedViewController: UIViewController {
     
+    //MARK: - vars
     let post = Post(author: "Post", description: "Post", image: "bars", likes: 1, views: 1)
-    let tabBarItemLocal = UITabBarItem(title: "Feed",
+    private let tabBarItemLocal = UITabBarItem(title: "Feed",
                                        image: UIImage(systemName: "f.circle.fill"),
                                        tag: 0)
     
-    let buttonToPostFirst = UIButton()
-    let buttonToPostSecond = UIButton()
+    private let buttonToPostFirst = CustomButton(title: Constants.firstButton, titleColor: .white)
+    private let buttonToPostSecond = CustomButton(title: Constants.secondButton, titleColor: .white)
     
-    let stackView = UIStackView()
+    private let stackView = UIStackView()
     
+    //MARK: - init
     init(){
         super.init(nibName: nil, bundle: nil)
         self.tabBarItem = tabBarItemLocal
@@ -29,34 +31,33 @@ class FeedViewController: UIViewController, SetupViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - override
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupButtons()
         setupStack()
         setupConstraints()
+        buttonsAction()
     }
     
-    func setupView() {
+    //MARK: - private func
+    private func setupView() {
         view.backgroundColor =  .green
         self.navigationItem.title = "Feed"
     }
     
-    func setupButtons(){
+    private func setupButtons(){
         buttonToPostFirst.toAutoLayout()
         buttonToPostSecond.toAutoLayout()
         buttonToPostFirst.backgroundColor = .red
         buttonToPostFirst.layer.cornerRadius = 10
-        buttonToPostFirst.setTitle("First button", for: .normal)
-        buttonToPostFirst.addTarget(self, action: #selector(pressed), for: .touchUpInside)
         
         buttonToPostSecond.backgroundColor = .blue
         buttonToPostSecond.layer.cornerRadius = 10
-        buttonToPostSecond.setTitle("Second button", for: .normal)
-        buttonToPostSecond.addTarget(self, action: #selector(pressed), for: .touchUpInside)
     }
     
-    func setupStack(){
+    private func setupStack(){
         stackView.toAutoLayout()
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -65,7 +66,7 @@ class FeedViewController: UIViewController, SetupViewProtocol {
         view.addSubview(stackView)
     }
     
-    func setupConstraints(){
+    private func setupConstraints(){
         let constraints = [
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -73,8 +74,16 @@ class FeedViewController: UIViewController, SetupViewProtocol {
         NSLayoutConstraint.activate(constraints)
     }
     
-    @objc func pressed(){
-        let postViewController = PostViewController(post: post)
-        navigationController?.pushViewController(postViewController, animated: true)
+    private func buttonsAction(){
+        buttonToPostFirst.action = { [weak self] in
+            guard let post = self?.post else { return }
+            let postViewController = PostViewController(post: post)
+            self?.navigationController?.pushViewController(postViewController, animated: true)
+        }
+        buttonToPostSecond.action = { [weak self] in
+            guard let post = self?.post else { return }
+            let postViewController = PostViewController(post: post)
+            self?.navigationController?.pushViewController(postViewController, animated: true)
+        }
     }
 }

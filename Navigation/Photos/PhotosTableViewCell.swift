@@ -7,10 +7,10 @@
 
 import UIKit
 
-class PhotosTableViewCell: UITableViewCell {
+final class PhotosTableViewCell: UITableViewCell {
     
     private let photosLabel = UILabel()
-    private let arrowButton = UIButton()
+    private let arrowButton = CustomButton()
     private let firstPhoto = UIImageView()
     private let secondPhoto = UIImageView()
     private let thirdPhoto = UIImageView()
