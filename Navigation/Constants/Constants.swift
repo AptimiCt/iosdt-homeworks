@@ -118,4 +118,6 @@ struct Constants {
     static let firstButton = "First button"
     static let secondButton = "Second button"
     static let alert = "Alert"
+    static let checkWord = "Проверить слово"
+    static let wordTextField = "Введите слово для проверки"
 }

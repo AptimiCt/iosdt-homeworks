@@ -19,6 +19,27 @@ class FeedViewController: UIViewController {
     private let buttonToPostFirst = CustomButton(title: Constants.firstButton, titleColor: .white)
     private let buttonToPostSecond = CustomButton(title: Constants.secondButton, titleColor: .white)
     
+    private let checkWordButton: CustomButton = {
+        let checkButton = CustomButton(title: Constants.checkWord, titleColor: .white)
+        checkButton.setTitleColor(UIColor.systemPurple, for: .highlighted)
+        checkButton.backgroundColor = .systemBlue
+        checkButton.layer.cornerRadius = 10
+        checkButton.toAutoLayout()
+        return checkButton
+    }()
+    
+    private let wordTextField: CustomTextField = {
+        let textField = CustomTextField(font: .systemFont(ofSize: 18, weight: .bold), placeholder: Constants.wordTextField)
+        textField.textAlignment = .center
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.backgroundColor = .lightText
+        textField.layer.cornerRadius = 10
+        textField.clipsToBounds = true
+        textField.toAutoLayout()
+        return textField
+    }()
+    
     private let stackView = UIStackView()
     
     //MARK: - init
@@ -43,7 +64,7 @@ class FeedViewController: UIViewController {
     
     //MARK: - private func
     private func setupView() {
-        view.backgroundColor =  .green
+        view.backgroundColor = .systemGray3
         self.navigationItem.title = "Feed"
     }
     
@@ -63,13 +84,22 @@ class FeedViewController: UIViewController {
         stackView.spacing = 10
         stackView.addArrangedSubview(buttonToPostFirst)
         stackView.addArrangedSubview(buttonToPostSecond)
-        view.addSubview(stackView)
+        view.addSubviews(stackView, wordTextField, checkWordButton)
     }
     
     private func setupConstraints(){
         let constraints = [
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stackView.topAnchor.constraint(equalTo: checkWordButton.bottomAnchor, constant: 15),
+            
+            checkWordButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            checkWordButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            checkWordButton.topAnchor.constraint(equalTo: wordTextField.bottomAnchor, constant: 15),
+            
+            wordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            wordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            wordTextField.heightAnchor.constraint(equalToConstant: 34)
         ]
         NSLayoutConstraint.activate(constraints)
     }

@@ -17,13 +17,13 @@
 		BB152511282FBFF90045275F /* SetupViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB152510282FBFF90045275F /* SetupViewProtocol.swift */; };
 		BB1578CD28195B7500579E09 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1578CC28195B7500579E09 /* LoginFactory.swift */; };
 		BB1578D0281B341400579E09 /* CurrentLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1578CF281B341400579E09 /* CurrentLoginFactory.swift */; };
-		BB29EA602811F40A004BF74C /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = BB29EA5F2811F40A004BF74C /* iOSIntPackage */; };
 		BB38BC4D2794180600FF4B2E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38BC4C2794180600FF4B2E /* LoginViewController.swift */; };
 		BB53FB24276A8F9D0094AF1D /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */; };
 		BB8A46BA280B040100C8B27C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAE6843279E0E830031743C /* Storage.swift */; };
 		BB962F2D283457B10080A2D1 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB962F2C283457B10080A2D1 /* CustomButton.swift */; };
 		BBA2D94827AFD2D2002AC2A1 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2D94727AFD2D2002AC2A1 /* PhotosViewController.swift */; };
 		BBA2D94B27AFE082002AC2A1 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2D94A27AFE082002AC2A1 /* UIView+Ext.swift */; };
+		BBA8973B285C10D900126052 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA8973A285C10D800126052 /* CustomTextField.swift */; };
 		BBBBC9152753E9A6003DDF50 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */; };
 		BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBBC9162753E9DB003DDF50 /* ProfileViewController.swift */; };
 		BBD4136A275D721800B6E978 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD41369275D721800B6E978 /* PostViewController.swift */; };
@@ -36,9 +36,6 @@
 		BBDC80392749E301000A302B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBDC80382749E301000A302B /* Assets.xcassets */; };
 		BBDC803C2749E301000A302B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBDC803A2749E301000A302B /* LaunchScreen.storyboard */; };
 		BBE33F7528310F36008D8E19 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = BBE33F7428310F36008D8E19 /* iOSIntPackage */; };
-		BBF12CFB2821C7A0000F6926 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF12CF82821C7A0000F6926 /* User.swift */; };
-		BBF12CFC2821C7A0000F6926 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF12CF92821C7A0000F6926 /* CurrentUserService.swift */; };
-		BBF12CFD2821C7A0000F6926 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF12CFA2821C7A0000F6926 /* TestUserService.swift */; };
 		BBF7295027B4238100D737EF /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF7294F27B4238100D737EF /* PhotosCollectionViewCell.swift */; };
 		BBF7295327B45F8100D737EF /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF7295227B45F8100D737EF /* Cells.swift */; };
 		BBFECF48280A3A9E002018F3 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = BBFECF47280A3A9E002018F3 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -89,6 +86,7 @@
 		BB962F2C283457B10080A2D1 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		BBA2D94727AFD2D2002AC2A1 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		BBA2D94A27AFE082002AC2A1 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		BBA8973A285C10D800126052 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		BBAE6843279E0E830031743C /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		BBBBC9162753E9DB003DDF50 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				BB962F2C283457B10080A2D1 /* CustomButton.swift */,
+				BBA8973A285C10D800126052 /* CustomTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -479,6 +478,7 @@
 				BBA2D94827AFD2D2002AC2A1 /* PhotosViewController.swift in Sources */,
 				BB1578D0281B341400579E09 /* CurrentLoginFactory.swift in Sources */,
 				BBD735CA27AEDB05002397A0 /* Photos.swift in Sources */,
+				BBA8973B285C10D900126052 /* CustomTextField.swift in Sources */,
 				BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */,
 				BB15250D282FBFDE0045275F /* AppDelegate.swift in Sources */,
 				BB8A46BA280B040100C8B27C /* Storage.swift in Sources */,
