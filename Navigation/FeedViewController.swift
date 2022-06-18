@@ -11,7 +11,7 @@ import StorageService
 class FeedViewController: UIViewController {
     
     //MARK: - vars
-    let post = Post(author: "Post", description: "Post", image: "bars", likes: 1, views: 1)
+    private var post: Post?
     private let tabBarItemLocal = UITabBarItem(title: "Feed",
                                        image: UIImage(systemName: "f.circle.fill"),
                                        tag: 0)
@@ -40,12 +40,30 @@ class FeedViewController: UIViewController {
         return textField
     }()
     
+    private lazy var labelCheck: UILabel = {
+        let label = UILabel()
+        label.alpha = 0
+        label.backgroundColor = .systemIndigo
+        label.layer.cornerRadius = 10
+        label.isUserInteractionEnabled = true
+        label.textAlignment = .center
+        label.clipsToBounds = true
+        label.toAutoLayout()
+        return label
+    }()
+    
     private let stackView = UIStackView()
     
     //MARK: - init
     init(){
         super.init(nibName: nil, bundle: nil)
         self.tabBarItem = tabBarItemLocal
+    }
+    
+    init(post: Post){
+        super.init(nibName: nil, bundle: nil)
+        self.tabBarItem = tabBarItemLocal
+        self.post = post
     }
     
     required init?(coder: NSCoder) {
@@ -84,7 +102,7 @@ class FeedViewController: UIViewController {
         stackView.spacing = 10
         stackView.addArrangedSubview(buttonToPostFirst)
         stackView.addArrangedSubview(buttonToPostSecond)
-        view.addSubviews(stackView, wordTextField, checkWordButton)
+        view.addSubviews(stackView, wordTextField, checkWordButton, labelCheck)
     }
     
     private func setupConstraints(){
@@ -99,9 +117,26 @@ class FeedViewController: UIViewController {
             
             wordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             wordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            wordTextField.heightAnchor.constraint(equalToConstant: 34)
+            wordTextField.heightAnchor.constraint(equalToConstant: 34),
+            labelCheck.bottomAnchor.constraint(equalTo: checkWordButton.topAnchor, constant: -5),
+            labelCheck.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            labelCheck.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            labelCheck.heightAnchor.constraint(equalToConstant: 70),
         ]
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    private func labelShow(text: String, color: UIColor){
+        labelCheck.text = text
+        labelCheck.textColor = color
+        UIView.animateKeyframes(withDuration: 3, delay: 0) {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.3) {
+                self.labelCheck.alpha = 1
+            }
+            UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 1) {
+                self.labelCheck.alpha = 0
+            }
+        }
     }
     
     private func buttonsAction(){
@@ -114,6 +149,11 @@ class FeedViewController: UIViewController {
             guard let post = self?.post else { return }
             let postViewController = PostViewController(post: post)
             self?.navigationController?.pushViewController(postViewController, animated: true)
+        }
+        checkWordButton.action = { [weak self] in
+            guard let word = self?.wordTextField.text, !(word.isEmpty),let post = self?.post else { return }
+            let check = post.checker(word: word)
+            check ? self?.labelShow(text: "Верно", color: .green) : self?.labelShow(text: "Не верно", color: .red)
         }
     }
 }

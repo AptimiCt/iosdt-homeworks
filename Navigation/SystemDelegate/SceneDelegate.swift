@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -18,8 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
+        let post = Post(author: "Post", description: "Post", image: "bars", likes: 1, views: 1)
         let tabBarController = UITabBarController()
-        let feedViewController = FeedViewController()
+        let feedViewController = FeedViewController(post: post)
         let loginViewController = LoginViewController()
         let currentLoginFactory = CurrentLoginFactory()
         loginViewController.delegate = currentLoginFactory.create()
