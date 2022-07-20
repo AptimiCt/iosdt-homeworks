@@ -10,15 +10,17 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    
+    var coordinator: AppCoordinator?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        coordinator = AppCoordinator()
         let window = UIWindow(windowScene: windowScene)
-        let tabBarController = UITabBarController()
+        let tabBarController = coordinator?.startApp()
         let feedViewController = FeedViewController()
         let loginViewController = LoginViewController()
         let currentLoginFactory = CurrentLoginFactory()
@@ -27,8 +29,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
         let profileNavigationController = UINavigationController(rootViewController: loginViewController)
         
-        tabBarController.viewControllers = [feedNavigationController,profileNavigationController]
-        tabBarController.selectedIndex = 1
+        tabBarController?.viewControllers = [feedNavigationController,profileNavigationController]
+        tabBarController?.selectedIndex = 1
         
         if #available(iOS 15.0, *) {
             let appearanceTabBar = UITabBarAppearance()
@@ -37,10 +39,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             appearanceNavigationBar.configureWithOpaqueBackground()
             appearanceTabBar.backgroundColor = .white
             appearanceNavigationBar.backgroundColor = .white
-            tabBarController.tabBar.standardAppearance = appearanceTabBar
+            tabBarController?.tabBar.standardAppearance = appearanceTabBar
             feedNavigationController.navigationBar.standardAppearance = appearanceNavigationBar
             profileNavigationController.navigationBar.standardAppearance = appearanceNavigationBar
-            tabBarController.tabBar.scrollEdgeAppearance = tabBarController.tabBar.standardAppearance
+            tabBarController?.tabBar.scrollEdgeAppearance = tabBarController?.tabBar.standardAppearance
             feedNavigationController.navigationBar.scrollEdgeAppearance = feedNavigationController.navigationBar.standardAppearance
             profileNavigationController.navigationBar.scrollEdgeAppearance = profileNavigationController.navigationBar.standardAppearance
         }
