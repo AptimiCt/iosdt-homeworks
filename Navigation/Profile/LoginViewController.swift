@@ -59,10 +59,8 @@ class LoginViewController: UIViewController {
         return stackView
     }()
     
-    private let loginButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Log In", for: .normal)
-        button.titleLabel?.textColor = .white
+    private let loginButton: CustomButton = {
+        let button = CustomButton(title: Constants.logIn, titleColor: .white)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -90,6 +88,7 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .white
         setupView()
         setupConstrains()
+        loginButtonTapped()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,8 +119,6 @@ class LoginViewController: UIViewController {
         stackView.addArrangedSubview(loginTextView)
         stackView.addArrangedSubview(passwordTextView)
         contentView.addSubviews(logoImageView, stackView, loginButton)
-        
-        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
     private func setupConstrains(){
@@ -167,29 +164,7 @@ class LoginViewController: UIViewController {
         NSLayoutConstraint.activate(constrains)
     }
     
-    //MARK: - @objc funcs
-    @objc
-    private func loginButtonTapped(){
-        
-        guard let passwordText = passwordTextView.text, let loginText = loginTextView.text else { return }
-        #if DEBUG
-            let check = true
-            let userService = TestUserService()
-        #else
-            guard let check = delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
-            let userService = CurrentUserService()
-        #endif
-        if check {
-            let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
-            navigationController?.pushViewController(profileViewController, animated: true)
-        } else {
-            let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
-            let actionOk = UIAlertAction(title: "Ok", style: .default)
-            alert.addAction(actionOk)
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
+    //MARK: - @objc private funcs
     @objc
     private func keyboardWillShow(notification: NSNotification){
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
@@ -202,5 +177,28 @@ class LoginViewController: UIViewController {
     private func keyboardWillHide(notification: NSNotification){
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
+    }
+    
+    //MARK: - private funcs
+    private func loginButtonTapped(){
+        loginButton.action = { [weak self] in
+            guard let passwordText = self?.passwordTextView.text, let loginText = self?.loginTextView.text else { return }
+            #if DEBUG
+            let check = true
+            let userService = TestUserService()
+            #else
+            guard let check = delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
+            let userService = CurrentUserService()
+            #endif
+            if check {
+                let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
+                self?.navigationController?.pushViewController(profileViewController, animated: true)
+            } else {
+                let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
+                let actionOk = UIAlertAction(title: "Ok", style: .default)
+                alert.addAction(actionOk)
+                self?.present(alert, animated: true, completion: nil)
+            }
+        }
     }
 }

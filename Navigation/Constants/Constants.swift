@@ -113,4 +113,11 @@ struct Constants {
     static let fullName = "Джейк Салли"
     static let avatar = "avatar"
     static let status = "Waiting for something..."
+    static let showStatus = "Show status"
+    static let logIn = "Log In"
+    static let firstButton = "First button"
+    static let secondButton = "Second button"
+    static let alert = "Alert"
+    static let checkWord = "Проверить слово"
+    static let wordTextField = "Введите слово для проверки"
 }
