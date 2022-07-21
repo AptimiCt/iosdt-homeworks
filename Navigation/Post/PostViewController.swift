@@ -8,9 +8,9 @@
 import UIKit
 import StorageService
 
-class PostViewController: UIViewController, SetupViewProtocol {
+final class PostViewController: UIViewController {
     
-    var post: Post?
+    private var post: Post?
     
     init(post: Post) {
         self.post = post
@@ -26,16 +26,16 @@ class PostViewController: UIViewController, SetupViewProtocol {
         setupView()
     }
     
-    func setupView() {
+    private func setupView() {
         let leftButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                              target: self,
                                              action: #selector(openInfoVC))
-        view.backgroundColor = .blue
+        view.backgroundColor = .systemTeal
         navigationItem.title = post?.author
         navigationItem.setRightBarButton(leftButtonItem, animated: true)
     }
     
-    @objc func openInfoVC(){
+    @objc private func openInfoVC(){
         let infoVC = InfoViewController()
         present(infoVC, animated: true, completion: nil)
     }
