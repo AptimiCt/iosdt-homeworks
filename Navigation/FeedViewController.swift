@@ -8,17 +8,17 @@
 import UIKit
 import StorageService
 
-class FeedViewController: UIViewController, SetupViewProtocol {
+final class FeedViewController: UIViewController {
     
-    let post = Post(author: "Post", description: "Post", image: "bars", likes: 1, views: 1)
-    let tabBarItemLocal = UITabBarItem(title: "Feed",
+    private let post = Post(author: "Post", description: "Post", image: "bars", likes: 1, views: 1)
+    private let tabBarItemLocal = UITabBarItem(title: "Feed",
                                        image: UIImage(systemName: "f.circle.fill"),
                                        tag: 0)
     
-    let buttonToPostFirst = UIButton()
-    let buttonToPostSecond = UIButton()
+    private let buttonToPostFirst = UIButton()
+    private let buttonToPostSecond = UIButton()
     
-    let stackView = UIStackView()
+    private let stackView = UIStackView()
     
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -37,12 +37,12 @@ class FeedViewController: UIViewController, SetupViewProtocol {
         setupConstraints()
     }
     
-    func setupView() {
+    private func setupView() {
         view.backgroundColor =  .green
         self.navigationItem.title = "Feed"
     }
     
-    func setupButtons(){
+    private func setupButtons(){
         buttonToPostFirst.toAutoLayout()
         buttonToPostSecond.toAutoLayout()
         buttonToPostFirst.backgroundColor = .red
@@ -56,7 +56,7 @@ class FeedViewController: UIViewController, SetupViewProtocol {
         buttonToPostSecond.addTarget(self, action: #selector(pressed), for: .touchUpInside)
     }
     
-    func setupStack(){
+    private func setupStack(){
         stackView.toAutoLayout()
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -65,7 +65,7 @@ class FeedViewController: UIViewController, SetupViewProtocol {
         view.addSubview(stackView)
     }
     
-    func setupConstraints(){
+    private func setupConstraints(){
         let constraints = [
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -73,7 +73,7 @@ class FeedViewController: UIViewController, SetupViewProtocol {
         NSLayoutConstraint.activate(constraints)
     }
     
-    @objc func pressed(){
+    @objc private func pressed(){
         let postViewController = PostViewController(post: post)
         navigationController?.pushViewController(postViewController, animated: true)
     }
