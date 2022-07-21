@@ -15,7 +15,6 @@ protocol MainCoordinator {
 final class AppCoordinator: MainCoordinator {
     
     func startApp() -> UITabBarController {
-        let tabBarController = UITabBarController()
-        return tabBarController
+        return TabBarController()
     }
 }

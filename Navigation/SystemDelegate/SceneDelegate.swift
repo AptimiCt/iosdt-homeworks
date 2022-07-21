@@ -21,16 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         coordinator = AppCoordinator()
         let window = UIWindow(windowScene: windowScene)
         let tabBarController = coordinator?.startApp()
-        let feedViewController = FeedViewController()
-        let loginViewController = LoginViewController()
-        let currentLoginFactory = CurrentLoginFactory()
-        loginViewController.delegate = currentLoginFactory.create()
-        
-        let feedNavigationController = UINavigationController(rootViewController: feedViewController)
-        let profileNavigationController = UINavigationController(rootViewController: loginViewController)
-        
-        tabBarController?.viewControllers = [feedNavigationController,profileNavigationController]
-        tabBarController?.selectedIndex = 1
         
         if #available(iOS 15.0, *) {
             let appearanceTabBar = UITabBarAppearance()
@@ -40,11 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             appearanceTabBar.backgroundColor = .white
             appearanceNavigationBar.backgroundColor = .white
             tabBarController?.tabBar.standardAppearance = appearanceTabBar
-            feedNavigationController.navigationBar.standardAppearance = appearanceNavigationBar
-            profileNavigationController.navigationBar.standardAppearance = appearanceNavigationBar
             tabBarController?.tabBar.scrollEdgeAppearance = tabBarController?.tabBar.standardAppearance
-            feedNavigationController.navigationBar.scrollEdgeAppearance = feedNavigationController.navigationBar.standardAppearance
-            profileNavigationController.navigationBar.scrollEdgeAppearance = profileNavigationController.navigationBar.standardAppearance
         }
         
         window.rootViewController = tabBarController

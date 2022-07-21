@@ -18,6 +18,8 @@
 		BB1578CD28195B7500579E09 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1578CC28195B7500579E09 /* LoginFactory.swift */; };
 		BB1578D0281B341400579E09 /* CurrentLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1578CF281B341400579E09 /* CurrentLoginFactory.swift */; };
 		BB38BC4D2794180600FF4B2E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38BC4C2794180600FF4B2E /* LoginViewController.swift */; };
+		BB47EFF52888C12400FFB5EC /* ViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47EFF42888C12400FFB5EC /* ViewControllersFactory.swift */; };
+		BB47EFF82889EA4B00FFB5EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47EFF72889EA4B00FFB5EC /* TabBarController.swift */; };
 		BB53FB24276A8F9D0094AF1D /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */; };
 		BB8A46BA280B040100C8B27C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAE6843279E0E830031743C /* Storage.swift */; };
 		BB9D5EC9285FB3310039DFE7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D5EC8285FB3310039DFE7 /* AppCoordinator.swift */; };
@@ -81,6 +83,8 @@
 		BB1578CC28195B7500579E09 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		BB1578CF281B341400579E09 /* CurrentLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLoginFactory.swift; sourceTree = "<group>"; };
 		BB38BC4C2794180600FF4B2E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BB47EFF42888C12400FFB5EC /* ViewControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllersFactory.swift; sourceTree = "<group>"; };
+		BB47EFF72889EA4B00FFB5EC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
 		BB9D5EC8285FB3310039DFE7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		BBA2D94727AFD2D2002AC2A1 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +172,7 @@
 			children = (
 				BB1578CC28195B7500579E09 /* LoginFactory.swift */,
 				BB1578CF281B341400579E09 /* CurrentLoginFactory.swift */,
+				BB47EFF42888C12400FFB5EC /* ViewControllersFactory.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -178,6 +183,14 @@
 				BB0B2249279343AD00C51B3D /* Constants.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		BB47EFF62889EA2500FFB5EC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BB47EFF72889EA4B00FFB5EC /* TabBarController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		BB53FB22276A8F100094AF1D /* Profile */ = {
@@ -257,6 +270,7 @@
 		BBDC802E2749E2FF000A302B /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				BB47EFF62889EA2500FFB5EC /* View */,
 				BB9D5EC7285FB3080039DFE7 /* Coordinator */,
 				BB15250F282FBFF90045275F /* Protocols */,
 				BB15250A282FBFDE0045275F /* SystemDelegate */,
@@ -469,6 +483,7 @@
 			files = (
 				BB152511282FBFF90045275F /* SetupViewProtocol.swift in Sources */,
 				BBD68B7F281742B1007BD77E /* LoginInspector.swift in Sources */,
+				BB47EFF52888C12400FFB5EC /* ViewControllersFactory.swift in Sources */,
 				BBD735CD27AEE22A002397A0 /* PhotosTableViewCell.swift in Sources */,
 				BBD68B7D281726C0007BD77E /* Checker.swift in Sources */,
 				BB152509282FBFCE0045275F /* TestUserService.swift in Sources */,
@@ -491,6 +506,7 @@
 				BBD4136C275D882000B6E978 /* InfoViewController.swift in Sources */,
 				BBF7295327B45F8100D737EF /* Cells.swift in Sources */,
 				BB9D5EC9285FB3310039DFE7 /* AppCoordinator.swift in Sources */,
+				BB47EFF82889EA4B00FFB5EC /* TabBarController.swift in Sources */,
 				BB152508282FBFCE0045275F /* CurrentUserService.swift in Sources */,
 				BB152507282FBFCE0045275F /* User.swift in Sources */,
 			);
