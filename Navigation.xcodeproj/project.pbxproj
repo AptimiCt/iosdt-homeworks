@@ -20,6 +20,8 @@
 		BB38BC4D2794180600FF4B2E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38BC4C2794180600FF4B2E /* LoginViewController.swift */; };
 		BB47EFF52888C12400FFB5EC /* ViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47EFF42888C12400FFB5EC /* ViewControllersFactory.swift */; };
 		BB47EFF82889EA4B00FFB5EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47EFF72889EA4B00FFB5EC /* TabBarController.swift */; };
+		BB47EFFA288A002000FFB5EC /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47EFF9288A002000FFB5EC /* FeedCoordinator.swift */; };
+		BB47EFFC288A003400FFB5EC /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47EFFB288A003400FFB5EC /* LoginCoordinator.swift */; };
 		BB53FB24276A8F9D0094AF1D /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */; };
 		BB8A46BA280B040100C8B27C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAE6843279E0E830031743C /* Storage.swift */; };
 		BB9D5EC9285FB3310039DFE7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D5EC8285FB3310039DFE7 /* AppCoordinator.swift */; };
@@ -85,6 +87,8 @@
 		BB38BC4C2794180600FF4B2E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BB47EFF42888C12400FFB5EC /* ViewControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllersFactory.swift; sourceTree = "<group>"; };
 		BB47EFF72889EA4B00FFB5EC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		BB47EFF9288A002000FFB5EC /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		BB47EFFB288A003400FFB5EC /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
 		BB9D5EC8285FB3310039DFE7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		BBA2D94727AFD2D2002AC2A1 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				BB9D5EC8285FB3310039DFE7 /* AppCoordinator.swift */,
+				BB47EFF9288A002000FFB5EC /* FeedCoordinator.swift */,
+				BB47EFFB288A003400FFB5EC /* LoginCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -485,6 +491,7 @@
 				BBD68B7F281742B1007BD77E /* LoginInspector.swift in Sources */,
 				BB47EFF52888C12400FFB5EC /* ViewControllersFactory.swift in Sources */,
 				BBD735CD27AEE22A002397A0 /* PhotosTableViewCell.swift in Sources */,
+				BB47EFFA288A002000FFB5EC /* FeedCoordinator.swift in Sources */,
 				BBD68B7D281726C0007BD77E /* Checker.swift in Sources */,
 				BB152509282FBFCE0045275F /* TestUserService.swift in Sources */,
 				BBA2D94827AFD2D2002AC2A1 /* PhotosViewController.swift in Sources */,
@@ -492,6 +499,7 @@
 				BBD735CA27AEDB05002397A0 /* Photos.swift in Sources */,
 				BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */,
 				BB15250D282FBFDE0045275F /* AppDelegate.swift in Sources */,
+				BB47EFFC288A003400FFB5EC /* LoginCoordinator.swift in Sources */,
 				BB8A46BA280B040100C8B27C /* Storage.swift in Sources */,
 				BBD735C827A72CAE002397A0 /* PostTableViewCell.swift in Sources */,
 				BB15250E282FBFDE0045275F /* SceneDelegate.swift in Sources */,

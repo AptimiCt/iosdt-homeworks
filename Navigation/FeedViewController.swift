@@ -10,6 +10,8 @@ import StorageService
 
 final class FeedViewController: UIViewController {
     
+    private weak var mainCoordinator: AppCoordinator?
+    
     private let post = Post(author: "Post", description: "Post", image: "bars", likes: 1, views: 1)
     private let tabBarItemLocal = UITabBarItem(title: "Feed",
                                        image: UIImage(systemName: "f.circle.fill"),

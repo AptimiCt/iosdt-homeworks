@@ -13,6 +13,7 @@ protocol LoginViewControllerDelegate: AnyObject {
 
 class LoginViewController: UIViewController {
     
+    private weak var flowCoordinator: FlowCoordinator?
     //MARK: - vars
     var delegate: LoginViewControllerDelegate?
     
