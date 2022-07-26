@@ -30,7 +30,11 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         title = text
         imagePublisherFacade = ImagePublisherFacade()
-        imagePublisherFacade?.addImagesWithTimer(time: 1, repeat: 20, userImages: Photos.fetchPhotos())
+        let userImages = Photos.fetchPhotos()
+        for qos in 0...4 {
+            imageProcessingInThread(userImages, qos)
+        }
+        imagePublisherFacade?.addImagesWithTimer(time: 1, repeat: 20, userImages: userImages)
         setupDelegate()
         setupView()
         self.collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: Cells.cellForCollection)
@@ -50,13 +54,36 @@ class PhotosViewController: UIViewController {
 
 //MARK: - extension
 extension PhotosViewController {
-    func setupDelegate(){
+    private func setupDelegate(){
         collectionView.dataSource = self
         collectionView.delegate = self
     }
-    func setupView() {
+    private func setupView() {
         view.addSubview(collectionView)
         collectionView.pin(to: view)
+    }
+    
+    
+    private func imageProcessingInThread(_ userImages: [UIImage], _ qos: Int) {
+        switch qos {
+        case 0:
+            ImageProcessor().processImagesOnThread(sourceImages: userImages, filter: .allCases[qos], qos: .userInteractive) { _ in
+            }
+        case 1:
+            ImageProcessor().processImagesOnThread(sourceImages: userImages, filter: .allCases[qos], qos: .userInitiated) { _ in
+            }
+        case 2:
+            ImageProcessor().processImagesOnThread(sourceImages: userImages, filter: .allCases[qos], qos: .utility) { _ in
+            }
+        case 3:
+            ImageProcessor().processImagesOnThread(sourceImages: userImages, filter: .allCases[qos], qos: .background) { _ in
+            }
+        case 4:
+            ImageProcessor().processImagesOnThread(sourceImages: userImages, filter: .allCases[qos], qos: .default) { _ in
+            }
+        default:
+            break
+        }
     }
 }
 
