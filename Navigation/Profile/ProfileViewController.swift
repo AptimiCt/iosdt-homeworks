@@ -8,7 +8,7 @@
 import UIKit
 import StorageService
 
-class ProfileViewController: UIViewController, SetupViewProtocol {
+class ProfileViewController: UIViewController {
     
     
     //MARK: - vars
@@ -61,7 +61,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         closeButtonTaped()
     }
     //MARK: - funcs
-    func setupView() {
+    private func setupView() {
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -69,7 +69,7 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
         configureConstraints()
     }
     
-    func configureConstraints(){
+    private func configureConstraints(){
         view.addSubview(tableView)
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: Cells.cellForPost)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: Cells.cellForSection)
