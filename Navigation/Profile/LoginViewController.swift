@@ -67,6 +67,14 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private let checkPasswordButton: CustomButton = {
+        let button = CustomButton(title: Constants.checkPassword, titleColor: .white)
+        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        return button
+    }()
+    
     private let tabBarItemLocal = UITabBarItem(title: "Profile",
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
@@ -110,6 +118,7 @@ class LoginViewController: UIViewController {
         logoImageView.toAutoLayout()
         stackView.toAutoLayout()
         loginButton.toAutoLayout()
+        checkPasswordButton.toAutoLayout()
         passwordTextView.toAutoLayout()
         
         view.addSubviews(scrollView)
@@ -118,7 +127,7 @@ class LoginViewController: UIViewController {
         
         stackView.addArrangedSubview(loginTextView)
         stackView.addArrangedSubview(passwordTextView)
-        contentView.addSubviews(logoImageView, stackView, loginButton)
+        contentView.addSubviews(logoImageView, stackView, loginButton, checkPasswordButton)
     }
     
     private func setupConstrains(){
@@ -157,8 +166,12 @@ class LoginViewController: UIViewController {
                                              constant: Constants.topMarginForLoginButton),
             loginButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
-            loginButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16)
             
+            checkPasswordButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            checkPasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            checkPasswordButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            checkPasswordButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16),
+            checkPasswordButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
         ]
         
         NSLayoutConstraint.activate(constrains)
