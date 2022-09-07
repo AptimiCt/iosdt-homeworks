@@ -115,7 +115,7 @@ struct Constants {
     static let status = "Waiting for something..."
     static let showStatus = "Show status"
     static let logIn = "Log In"
-    static let checkPassword = "Check password"
+    static let choosePassword = "Подобрать пароль"
     static let firstButton = "First button"
     static let secondButton = "Second button"
     static let alert = "Alert"

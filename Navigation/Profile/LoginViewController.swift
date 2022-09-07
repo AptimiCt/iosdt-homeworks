@@ -67,8 +67,8 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    private let checkPasswordButton: CustomButton = {
-        let button = CustomButton(title: Constants.checkPassword, titleColor: .white)
+    private let choosePasswordButton: CustomButton = {
+        let button = CustomButton(title: Constants.choosePassword, titleColor: .white)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -97,6 +97,7 @@ class LoginViewController: UIViewController {
         setupView()
         setupConstrains()
         loginButtonTapped()
+        choosePasswordButtonTapped()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,7 +119,7 @@ class LoginViewController: UIViewController {
         logoImageView.toAutoLayout()
         stackView.toAutoLayout()
         loginButton.toAutoLayout()
-        checkPasswordButton.toAutoLayout()
+        choosePasswordButton.toAutoLayout()
         passwordTextView.toAutoLayout()
         
         view.addSubviews(scrollView)
@@ -127,7 +128,7 @@ class LoginViewController: UIViewController {
         
         stackView.addArrangedSubview(loginTextView)
         stackView.addArrangedSubview(passwordTextView)
-        contentView.addSubviews(logoImageView, stackView, loginButton, checkPasswordButton)
+        contentView.addSubviews(logoImageView, stackView, loginButton, choosePasswordButton)
     }
     
     private func setupConstrains(){
@@ -167,11 +168,11 @@ class LoginViewController: UIViewController {
             loginButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
             
-            checkPasswordButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            checkPasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
-            checkPasswordButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-            checkPasswordButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16),
-            checkPasswordButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
+            choosePasswordButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            choosePasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            choosePasswordButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            choosePasswordButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16),
+            choosePasswordButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
         ]
         
         NSLayoutConstraint.activate(constrains)
@@ -200,7 +201,7 @@ class LoginViewController: UIViewController {
             let check = true
             let userService = TestUserService()
             #else
-            guard let check = delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
+            guard let check = self?.delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
             let userService = CurrentUserService()
             #endif
             if check {
@@ -213,5 +214,45 @@ class LoginViewController: UIViewController {
                 self?.present(alert, animated: true, completion: nil)
             }
         }
+    }
+    private func choosePasswordButtonTapped(){
+        choosePasswordButton.action = { [weak self] in
+//            let passwordText = "1234"
+            guard let passwordText = self?.passwordTextView.text, let loginText = self?.loginTextView.text else { return }
+            #if DEBUG
+            let check = true
+            let userService = TestUserService()
+            #else
+            guard let check = self?.delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
+            let userService = CurrentUserService()
+            #endif
+            if check {
+                let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
+                self?.navigationController?.pushViewController(profileViewController, animated: true)
+            } else {
+                let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
+                let actionOk = UIAlertAction(title: "Ok", style: .default)
+                alert.addAction(actionOk)
+                self?.present(alert, animated: true, completion: nil)
+            }
+            
+        }
+    }
+}
+
+extension String {
+    var digits:      String { return "0123456789" }
+    var lowercase:   String { return "abcdefghijklmnopqrstuvwxyz" }
+    var uppercase:   String { return "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }
+    var punctuation: String { return "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" }
+    var letters:     String { return lowercase + uppercase }
+    var printable:   String { return digits + letters + punctuation }
+
+
+
+    mutating func replace(at index: Int, with character: Character) {
+        var stringArray = Array(self)
+        stringArray[index] = character
+        self = String(stringArray)
     }
 }
