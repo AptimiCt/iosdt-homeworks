@@ -18,7 +18,11 @@ class LoginViewController: UIViewController {
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView()
+        
+        return activity
+    }()
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
@@ -121,8 +125,10 @@ class LoginViewController: UIViewController {
         loginButton.toAutoLayout()
         choosePasswordButton.toAutoLayout()
         passwordTextView.toAutoLayout()
+        activityIndicator.toAutoLayout()
         
         view.addSubviews(scrollView)
+        view.addSubview(activityIndicator)
         scrollView.addSubviews(contentView)
         scrollView.keyboardDismissMode = .interactive
         
@@ -173,6 +179,10 @@ class LoginViewController: UIViewController {
             choosePasswordButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             choosePasswordButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16),
             choosePasswordButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: passwordTextView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: passwordTextView.centerYAnchor),
+            activityIndicator.heightAnchor.constraint(equalTo: passwordTextView.heightAnchor)
         ]
         
         NSLayoutConstraint.activate(constrains)
@@ -216,43 +226,30 @@ class LoginViewController: UIViewController {
         }
     }
     private func choosePasswordButtonTapped(){
+        passwordTextView.delegate = self
         choosePasswordButton.action = { [weak self] in
-//            let passwordText = "1234"
-            guard let passwordText = self?.passwordTextView.text, let loginText = self?.loginTextView.text else { return }
-            #if DEBUG
-            let check = true
-            let userService = TestUserService()
-            #else
-            guard let check = self?.delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
-            let userService = CurrentUserService()
-            #endif
-            if check {
-                let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
-                self?.navigationController?.pushViewController(profileViewController, animated: true)
-            } else {
-                let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
-                let actionOk = UIAlertAction(title: "Ok", style: .default)
-                alert.addAction(actionOk)
-                self?.present(alert, animated: true, completion: nil)
+            let bruteForceManager = BruteForceManager()
+            let passwordText = bruteForceManager.passwordGenerator(lengthPass: 3)
+            self?.activityIndicator.startAnimating()
+            self?.passwordTextView.isUserInteractionEnabled = false
+            DispatchQueue.global().async {
+                bruteForceManager.bruteForce(passwordToUnlock: passwordText)
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
+                    self?.activityIndicator.hidesWhenStopped
+                    self?.passwordTextView.isUserInteractionEnabled = true
+                    self?.passwordTextView.isSecureTextEntry = false
+                    self?.passwordTextView.text = passwordText
+                }
             }
-            
         }
     }
 }
 
-extension String {
-    var digits:      String { return "0123456789" }
-    var lowercase:   String { return "abcdefghijklmnopqrstuvwxyz" }
-    var uppercase:   String { return "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }
-    var punctuation: String { return "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" }
-    var letters:     String { return lowercase + uppercase }
-    var printable:   String { return digits + letters + punctuation }
-
-
-
-    mutating func replace(at index: Int, with character: Character) {
-        var stringArray = Array(self)
-        stringArray[index] = character
-        self = String(stringArray)
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if !passwordTextView.isSecureTextEntry {
+            passwordTextView.isSecureTextEntry.toggle()
+        }
     }
 }

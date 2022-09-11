@@ -18,6 +18,7 @@
 		BB1578CD28195B7500579E09 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1578CC28195B7500579E09 /* LoginFactory.swift */; };
 		BB1578D0281B341400579E09 /* CurrentLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1578CF281B341400579E09 /* CurrentLoginFactory.swift */; };
 		BB38BC4D2794180600FF4B2E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38BC4C2794180600FF4B2E /* LoginViewController.swift */; };
+		BB38C9CD28CE000D00739803 /* BruteForceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38C9CC28CE000D00739803 /* BruteForceManager.swift */; };
 		BB53FB24276A8F9D0094AF1D /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */; };
 		BB8A46BA280B040100C8B27C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAE6843279E0E830031743C /* Storage.swift */; };
 		BB962F2D283457B10080A2D1 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB962F2C283457B10080A2D1 /* CustomButton.swift */; };
@@ -82,6 +83,7 @@
 		BB1578CC28195B7500579E09 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		BB1578CF281B341400579E09 /* CurrentLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLoginFactory.swift; sourceTree = "<group>"; };
 		BB38BC4C2794180600FF4B2E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BB38C9CC28CE000D00739803 /* BruteForceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForceManager.swift; sourceTree = "<group>"; };
 		BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
 		BB962F2C283457B10080A2D1 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		BBA2D94727AFD2D2002AC2A1 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				BBF7295227B45F8100D737EF /* Cells.swift */,
 				BBD68B7C281726C0007BD77E /* Checker.swift */,
 				BBD68B7E281742B1007BD77E /* LoginInspector.swift */,
+				BB38C9CC28CE000D00739803 /* BruteForceManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				BBD735CA27AEDB05002397A0 /* Photos.swift in Sources */,
 				BBA8973B285C10D900126052 /* CustomTextField.swift in Sources */,
 				BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */,
+				BB38C9CD28CE000D00739803 /* BruteForceManager.swift in Sources */,
 				BB15250D282FBFDE0045275F /* AppDelegate.swift in Sources */,
 				BB8A46BA280B040100C8B27C /* Storage.swift in Sources */,
 				BBD735C827A72CAE002397A0 /* PostTableViewCell.swift in Sources */,
