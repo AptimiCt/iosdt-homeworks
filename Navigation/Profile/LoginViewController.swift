@@ -18,7 +18,11 @@ class LoginViewController: UIViewController {
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView()
+        
+        return activity
+    }()
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
@@ -67,6 +71,14 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private let choosePasswordButton: CustomButton = {
+        let button = CustomButton(title: Constants.choosePassword, titleColor: .white)
+        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        return button
+    }()
+    
     private let tabBarItemLocal = UITabBarItem(title: "Profile",
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
@@ -89,6 +101,7 @@ class LoginViewController: UIViewController {
         setupView()
         setupConstrains()
         loginButtonTapped()
+        choosePasswordButtonTapped()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,15 +123,18 @@ class LoginViewController: UIViewController {
         logoImageView.toAutoLayout()
         stackView.toAutoLayout()
         loginButton.toAutoLayout()
+        choosePasswordButton.toAutoLayout()
         passwordTextView.toAutoLayout()
+        activityIndicator.toAutoLayout()
         
         view.addSubviews(scrollView)
+        view.addSubview(activityIndicator)
         scrollView.addSubviews(contentView)
         scrollView.keyboardDismissMode = .interactive
         
         stackView.addArrangedSubview(loginTextView)
         stackView.addArrangedSubview(passwordTextView)
-        contentView.addSubviews(logoImageView, stackView, loginButton)
+        contentView.addSubviews(logoImageView, stackView, loginButton, choosePasswordButton)
     }
     
     private func setupConstrains(){
@@ -157,8 +173,16 @@ class LoginViewController: UIViewController {
                                              constant: Constants.topMarginForLoginButton),
             loginButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
-            loginButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16)
             
+            choosePasswordButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            choosePasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            choosePasswordButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            choosePasswordButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16),
+            choosePasswordButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: passwordTextView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: passwordTextView.centerYAnchor),
+            activityIndicator.heightAnchor.constraint(equalTo: passwordTextView.heightAnchor)
         ]
         
         NSLayoutConstraint.activate(constrains)
@@ -187,7 +211,7 @@ class LoginViewController: UIViewController {
             let check = true
             let userService = TestUserService()
             #else
-            guard let check = delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
+            guard let check = self?.delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
             let userService = CurrentUserService()
             #endif
             if check {
@@ -199,6 +223,32 @@ class LoginViewController: UIViewController {
                 alert.addAction(actionOk)
                 self?.present(alert, animated: true, completion: nil)
             }
+        }
+    }
+    private func choosePasswordButtonTapped(){
+        passwordTextView.delegate = self
+        choosePasswordButton.action = { [weak self] in
+            let bruteForceManager = BruteForceManager()
+            let passwordText = bruteForceManager.passwordGenerator(lengthPass: 3)
+            self?.activityIndicator.startAnimating()
+            self?.passwordTextView.isUserInteractionEnabled = false
+            DispatchQueue.global().async {
+                bruteForceManager.bruteForce(passwordToUnlock: passwordText)
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
+                    self?.passwordTextView.isUserInteractionEnabled = true
+                    self?.passwordTextView.isSecureTextEntry = false
+                    self?.passwordTextView.text = passwordText
+                }
+            }
+        }
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if !passwordTextView.isSecureTextEntry {
+            passwordTextView.isSecureTextEntry.toggle()
         }
     }
 }
