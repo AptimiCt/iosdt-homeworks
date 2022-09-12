@@ -236,7 +236,6 @@ class LoginViewController: UIViewController {
                 bruteForceManager.bruteForce(passwordToUnlock: passwordText)
                 DispatchQueue.main.async {
                     self?.activityIndicator.stopAnimating()
-                    self?.activityIndicator.hidesWhenStopped
                     self?.passwordTextView.isUserInteractionEnabled = true
                     self?.passwordTextView.isSecureTextEntry = false
                     self?.passwordTextView.text = passwordText
