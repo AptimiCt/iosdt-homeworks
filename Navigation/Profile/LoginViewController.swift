@@ -15,6 +15,8 @@ class LoginViewController: UIViewController {
     
     //MARK: - vars
     var delegate: LoginViewControllerDelegate?
+    private var timer: Timer?
+    private var count = 0
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -203,6 +205,15 @@ class LoginViewController: UIViewController {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
     
+    @objc
+    private func timerCrack(){
+        count += 1
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.choosePasswordButton.setTitle("\(String(describing: self.count)) сек.", for: .normal)
+        }
+    }
+    
     //MARK: - private funcs
     private func loginButtonTapped(){
         loginButton.action = { [weak self] in
@@ -226,19 +237,27 @@ class LoginViewController: UIViewController {
         }
     }
     private func choosePasswordButtonTapped(){
-        passwordTextView.delegate = self
         choosePasswordButton.action = { [weak self] in
+            guard let self = self else { return }
+            self.passwordTextView.delegate = self
+            self.choosePasswordButton.setTitle("\(Constants.choosePassword)", for: .normal)
+            self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.timerCrack), userInfo: nil, repeats: true)
             let bruteForceManager = BruteForceManager()
             let passwordText = bruteForceManager.passwordGenerator(lengthPass: 3)
-            self?.activityIndicator.startAnimating()
-            self?.passwordTextView.isUserInteractionEnabled = false
+            self.activityIndicator.startAnimating()
+            self.passwordTextView.isUserInteractionEnabled = false
+            self.choosePasswordButton.isUserInteractionEnabled = false
             DispatchQueue.global().async {
                 bruteForceManager.bruteForce(passwordToUnlock: passwordText)
                 DispatchQueue.main.async {
-                    self?.activityIndicator.stopAnimating()
-                    self?.passwordTextView.isUserInteractionEnabled = true
-                    self?.passwordTextView.isSecureTextEntry = false
-                    self?.passwordTextView.text = passwordText
+                    self.activityIndicator.stopAnimating()
+                    self.passwordTextView.isUserInteractionEnabled = true
+                    self.choosePasswordButton.isUserInteractionEnabled = true
+                    self.passwordTextView.isSecureTextEntry = false
+                    self.passwordTextView.text = passwordText
+                    self.timer?.invalidate()
+                    self.count = 0
+                    self.choosePasswordButton.setTitle("\(Constants.choosePassword)", for: .normal)
                 }
             }
         }
