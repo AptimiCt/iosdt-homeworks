@@ -37,6 +37,7 @@
 		BBDC80392749E301000A302B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBDC80382749E301000A302B /* Assets.xcassets */; };
 		BBDC803C2749E301000A302B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBDC803A2749E301000A302B /* LaunchScreen.storyboard */; };
 		BBE33F7528310F36008D8E19 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = BBE33F7428310F36008D8E19 /* iOSIntPackage */; };
+		BBEF350328DBA4ED0024C181 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEF350228DBA4ED0024C181 /* LoginError.swift */; };
 		BBF7295027B4238100D737EF /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF7294F27B4238100D737EF /* PhotosCollectionViewCell.swift */; };
 		BBF7295327B45F8100D737EF /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF7295227B45F8100D737EF /* Cells.swift */; };
 		BBFECF48280A3A9E002018F3 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = BBFECF47280A3A9E002018F3 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -104,6 +105,7 @@
 		BBDC80382749E301000A302B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBDC803B2749E301000A302B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBDC803D2749E301000A302B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBEF350228DBA4ED0024C181 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		BBF7294F27B4238100D737EF /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		BBF7295227B45F8100D737EF /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		BBFECF45280A3A9E002018F3 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -290,6 +292,7 @@
 				BBD68B7C281726C0007BD77E /* Checker.swift */,
 				BBD68B7E281742B1007BD77E /* LoginInspector.swift */,
 				BB38C9CC28CE000D00739803 /* BruteForceManager.swift */,
+				BBEF350228DBA4ED0024C181 /* LoginError.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				BB152509282FBFCE0045275F /* TestUserService.swift in Sources */,
 				BBA2D94827AFD2D2002AC2A1 /* PhotosViewController.swift in Sources */,
 				BB1578D0281B341400579E09 /* CurrentLoginFactory.swift in Sources */,
+				BBEF350328DBA4ED0024C181 /* LoginError.swift in Sources */,
 				BBD735CA27AEDB05002397A0 /* Photos.swift in Sources */,
 				BBA8973B285C10D900126052 /* CustomTextField.swift in Sources */,
 				BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */,

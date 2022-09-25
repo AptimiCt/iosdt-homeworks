@@ -225,16 +225,30 @@ class LoginViewController: UIViewController {
             guard let check = self?.delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
             let userService = CurrentUserService()
             #endif
-            if check {
-                let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
-                self?.navigationController?.pushViewController(profileViewController, animated: true)
-            } else {
-                let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
-                let actionOk = UIAlertAction(title: "Ok", style: .default)
-                alert.addAction(actionOk)
-                self?.present(alert, animated: true, completion: nil)
-            }
+//            if check {
+//                let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
+//                self?.navigationController?.pushViewController(profileViewController, animated: true)
+//            } else {
+//                self?.handle(error: .incorrectCredentials)
+//            }
+            
         }
+    }
+    private func handle(error: LoginError) {
+        switch error {
+            case .incorrectCredentials:
+                alertAfterError()
+            case .emptyLogin:
+                alertAfterError()
+            case .emptyPassword:
+                alertAfterError()
+        }
+    }
+    private func alertAfterError(){
+        let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
+        let actionOk = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(actionOk)
+        present(alert, animated: true, completion: nil)
     }
     private func choosePasswordButtonTapped(){
         choosePasswordButton.action = { [weak self] in
