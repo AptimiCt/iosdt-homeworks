@@ -121,4 +121,7 @@ struct Constants {
     static let alert = "Alert"
     static let checkWord = "Проверить слово"
     static let wordTextField = "Введите слово для проверки"
+    static let people = "https://swapi.dev/api/people/8"
+    static let starships = "https://swapi.dev/api/starships/3"
+    static let planets = "https://swapi.dev/api/planets/5"
 }
