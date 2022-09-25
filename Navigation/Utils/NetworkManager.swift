@@ -7,7 +7,8 @@
 
 import Foundation
 struct NetworkManager {
-    static func request(for configuration: AppConfiguration) {
+    static func request(for configuration: AppConfiguration?) {
+        guard let configuration = configuration else { return }
         switch configuration {
             case .people(let urlString):
                 guard let url = URL(string: urlString) else { return }
@@ -38,8 +39,12 @@ struct NetworkManager {
     }
 }
 
-enum AppConfiguration {
-    case people(String)
-    case starships(String)
-    case planets(String)
+enum AppConfiguration:CaseIterable {
+    static var allCases: [AppConfiguration] {
+        return [.people(urlString: Constants.people), .starships(urlString: Constants.starships), .planets(urlString: Constants.planets)]
+    }
+    
+    case people(urlString: String)
+    case starships(urlString: String)
+    case planets(urlString: String)
 }
