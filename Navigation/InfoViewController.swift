@@ -10,19 +10,28 @@ import UIKit
 final class InfoViewController: UIViewController {
     
     private let alertButton = CustomButton(title: Constants.alert , titleColor: .black)
+    private let firstLabel: UILabel = {
+        let firstLabel = UILabel()
+        firstLabel.backgroundColor = .green
+        firstLabel.layer.cornerRadius = 15
+        firstLabel.clipsToBounds = true
+        return firstLabel
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemTeal
-        setupButton()
+        setupView()
         setupConstraints()
     }
     
-    private func setupButton(){
-        alertButton.translatesAutoresizingMaskIntoConstraints = false
+    private func setupView(){
+        alertButton.toAutoLayout()
+        firstLabel.toAutoLayout()
         alertButton.backgroundColor = .red
         alertButton.layer.cornerRadius = 15
-        self.view.addSubview(alertButton)
+        
+        self.view.addSubviews(alertButton, firstLabel)
         
         alertButton.action = { [weak self] in
             let title = "Уведомление!"
@@ -45,10 +54,16 @@ final class InfoViewController: UIViewController {
     private func setupConstraints(){
         NSLayoutConstraint.activate([
             alertButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            alertButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            alertButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             alertButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             alertButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            alertButton.heightAnchor.constraint(equalToConstant: 40)
+            alertButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            firstLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            firstLabel.leadingAnchor.constraint(equalTo: alertButton.leadingAnchor),
+            firstLabel.topAnchor.constraint(equalTo: alertButton.bottomAnchor, constant: 20),
+            firstLabel.trailingAnchor.constraint(equalTo: alertButton.trailingAnchor),
+            firstLabel.heightAnchor.constraint(equalToConstant: 40),
         ])
     }
 }
