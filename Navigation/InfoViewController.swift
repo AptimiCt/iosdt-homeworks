@@ -110,12 +110,11 @@ final class InfoViewController: UIViewController {
         URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
             if let data = data {
                 do {
-                    let serializationDict = try JSONSerialization.jsonObject(with: data, options: [])
-                    if let dict = serializationDict as? [String: Any], let title = dict["name"] as? String {
-                        DispatchQueue.main.async {
-                            self?.planetLabel.text = title
-                        }
+                    let serializationDict = try JSONDecoder().decode(Planets.self, from: data)
+                    DispatchQueue.main.async {
+                        self?.planetLabel.text = serializationDict.orbitalPeriod
                     }
+                    print(serializationDict)
                 } catch let error {
                     print(error.localizedDescription)
                 }

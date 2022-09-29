@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1401A70270D4E8F073AC4858 /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348F2BBF52654939CF047689 /* Pods_Navigation.framework */; };
+		BB0165C428E6433100C16F9A /* Planets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0165C328E6433100C16F9A /* Planets.swift */; };
 		BB0B224A279343AD00C51B3D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B2249279343AD00C51B3D /* Constants.swift */; };
 		BB152507282FBFCE0045275F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB152504282FBFCE0045275F /* User.swift */; };
 		BB152508282FBFCE0045275F /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB152505282FBFCE0045275F /* CurrentUserService.swift */; };
@@ -74,6 +75,7 @@
 		348F2BBF52654939CF047689 /* Pods_Navigation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Navigation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6159A22EA19A2E3C6E86B7 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
 		8CEB151DFA3B01B29365FC90 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
+		BB0165C328E6433100C16F9A /* Planets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planets.swift; sourceTree = "<group>"; };
 		BB0B2249279343AD00C51B3D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BB152504282FBFCE0045275F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BB152505282FBFCE0045275F /* CurrentUserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				BB152504282FBFCE0045275F /* User.swift */,
 				BB152505282FBFCE0045275F /* CurrentUserService.swift */,
 				BB152506282FBFCE0045275F /* TestUserService.swift */,
+				BB0165C328E6433100C16F9A /* Planets.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				BB1578D0281B341400579E09 /* CurrentLoginFactory.swift in Sources */,
 				BBD735CA27AEDB05002397A0 /* Photos.swift in Sources */,
 				BBA8973B285C10D900126052 /* CustomTextField.swift in Sources */,
+				BB0165C428E6433100C16F9A /* Planets.swift in Sources */,
 				BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */,
 				BB38C9CD28CE000D00739803 /* BruteForceManager.swift in Sources */,
 				BB15250D282FBFDE0045275F /* AppDelegate.swift in Sources */,
