@@ -15,14 +15,18 @@ final class InfoViewController: UIViewController {
         firstLabel.backgroundColor = .green
         firstLabel.layer.cornerRadius = 15
         firstLabel.clipsToBounds = true
+        firstLabel.numberOfLines = 0
+        firstLabel.textAlignment = .center
         return firstLabel
     }()
+    private var firstUrl = "https://jsonplaceholder.typicode.com/todos/21"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemTeal
         setupView()
         setupConstraints()
+        open(with: firstUrl)
     }
     
     private func setupView(){
@@ -63,7 +67,25 @@ final class InfoViewController: UIViewController {
             firstLabel.leadingAnchor.constraint(equalTo: alertButton.leadingAnchor),
             firstLabel.topAnchor.constraint(equalTo: alertButton.bottomAnchor, constant: 20),
             firstLabel.trailingAnchor.constraint(equalTo: alertButton.trailingAnchor),
-            firstLabel.heightAnchor.constraint(equalToConstant: 40),
+            firstLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
         ])
+    }
+    
+    private func open(with stringUrl: String){
+        guard let url = URL(string: stringUrl) else { return }
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
+            if let data = data {
+                do {
+                    let serializationDict = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                    if let dict = serializationDict as? [String: Any], let title = dict["title"] as? String {
+                        DispatchQueue.main.async {
+                            self?.firstLabel.text = title
+                        }
+                    }
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+            }
+        }.resume()
     }
 }
