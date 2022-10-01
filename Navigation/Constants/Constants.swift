@@ -8,6 +8,12 @@
 import UIKit
 
 struct Constants {
+    
+    static let firstUrl = "https://jsonplaceholder.typicode.com/todos/21"
+    static let planetUrl = "https://swapi.dev/api/planets/1"
+    static let peoplesID = "peoplesID"
+    
+    
     //MARK: - Constants for ProfileTableHederView
     static let screenWeight = UIScreen.main.bounds.width
     
