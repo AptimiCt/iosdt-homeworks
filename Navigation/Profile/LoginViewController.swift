@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 //MARK: - protocol
 protocol LoginViewControllerDelegate: AnyObject {
     func checkerLoginInspector(for password: String, login: String) -> Bool
