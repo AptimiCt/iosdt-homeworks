@@ -8,10 +8,16 @@
 import Foundation
 
 class LoginInspector: LoginViewControllerDelegate {
+
+    func checkCredentionals(email: String, password: String, completion: @escaping (Result<AuthModel,NSError>) -> Void) {
+        CheckerService.shared.checkCredentials(email: email, password: password) { _,_ in
+            
+        }
+    }
     
-    func checkerLoginInspector(for password: String, login: String) -> Bool {
-        Checker.shared.checkCredential(for: password, login: login)
+    func signUp(email: String, password: String, completion: @escaping (Result<AuthModel, NSError>) -> Void) {
+        CheckerService.shared.signUp(email: email, password: password) { result, error in
+            
+        }
     }
 }
-
-

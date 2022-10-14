@@ -6,11 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
-//MARK: - protocol
-protocol LoginViewControllerDelegate: AnyObject {
-    func checkerLoginInspector(for password: String, login: String) -> Bool
-}
 
 class LoginViewController: UIViewController {
     
@@ -216,27 +211,39 @@ class LoginViewController: UIViewController {
     }
     
     //MARK: - private funcs
-    private func loginButtonTapped(){
+    private func loginButtonTapped() {
         loginButton.action = { [weak self] in
             guard let passwordText = self?.passwordTextView.text, let loginText = self?.loginTextView.text else { return }
-            #if DEBUG
-            let check = true
-            let userService = TestUserService()
-            #else
-            guard let check = self?.delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
-            let userService = CurrentUserService()
-            #endif
-            if check {
-                let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
-                self?.navigationController?.pushViewController(profileViewController, animated: true)
-            } else {
-                let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
-                let actionOk = UIAlertAction(title: "Ok", style: .default)
-                alert.addAction(actionOk)
-                self?.present(alert, animated: true, completion: nil)
-            }
+            self?.delegate?.checkCredentionals(email: loginText, password: passwordText, completion: { result in
+                
+            })
+//            #if DEBUG
+//            let check = true
+//            let userService = TestUserService()
+//            #else
+//            guard let check = self?.delegate?.checkCredentionals(passwordText, login: loginText) else { return }
+//            let userService = CurrentUserService()
+//            #endif
+//            if check {
+//                let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
+//                self?.navigationController?.pushViewController(profileViewController, animated: true)
+//            } else {
+//                let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
+//                let actionOk = UIAlertAction(title: "Ok", style: .default)
+//                alert.addAction(actionOk)
+//                self?.present(alert, animated: true, completion: nil)
+//            }
         }
     }
+    private func signUpButtonTapped() {
+        //
+        guard let passwordText = self.passwordTextView.text, let loginText = self.loginTextView.text else { return }
+        self.delegate?.signUp(email: loginText, password: passwordText, completion: { result in
+            
+        })
+    }
+
+    //Реализация bruteForce
     private func choosePasswordButtonTapped(){
         choosePasswordButton.action = { [weak self] in
             guard let self = self else { return }
