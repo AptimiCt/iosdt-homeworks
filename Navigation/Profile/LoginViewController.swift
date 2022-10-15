@@ -69,6 +69,14 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private let signUpButton: CustomButton = {
+        let button = CustomButton(title: Constants.signUp, titleColor: .white)
+        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        return button
+    }()
+    
     private let choosePasswordButton: CustomButton = {
         let button = CustomButton(title: Constants.choosePassword, titleColor: .white)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
@@ -99,6 +107,7 @@ class LoginViewController: UIViewController {
         setupView()
         setupConstrains()
         loginButtonTapped()
+        signUpButtonTapped()
         choosePasswordButtonTapped()
     }
     
@@ -121,6 +130,7 @@ class LoginViewController: UIViewController {
         logoImageView.toAutoLayout()
         stackView.toAutoLayout()
         loginButton.toAutoLayout()
+        signUpButton.toAutoLayout()
         choosePasswordButton.toAutoLayout()
         passwordTextView.toAutoLayout()
         activityIndicator.toAutoLayout()
@@ -132,7 +142,7 @@ class LoginViewController: UIViewController {
         
         stackView.addArrangedSubview(loginTextView)
         stackView.addArrangedSubview(passwordTextView)
-        contentView.addSubviews(logoImageView, stackView, loginButton, choosePasswordButton)
+        contentView.addSubviews(logoImageView, stackView, loginButton, signUpButton, choosePasswordButton)
     }
     
     private func setupConstrains(){
@@ -172,8 +182,14 @@ class LoginViewController: UIViewController {
             loginButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
             
+            signUpButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            signUpButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            signUpButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16),
+            signUpButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
+            
             choosePasswordButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            choosePasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            choosePasswordButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 16),
             choosePasswordButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             choosePasswordButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16),
             choosePasswordButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
@@ -236,11 +252,12 @@ class LoginViewController: UIViewController {
         }
     }
     private func signUpButtonTapped() {
-        //
-        guard let passwordText = self.passwordTextView.text, let loginText = self.loginTextView.text else { return }
-        self.delegate?.signUp(email: loginText, password: passwordText, completion: { result in
-            
-        })
+        signUpButton.action = {
+            guard let passwordText = self.passwordTextView.text, let loginText = self.loginTextView.text else { return }
+            self.delegate?.signUp(email: loginText, password: passwordText, completion: { result in
+                
+            })
+        }
     }
 
     //Реализация bruteForce

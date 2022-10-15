@@ -20,8 +20,9 @@ class CheckerService: CheckerServiceProtocol {
     
     func checkCredentials(email: String, password: String, completion: @escaping (AuthDataResult?, NSError?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            print("\(result)")
-            print("\(error?.localizedDescription)")
+//            print("\(result?.user.uid)")
+//            print("\(error?.localizedDescription)")
+            completion(result, error as NSError?)
         }
         
         
@@ -35,8 +36,8 @@ class CheckerService: CheckerServiceProtocol {
     func signUp(email: String, password: String, completion: @escaping (AuthDataResult?, NSError?) -> Void) {
         
         Auth.auth().createUser(withEmail: email, password: password) { createResult, error in
-            print("\(createResult)")
-            print("\(error?.localizedDescription)")
+//            print("\(createResult?.user)")
+//            print("\(error?.localizedDescription)")
         }
     }
     
