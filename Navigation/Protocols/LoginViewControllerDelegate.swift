@@ -9,6 +9,6 @@ import Foundation
 
 protocol LoginViewControllerDelegate: AnyObject {
    
-    func checkCredentionals(email: String, password: String, completion: @escaping (Result<AuthModel,NSError>) -> Void )
-    func signUp(email: String, password: String, completion: @escaping (Result<AuthModel,NSError>) -> Void )
+    func checkCredentionalsInspector(email: String, password: String, completion: @escaping (Result<AuthModel, NSError>) -> Void )
+    func signUpInspector(email: String, password: String, completion: @escaping (Result<AuthModel, NSError>) -> Void )
 }

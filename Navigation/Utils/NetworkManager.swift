@@ -32,7 +32,6 @@ struct NetworkManager {
                     print("B: allHeaderFields: \(response.allHeaderFields); \nstatusCode: \(response.statusCode)")
                 } else {
                     print("C: \(String(describing: error?.localizedDescription))")
-                    //The Internet connection appears to be offline.
                 }
             }.resume()
         }
