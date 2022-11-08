@@ -6,10 +6,6 @@
 //
 
 import UIKit
-//MARK: - protocol
-protocol LoginViewControllerDelegate: AnyObject {
-    func checkerLoginInspector(for password: String, login: String) -> Bool
-}
 
 class LoginViewController: UIViewController {
     
@@ -73,6 +69,14 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private let signUpButton: CustomButton = {
+        let button = CustomButton(title: Constants.signUp, titleColor: .white)
+        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        return button
+    }()
+    
     private let choosePasswordButton: CustomButton = {
         let button = CustomButton(title: Constants.choosePassword, titleColor: .white)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
@@ -103,6 +107,7 @@ class LoginViewController: UIViewController {
         setupView()
         setupConstrains()
         loginButtonTapped()
+        signUpButtonTapped()
         choosePasswordButtonTapped()
     }
     
@@ -125,6 +130,7 @@ class LoginViewController: UIViewController {
         logoImageView.toAutoLayout()
         stackView.toAutoLayout()
         loginButton.toAutoLayout()
+        signUpButton.toAutoLayout()
         choosePasswordButton.toAutoLayout()
         passwordTextView.toAutoLayout()
         activityIndicator.toAutoLayout()
@@ -136,7 +142,7 @@ class LoginViewController: UIViewController {
         
         stackView.addArrangedSubview(loginTextView)
         stackView.addArrangedSubview(passwordTextView)
-        contentView.addSubviews(logoImageView, stackView, loginButton, choosePasswordButton)
+        contentView.addSubviews(logoImageView, stackView, loginButton, signUpButton, choosePasswordButton)
     }
     
     private func setupConstrains(){
@@ -176,8 +182,14 @@ class LoginViewController: UIViewController {
             loginButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
             
+            signUpButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            signUpButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            signUpButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16),
+            signUpButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
+            
             choosePasswordButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            choosePasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            choosePasswordButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 16),
             choosePasswordButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             choosePasswordButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16),
             choosePasswordButton.heightAnchor.constraint(equalToConstant: Constants.heightForLoginButton),
@@ -215,27 +227,131 @@ class LoginViewController: UIViewController {
     }
     
     //MARK: - private funcs
-    private func loginButtonTapped(){
+    private func checkCredentionalsOnError(email: String, password: String) throws {
+        if email.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty {
+            throw credentialError.emptyEmail
+        } else if !validate(email) {
+            throw credentialError.emailIsNoCorrect
+        }
+        if password.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty {
+            throw credentialError.emptyPassword
+        }
+        if !passwordIsValid(password) {
+            throw credentialError.incorrectCredentials
+        }
+    }
+    
+    private func handle(error: credentialError) {
+        switch error {
+            case .incorrectCredentials:
+                alertForError(message: error.rawValue)
+            case .emptyEmail:
+                alertForError(message: error.rawValue)
+            case .emptyPassword:
+                alertForError(message: error.rawValue)
+            case .emailIsNoCorrect:
+                alertForError(message: error.rawValue)
+        }
+    }
+    
+    private func alertForError(message: String) {
+        let alert = UIAlertController(title: Constants.titleAlert, message: message, preferredStyle: .alert)
+        let actionOk = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(actionOk)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func passwordIsValid(_ password: String) -> Bool {
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
+        return passwordTest.evaluate(with: password)
+    }
+    
+    private func validate(_ email: String) -> Bool {
+        let emailRegEx = "([a-z0-9.]){1,64}@([a-z0-9]){1,64}\\.([a-z0-9]){2,64}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
+        return emailTest.evaluate(with: email)
+    }
+    
+    private func loginButtonTapped() {
         loginButton.action = { [weak self] in
-            guard let passwordText = self?.passwordTextView.text, let loginText = self?.loginTextView.text else { return }
-            #if DEBUG
-            let check = true
-            let userService = TestUserService()
-            #else
-            guard let check = self?.delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
-            let userService = CurrentUserService()
-            #endif
-            if check {
-                let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
-                self?.navigationController?.pushViewController(profileViewController, animated: true)
-            } else {
-                let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
-                let actionOk = UIAlertAction(title: "Ok", style: .default)
-                alert.addAction(actionOk)
-                self?.present(alert, animated: true, completion: nil)
+            guard let self = self else { return }
+            guard let passwordText = self.passwordTextView.text, let loginText = self.loginTextView.text else { return }
+            do {
+                try self.checkCredentionalsOnError(email: loginText, password: passwordText)
+                self.delegate?.checkCredentionalsInspector(email: loginText, password: passwordText, completion: { result in
+                    #if DEBUG
+                    let userService = TestUserService()
+                    #else
+                    let userService = CurrentUserService()
+                    #endif
+                    switch result {
+                        case .success(let authModel):
+                            let fullName = authModel.name
+                            let profileViewController = ProfileViewController(loginName: fullName, userService: userService)
+                            self.navigationController?.pushViewController(profileViewController, animated: true)
+                        case .failure(let failure):
+                            switch failure.userInfo["FIRAuthErrorUserInfoNameKey"] as? String {
+                                case FirebaseResponseError.ERROR_INVALID_EMAIL.rawValue:
+                                    self.alertForError(message: "Не корректный email.")
+                                case FirebaseResponseError.ERROR_USER_NOT_FOUND.rawValue:
+                                    self.alertForError(message: "Отсутсвует такой пользователь. Зарегистрируйте пользователя.")
+                                case FirebaseResponseError.ERROR_WRONG_PASSWORD.rawValue:
+                                    self.alertForError(message: "Не корретный пароль.")
+                                case FirebaseResponseError.ERROR_NETWORK_REQUEST_FAILED.rawValue:
+                                    self.alertForError(message: "Проблема с подключением к интернет.")
+                                default:
+                                    self.alertForError(message: "Не известная ошибка.")
+                            }
+                    }
+                })
+            } catch {
+                self.handle(error: error as! credentialError)
+            }
+            
+        }
+    }
+    private func signUpButtonTapped() {
+        signUpButton.action = {
+            guard let passwordText = self.passwordTextView.text, let loginText = self.loginTextView.text else { return }
+            
+            do {
+                try self.checkCredentionalsOnError(email: loginText, password: passwordText)
+                self.delegate?.signUpInspector(email: loginText, password: passwordText, completion: { result in
+                    #if DEBUG
+                    let userService = TestUserService()
+                    #else
+                    let userService = CurrentUserService()
+                    #endif
+                    switch result {
+                        case .success(let authModel):
+                            let fullName = authModel.name
+                            let profileViewController = ProfileViewController(loginName: fullName, userService: userService)
+                            self.navigationController?.pushViewController(profileViewController, animated: true)
+                        case .failure(let failure):
+                            switch failure.userInfo["FIRAuthErrorUserInfoNameKey"] as? String {
+                                case FirebaseResponseError.ERROR_INVALID_EMAIL.rawValue:
+                                    self.alertForError(message: "Не корректный email.")
+                                case FirebaseResponseError.ERROR_USER_NOT_FOUND.rawValue:
+                                    self.alertForError(message: "Отсутсвует такой пользователь. Зарегистрируйте пользователя.")
+                                case FirebaseResponseError.ERROR_WRONG_PASSWORD.rawValue:
+                                    self.alertForError(message: "Не корретный пароль.")
+                                case FirebaseResponseError.ERROR_NETWORK_REQUEST_FAILED.rawValue:
+                                    self.alertForError(message: "Проблема с подключением к интернет.")
+                                case FirebaseResponseError.ERROR_EMAIL_ALREADY_IN_USE.rawValue:
+                                    self.alertForError(message: "Пользователь с таким email уже существует.")
+                                default:
+                                    self.alertForError(message: "Не известная ошибка.")
+                            }
+                    }
+                })
+            } catch {
+                self.handle(error: error as! credentialError)
             }
         }
     }
+
+    //Реализация bruteForce
     private func choosePasswordButtonTapped(){
         choosePasswordButton.action = { [weak self] in
             guard let self = self else { return }
