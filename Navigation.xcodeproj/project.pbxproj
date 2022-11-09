@@ -35,6 +35,7 @@
 		BBA8973B285C10D900126052 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA8973A285C10D800126052 /* CustomTextField.swift */; };
 		BBBBC9152753E9A6003DDF50 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */; };
 		BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBBC9162753E9DB003DDF50 /* ProfileViewController.swift */; };
+		BBBD5CD5291AD5BD00A63966 /* FilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD5CD4291AD5BD00A63966 /* FilesViewController.swift */; };
 		BBD4136A275D721800B6E978 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD41369275D721800B6E978 /* PostViewController.swift */; };
 		BBD4136C275D882000B6E978 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4136B275D882000B6E978 /* InfoViewController.swift */; };
 		BBD68B7D281726C0007BD77E /* CheckerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD68B7C281726C0007BD77E /* CheckerService.swift */; };
@@ -109,6 +110,7 @@
 		BBAE6843279E0E830031743C /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		BBBBC9162753E9DB003DDF50 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BBBD5CD4291AD5BD00A63966 /* FilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesViewController.swift; sourceTree = "<group>"; };
 		BBD41369275D721800B6E978 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		BBD4136B275D882000B6E978 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		BBD4136D275D894C00B6E978 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -243,6 +245,14 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		BBBD5CD3291AD57900A63966 /* FilesView */ = {
+			isa = PBXGroup;
+			children = (
+				BBBD5CD4291AD5BD00A63966 /* FilesViewController.swift */,
+			);
+			path = FilesView;
+			sourceTree = "<group>";
+		};
 		BBD735C627A72C95002397A0 /* Post */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +295,7 @@
 		BBDC802E2749E2FF000A302B /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				BBBD5CD3291AD57900A63966 /* FilesView */,
 				BB962F2B2834575F0080A2D1 /* View */,
 				BB15250F282FBFF90045275F /* Protocols */,
 				BB15250A282FBFDE0045275F /* SystemDelegate */,
@@ -504,6 +515,7 @@
 				BB152511282FBFF90045275F /* SetupViewProtocol.swift in Sources */,
 				BBD68B7F281742B1007BD77E /* LoginInspector.swift in Sources */,
 				BBD735CD27AEE22A002397A0 /* PhotosTableViewCell.swift in Sources */,
+				BBBD5CD5291AD5BD00A63966 /* FilesViewController.swift in Sources */,
 				BBD68B7D281726C0007BD77E /* CheckerService.swift in Sources */,
 				BB0165C628E64B3600C16F9A /* People.swift in Sources */,
 				BB152509282FBFCE0045275F /* TestUserService.swift in Sources */,

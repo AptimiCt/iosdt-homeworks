@@ -13,7 +13,7 @@ struct Constants {
     static let planetUrl = "https://swapi.dev/api/planets/1"
     static let peoplesID = "peoplesID"
     
-    
+    static let filesRID = "FilesTableViewCell"
     //MARK: - Constants for ProfileTableHederView
     static let screenWeight = UIScreen.main.bounds.width
     
@@ -124,7 +124,7 @@ struct Constants {
     static let signUp = "signUp"
     static let choosePassword = "Подобрать пароль"
     static let firstButton = "First button"
-    static let secondButton = "Second button"
+    static let files = "Files"
     static let alert = "Alert"
     static let checkWord = "Проверить слово"
     static let wordTextField = "Введите слово для проверки"

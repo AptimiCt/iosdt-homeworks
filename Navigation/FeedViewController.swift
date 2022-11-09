@@ -17,7 +17,7 @@ class FeedViewController: UIViewController {
                                        tag: 0)
     
     private let buttonToPostFirst = CustomButton(title: Constants.firstButton, titleColor: .white)
-    private let buttonToPostSecond = CustomButton(title: Constants.secondButton, titleColor: .white)
+    private let buttonToPostSecond = CustomButton(title: Constants.files, titleColor: .white)
     
     private let checkWordButton: CustomButton = {
         let checkButton = CustomButton(title: Constants.checkWord, titleColor: .white)
@@ -146,9 +146,9 @@ class FeedViewController: UIViewController {
             self?.navigationController?.pushViewController(postViewController, animated: true)
         }
         buttonToPostSecond.action = { [weak self] in
-            guard let post = self?.post else { return }
-            let postViewController = PostViewController(post: post)
-            self?.navigationController?.pushViewController(postViewController, animated: true)
+            let filesViewController = FilesViewController()
+            self?.navigationController?.pushViewController(filesViewController, animated: true)
+            
         }
         checkWordButton.action = { [weak self] in
             guard let word = self?.wordTextField.text, !(word.isEmpty),let post = self?.post else { return }
