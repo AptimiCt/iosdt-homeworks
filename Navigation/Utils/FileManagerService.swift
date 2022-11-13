@@ -11,7 +11,7 @@ final class FileManagerService: FileManagerServiceProtocol {
     
     private let managerService = FileManager.default
 
-    func contentsOfDirectory() throws -> [String: String] {
+    func contentsOfDirectory() throws -> [URL: String] {
         let documentsUrl = try managerService.url(for: .documentDirectory,
                                                 in: .userDomainMask,
                                                 appropriateFor: nil,
@@ -19,25 +19,31 @@ final class FileManagerService: FileManagerServiceProtocol {
         let contentsOfDirectory = try managerService.contentsOfDirectory(at: documentsUrl,
                                                               includingPropertiesForKeys: nil,
                                                               options: [.skipsHiddenFiles])
-        let contents = try urlToStringDict(urls: contentsOfDirectory)
-
+        let contents = try urlToDict(urls: contentsOfDirectory)
+//        Распечатать путь до каталога documents симулятора
+//        print(documentsUrl)
         return contents
     }
     
-    func createFile() {
-        
+    func createFile(name: String, data: Data) throws {
+        let documentsUrl = try managerService.url(for: .documentDirectory,
+                                                in: .userDomainMask,
+                                                appropriateFor: nil,
+                                                create: false)
+        let file = documentsUrl.appendingPathComponent(name)
+        managerService.createFile(atPath: file.path, contents: data)
     }
     
-    func removeContent() {
-        
+    func removeContent(at url: URL) throws{
+        try managerService.removeItem(at: url)
     }
     
-    private func urlToStringDict(urls: [URL]) throws -> [String: String] {
-        var contents: [String: String] = [:]
+    private func urlToDict(urls: [URL]) throws -> [URL: String] {
+        var contents: [URL: String] = [:]
         for url in urls {
             let attributes = try managerService.attributesOfItem(atPath: url.path)
             let typeAttributes = attributes[.type] as? String
-            contents[url.lastPathComponent] = typeAttributes
+            contents[url] = typeAttributes
         }
         return contents
     }

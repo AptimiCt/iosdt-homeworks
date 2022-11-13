@@ -9,13 +9,13 @@ import UIKit
 
 final class FilesViewController: UIViewController {
     
-    private var contentsDict: [String: String] = [:] {
+    private var contentsDict: [URL: String] = [:] {
         didSet{
             files = dictToArray()
             tableView.reloadData()
         }
     }
-    private var files: [String] = []
+    private var files: [URL] = []
     
     let fileManagerService = FileManagerService()
     
@@ -42,6 +42,7 @@ final class FilesViewController: UIViewController {
     
     private func setupTableView(){
         tableView.dataSource = self
+        tableView.delegate = self
         view.addSubview(tableView)
         [
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -60,11 +61,15 @@ final class FilesViewController: UIViewController {
     }
     
     @objc private func openImagePicker(){
-        
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        present(imagePicker, animated: true)
+        tableView.reloadData()
     }
     
-    private func dictToArray() -> [String] {
-        Array(self.contentsDict.keys).sorted { $0 < $1 }
+    private func dictToArray() -> [URL] {
+        Array(self.contentsDict.keys).sorted { $0.lastPathComponent < $1.lastPathComponent }
     }
 }
 
@@ -78,7 +83,7 @@ extension FilesViewController: UITableViewDataSource {
         var content = cell.defaultContentConfiguration()
         
         let file = files[indexPath.row]
-        content.text = file
+        content.text = file.lastPathComponent
         guard let val = contentsDict[file] else {
             cell.contentConfiguration = content
             return cell }
@@ -86,5 +91,45 @@ extension FilesViewController: UITableViewDataSource {
         cell.accessoryType = val == "NSFileTypeDirectory" ? .disclosureIndicator : .none
         cell.contentConfiguration = content
         return cell
+    }
+}
+extension FilesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let urlFile = files.remove(at: indexPath.row)
+            do {
+                try fileManagerService.removeContent(at: urlFile)
+                // Стоит ли тут перечитывать директорию, или может стоило просто удалить значение по ключу из contentsDict и tableView.reloadData()
+                try contentsDict = fileManagerService.contentsOfDirectory()
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+}
+
+extension FilesViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let url = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerImageURL")] as? URL else { return }
+        do {
+            let data = try Data(contentsOf: url)
+            try fileManagerService.createFile(name: url.lastPathComponent, data: data)
+            try contentsDict = fileManagerService.contentsOfDirectory()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }

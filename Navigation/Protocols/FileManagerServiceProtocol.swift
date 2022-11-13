@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FileManagerServiceProtocol {
-    func contentsOfDirectory() throws -> [String: String]
-    func createFile() throws
-    func removeContent() throws
+    func contentsOfDirectory() throws -> [URL: String]
+    func createFile(name: String, data: Data) throws
+    func removeContent(at url: URL) throws
 }
