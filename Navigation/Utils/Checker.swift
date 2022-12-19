@@ -11,13 +11,17 @@ class Checker {
     
     static let shared = Checker()
     
-    private let login = Constants.login
-    private let password = Constants.password
-    
-    private init () {}
+    let rm: RealmManager
+    let user: UserRealm?
+
+    private init () {
+        rm = RealmManager()
+        user = rm.users.first
+    }
     
     func checkCredential(for pass: String, login: String ) -> Bool {
-        if self.login == login.hash && self.password == pass.hash {
+
+        if let user = user, login == user.login, pass.hash == user.password {
             return true
         }
         return false

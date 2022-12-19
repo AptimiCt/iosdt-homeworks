@@ -31,8 +31,8 @@ class LoginViewController: UIViewController {
         return imageView
     }()
     
-    private let loginTextView: UITextField = {
-        let textField = UITextField()
+    private let loginTextView: TextFieldWithPadding = {
+        let textField = TextFieldWithPadding()
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.backgroundColor = .systemGray6
@@ -43,8 +43,8 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
-    private let passwordTextView: UITextField = {
-        let textField = UITextField()
+    private let passwordTextView: TextFieldWithPadding = {
+        let textField = TextFieldWithPadding()
         textField.backgroundColor = .systemGray6
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.placeholder = "Password"
@@ -85,10 +85,15 @@ class LoginViewController: UIViewController {
                                        image: UIImage(systemName: "person.crop.circle.fill"),
                                        tag: 1)
     
+    private var rm: RealmManager
+    
     //MARK: - init
     init(){
+        self.rm = RealmManager()
         super.init(nibName: nil, bundle: nil)
         self.tabBarItem = tabBarItemLocal
+        
+//        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     
     required init?(coder: NSCoder) {
@@ -104,6 +109,14 @@ class LoginViewController: UIViewController {
         setupConstrains()
         loginButtonTapped()
         choosePasswordButtonTapped()
+        #if DEBUG
+        let userService = TestUserService()
+        #else
+        let userService = CurrentUserService()
+        #endif
+        let user = rm.readUser()
+        guard let user = user else { return }
+        openPVC(loginName: user.login, userService: userService)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -217,24 +230,45 @@ class LoginViewController: UIViewController {
     //MARK: - private funcs
     private func loginButtonTapped(){
         loginButton.action = { [weak self] in
-            guard let passwordText = self?.passwordTextView.text, let loginText = self?.loginTextView.text else { return }
+            guard let self = self else { return }
+            
+            guard let passwordText = self.passwordTextView.text, let loginText = self.loginTextView.text else { return }
+            
+            if self.rm.users.first == nil {
+                if let avatarUrl = Bundle.main.url(forResource: "avatar", withExtension: "jpg") {
+                    FileManagerService().createFile(url: avatarUrl, name: "avatar.jpg")
+                }
+                #if DEBUG
+                #else
+                do {
+                    try self.rm.writeData(login: loginText, password: passwordText)
+                } catch {
+                    print(error.localizedDescription)
+                }
+                #endif
+            }
+            
             #if DEBUG
             let check = true
             let userService = TestUserService()
             #else
-            guard let check = self?.delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
+            guard let check = self.delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
             let userService = CurrentUserService()
             #endif
             if check {
-                let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
-                self?.navigationController?.pushViewController(profileViewController, animated: true)
+                self.openPVC(loginName: loginText, userService: userService)
             } else {
                 let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
                 let actionOk = UIAlertAction(title: "Ok", style: .default)
                 alert.addAction(actionOk)
-                self?.present(alert, animated: true, completion: nil)
+                self.present(alert, animated: true, completion: nil)
             }
         }
+    }
+    
+    private func openPVC(loginName: String, userService: UserService) {
+        let profileViewController = ProfileViewController(loginName: loginName, userService: userService)
+        self.navigationController?.pushViewController(profileViewController, animated: true)
     }
     private func choosePasswordButtonTapped(){
         choosePasswordButton.action = { [weak self] in

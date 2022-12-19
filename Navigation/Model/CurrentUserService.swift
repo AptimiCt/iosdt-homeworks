@@ -9,14 +9,15 @@ import Foundation
 
 final class CurrentUserService: UserService {
     
-    private let user: User
+    let rm = RealmManager()
+    private let user: UserRealm?
+    
     init() {
-        self.user = User(fullName: Constants.fullName, avatar: Constants.avatar, status: Constants.status)
+        self.user = rm.users.first
     }
     
-    func userService(loginName: String) -> User? {
-        
-        if loginName == user.fullName  {
+    func userService(loginName: String) -> UserRealm? {
+        if let user = user, loginName == user.login  {
             return user
         }
         return nil

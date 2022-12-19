@@ -30,11 +30,13 @@ class ProfileViewController: UIViewController {
     
     var localStorage:[Post] = []
     var photos: [UIImage] = []
+    var rm: RealmManager
     
     //MARK: - init
     
     init(loginName: String, userService: UserService) {
         self.userService = userService
+        self.rm = RealmManager()
         super.init(nibName: nil, bundle: nil)
         #if DEBUG
         view.backgroundColor = .systemGray6
@@ -43,9 +45,15 @@ class ProfileViewController: UIViewController {
         #endif
         self.tabBarItem = tabBarItemProfileView
         guard let user = self.userService.userService(loginName: loginName) else { return }
-        profileTableHeaderView.fullNameLabel.text = user.fullName
-        profileTableHeaderView.avatarImageView.image = UIImage(named: user.avatar)
-        profileTableHeaderView.statusLabel.text = user.status
+        do {
+            try rm.update(user: user, with: Date())
+        } catch {
+            print(error.localizedDescription)
+        }
+        profileTableHeaderView.fullNameLabel.text = user.login
+        guard let avatarData = user.avatar else { return }
+        self.profileTableHeaderView.avatarImageView.image = UIImage(data: avatarData)
+        profileTableHeaderView.statusLabel.text =  Constants.status
     }
     
     required init?(coder: NSCoder) {

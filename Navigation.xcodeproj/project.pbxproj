@@ -19,10 +19,15 @@
 		BB152511282FBFF90045275F /* SetupViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB152510282FBFF90045275F /* SetupViewProtocol.swift */; };
 		BB1578CD28195B7500579E09 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1578CC28195B7500579E09 /* LoginFactory.swift */; };
 		BB1578D0281B341400579E09 /* CurrentLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1578CF281B341400579E09 /* CurrentLoginFactory.swift */; };
+		BB1B5BF92949367F004B1D56 /* UserRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1B5BF82949367F004B1D56 /* UserRealm.swift */; };
 		BB21600A28E087B500715635 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB21600928E087B500715635 /* NetworkManager.swift */; };
 		BB38BC4D2794180600FF4B2E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38BC4C2794180600FF4B2E /* LoginViewController.swift */; };
 		BB38C9CD28CE000D00739803 /* BruteForceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38C9CC28CE000D00739803 /* BruteForceManager.swift */; };
 		BB53FB24276A8F9D0094AF1D /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */; };
+		BB76E14829493BB20016E6BF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BB76E14729493BB20016E6BF /* RealmSwift */; };
+		BB76E14A29493BBA0016E6BF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = BB76E14929493BBA0016E6BF /* Realm */; };
+		BB76E14C29493F7E0016E6BF /* TextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB76E14B29493F7E0016E6BF /* TextFieldWithPadding.swift */; };
+		BB76E14E2949415B0016E6BF /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB76E14D2949415B0016E6BF /* RealmManager.swift */; };
 		BB8A46BA280B040100C8B27C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAE6843279E0E830031743C /* Storage.swift */; };
 		BB962F2D283457B10080A2D1 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB962F2C283457B10080A2D1 /* CustomButton.swift */; };
 		BBA2D94827AFD2D2002AC2A1 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2D94727AFD2D2002AC2A1 /* PhotosViewController.swift */; };
@@ -30,6 +35,8 @@
 		BBA8973B285C10D900126052 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA8973A285C10D800126052 /* CustomTextField.swift */; };
 		BBBBC9152753E9A6003DDF50 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */; };
 		BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBBC9162753E9DB003DDF50 /* ProfileViewController.swift */; };
+		BBCB5465294CECF200218351 /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCB5464294CECF200218351 /* FileManagerService.swift */; };
+		BBCB546A294CEFC500218351 /* avatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBCB5469294CEFC500218351 /* avatar.jpg */; };
 		BBD4136A275D721800B6E978 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD41369275D721800B6E978 /* PostViewController.swift */; };
 		BBD4136C275D882000B6E978 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4136B275D882000B6E978 /* InfoViewController.swift */; };
 		BBD68B7D281726C0007BD77E /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD68B7C281726C0007BD77E /* Checker.swift */; };
@@ -87,10 +94,13 @@
 		BB152510282FBFF90045275F /* SetupViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewProtocol.swift; sourceTree = "<group>"; };
 		BB1578CC28195B7500579E09 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		BB1578CF281B341400579E09 /* CurrentLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLoginFactory.swift; sourceTree = "<group>"; };
+		BB1B5BF82949367F004B1D56 /* UserRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRealm.swift; sourceTree = "<group>"; };
 		BB21600928E087B500715635 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		BB38BC4C2794180600FF4B2E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BB38C9CC28CE000D00739803 /* BruteForceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForceManager.swift; sourceTree = "<group>"; };
 		BB53FB23276A8F9D0094AF1D /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
+		BB76E14B29493F7E0016E6BF /* TextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPadding.swift; sourceTree = "<group>"; };
+		BB76E14D2949415B0016E6BF /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		BB962F2C283457B10080A2D1 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		BBA2D94727AFD2D2002AC2A1 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		BBA2D94A27AFE082002AC2A1 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
@@ -98,6 +108,8 @@
 		BBAE6843279E0E830031743C /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		BBBBC9162753E9DB003DDF50 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BBCB5464294CECF200218351 /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
+		BBCB5469294CEFC500218351 /* avatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar.jpg; sourceTree = "<group>"; };
 		BBD41369275D721800B6E978 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		BBD4136B275D882000B6E978 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		BBD4136D275D894C00B6E978 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -121,9 +133,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB76E14829493BB20016E6BF /* RealmSwift in Frameworks */,
 				BBE33F7528310F36008D8E19 /* iOSIntPackage in Frameworks */,
 				1401A70270D4E8F073AC4858 /* Pods_Navigation.framework in Frameworks */,
 				BBFECF4B280A3A9E002018F3 /* StorageService.framework in Frameworks */,
+				BB76E14A29493BBA0016E6BF /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +168,7 @@
 				BB152506282FBFCE0045275F /* TestUserService.swift */,
 				BB0165C328E6433100C16F9A /* Planets.swift */,
 				BB0165C528E64B3600C16F9A /* People.swift */,
+				BB1B5BF82949367F004B1D56 /* UserRealm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -207,6 +222,7 @@
 			children = (
 				BB962F2C283457B10080A2D1 /* CustomButton.swift */,
 				BBA8973A285C10D800126052 /* CustomTextField.swift */,
+				BB76E14B29493F7E0016E6BF /* TextFieldWithPadding.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -226,6 +242,17 @@
 				BBD735C927AEDB05002397A0 /* Photos.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		BBCB5468294CEF6000218351 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				BBCB5469294CEFC500218351 /* avatar.jpg */,
+				BBDC80382749E301000A302B /* Assets.xcassets */,
+				BBDC803A2749E301000A302B /* LaunchScreen.storyboard */,
+				BBDC803D2749E301000A302B /* Info.plist */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		BBD735C627A72C95002397A0 /* Post */ = {
@@ -284,9 +311,7 @@
 				BBD4136B275D882000B6E978 /* InfoViewController.swift */,
 				BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */,
 				BB53FB22276A8F100094AF1D /* Profile */,
-				BBDC80382749E301000A302B /* Assets.xcassets */,
-				BBDC803A2749E301000A302B /* LaunchScreen.storyboard */,
-				BBDC803D2749E301000A302B /* Info.plist */,
+				BBCB5468294CEF6000218351 /* SupportingFiles */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -299,6 +324,8 @@
 				BBD68B7E281742B1007BD77E /* LoginInspector.swift */,
 				BB38C9CC28CE000D00739803 /* BruteForceManager.swift */,
 				BB21600928E087B500715635 /* NetworkManager.swift */,
+				BB76E14D2949415B0016E6BF /* RealmManager.swift */,
+				BBCB5464294CECF200218351 /* FileManagerService.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -353,6 +380,8 @@
 			name = Navigation;
 			packageProductDependencies = (
 				BBE33F7428310F36008D8E19 /* iOSIntPackage */,
+				BB76E14729493BB20016E6BF /* RealmSwift */,
+				BB76E14929493BBA0016E6BF /* Realm */,
 			);
 			productName = Navigation;
 			productReference = BBDC802C2749E2FF000A302B /* Navigation.app */;
@@ -405,6 +434,7 @@
 			mainGroup = BBDC80232749E2FF000A302B;
 			packageReferences = (
 				BB0C073E2810BF1D00C0D950 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+				BB1B5BF52948CC0E004B1D56 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = BBDC802D2749E2FF000A302B /* Products */;
 			projectDirPath = "";
@@ -423,6 +453,7 @@
 			files = (
 				BBDC803C2749E301000A302B /* LaunchScreen.storyboard in Resources */,
 				BBDC80392749E301000A302B /* Assets.xcassets in Resources */,
+				BBCB546A294CEFC500218351 /* avatar.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,8 +520,10 @@
 				BB0165C628E64B3600C16F9A /* People.swift in Sources */,
 				BB152509282FBFCE0045275F /* TestUserService.swift in Sources */,
 				BBA2D94827AFD2D2002AC2A1 /* PhotosViewController.swift in Sources */,
+				BB76E14C29493F7E0016E6BF /* TextFieldWithPadding.swift in Sources */,
 				BB1578D0281B341400579E09 /* CurrentLoginFactory.swift in Sources */,
 				BBD735CA27AEDB05002397A0 /* Photos.swift in Sources */,
+				BBCB5465294CECF200218351 /* FileManagerService.swift in Sources */,
 				BBA8973B285C10D900126052 /* CustomTextField.swift in Sources */,
 				BB0165C428E6433100C16F9A /* Planets.swift in Sources */,
 				BBBBC9172753E9DB003DDF50 /* ProfileViewController.swift in Sources */,
@@ -504,10 +537,12 @@
 				BBA2D94B27AFE082002AC2A1 /* UIView+Ext.swift in Sources */,
 				BBD4136A275D721800B6E978 /* PostViewController.swift in Sources */,
 				BBBBC9152753E9A6003DDF50 /* FeedViewController.swift in Sources */,
+				BB76E14E2949415B0016E6BF /* RealmManager.swift in Sources */,
 				BBF7295027B4238100D737EF /* PhotosCollectionViewCell.swift in Sources */,
 				BB1578CD28195B7500579E09 /* LoginFactory.swift in Sources */,
 				BB0B224A279343AD00C51B3D /* Constants.swift in Sources */,
 				BB53FB24276A8F9D0094AF1D /* ProfileTableHederView.swift in Sources */,
+				BB1B5BF92949367F004B1D56 /* UserRealm.swift in Sources */,
 				BBD4136C275D882000B6E978 /* InfoViewController.swift in Sources */,
 				BB962F2D283457B10080A2D1 /* CustomButton.swift in Sources */,
 				BBF7295327B45F8100D737EF /* Cells.swift in Sources */,
@@ -673,7 +708,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5BPW3NPX5G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_FILE = Navigation/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -704,7 +739,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5BPW3NPX5G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_FILE = Navigation/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -829,9 +864,27 @@
 				version = 3.2.3;
 			};
 		};
+		BB1B5BF52948CC0E004B1D56 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BB76E14729493BB20016E6BF /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB1B5BF52948CC0E004B1D56 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		BB76E14929493BBA0016E6BF /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB1B5BF52948CC0E004B1D56 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
 		BBE33F7428310F36008D8E19 /* iOSIntPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BB0C073E2810BF1D00C0D950 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;

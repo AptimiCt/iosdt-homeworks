@@ -8,7 +8,7 @@
 import Foundation
 
 protocol UserService{
-    func userService(loginName: String) -> User?
+    func userService(loginName: String) -> UserRealm?
 }
 
 final class User {
