@@ -10,6 +10,7 @@
 		1401A70270D4E8F073AC4858 /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348F2BBF52654939CF047689 /* Pods_Navigation.framework */; };
 		BB0165C428E6433100C16F9A /* Planets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0165C328E6433100C16F9A /* Planets.swift */; };
 		BB0165C628E64B3600C16F9A /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0165C528E64B3600C16F9A /* People.swift */; };
+		BB06900829584E6D009A2C24 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB06900729584E6D009A2C24 /* FavoritesViewController.swift */; };
 		BB0B224A279343AD00C51B3D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B2249279343AD00C51B3D /* Constants.swift */; };
 		BB0C6A4428FA045500C665D5 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0C6A4328FA045500C665D5 /* LoginViewControllerDelegate.swift */; };
 		BB0C6A4628FA060E00C665D5 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0C6A4528FA060E00C665D5 /* AuthModel.swift */; };
@@ -87,6 +88,7 @@
 		8CEB151DFA3B01B29365FC90 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
 		BB0165C328E6433100C16F9A /* Planets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planets.swift; sourceTree = "<group>"; };
 		BB0165C528E64B3600C16F9A /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
+		BB06900729584E6D009A2C24 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		BB0B2249279343AD00C51B3D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BB0C6A4328FA045500C665D5 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		BB0C6A4528FA060E00C665D5 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
@@ -162,6 +164,23 @@
 				8CEB151DFA3B01B29365FC90 /* Pods-Navigation.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BB06900629584DE5009A2C24 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				BB06900729584E6D009A2C24 /* FavoritesViewController.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		BB06900929584EFB009A2C24 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				BBD4136B275D882000B6E978 /* InfoViewController.swift */,
+				BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		BB152503282FBFCE0045275F /* Model */ = {
@@ -312,9 +331,9 @@
 				BBD735C627A72C95002397A0 /* Post */,
 				BBAE6842279E0E6F0031743C /* Storage */,
 				BB38BC4E27944DE000FF4B2E /* Constants */,
-				BBD4136B275D882000B6E978 /* InfoViewController.swift */,
-				BBBBC9142753E9A6003DDF50 /* FeedViewController.swift */,
+				BB06900929584EFB009A2C24 /* Feed */,
 				BB53FB22276A8F100094AF1D /* Profile */,
+				BB06900629584DE5009A2C24 /* Favorites */,
 				BBDC80382749E301000A302B /* Assets.xcassets */,
 				BBDC803A2749E301000A302B /* LaunchScreen.storyboard */,
 				BBDC803D2749E301000A302B /* Info.plist */,
@@ -536,6 +555,7 @@
 				BB15250D282FBFDE0045275F /* AppDelegate.swift in Sources */,
 				BB8A46BA280B040100C8B27C /* Storage.swift in Sources */,
 				BB5D0B5E28EE191300B14768 /* CheckerServiceProtocol.swift in Sources */,
+				BB06900829584E6D009A2C24 /* FavoritesViewController.swift in Sources */,
 				BBD735C827A72CAE002397A0 /* PostTableViewCell.swift in Sources */,
 				BB21600A28E087B500715635 /* NetworkManager.swift in Sources */,
 				BB15250E282FBFDE0045275F /* SceneDelegate.swift in Sources */,
