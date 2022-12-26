@@ -42,13 +42,16 @@ class FavoritesViewController: UIViewController {
     //MARK: - override funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-        localStorage = Storage.posts
+        localStorage = CoreDataManager.dataManager.posts.map { mappingPost(postDataModel: $0) }
         setupView()
         addFavoriteAction()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        localStorage = CoreDataManager.dataManager.posts.map { mappingPost(postDataModel: $0) }
+        CoreDataManager.dataManager.loadData()
+    }
     //MARK: - funcs
     private func setupView() {
-        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
@@ -76,6 +79,10 @@ class FavoritesViewController: UIViewController {
     private func addFavoriteAction(){
         
          
+    }
+    
+    private func mappingPost(postDataModel: PostCoreData) -> Post {
+        return Post(author: postDataModel.author ?? "", description: postDataModel.descriptionPost ?? "", image: postDataModel.image ?? "", likes: Int(postDataModel.likes), views: Int(postDataModel.views))
     }
 }
 

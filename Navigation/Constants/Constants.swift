@@ -131,4 +131,5 @@ struct Constants {
     static let people = "https://swapi.dev/api/people/8"
     static let starships = "https://swapi.dev/api/starships/3"
     static let planets = "https://swapi.dev/api/planets/5"
+    static let dataModel = "PostDataModel"
 }
