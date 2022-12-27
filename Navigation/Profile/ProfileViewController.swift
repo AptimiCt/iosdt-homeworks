@@ -201,9 +201,5 @@ extension ProfileViewController: UITableViewDelegate {
             let nvc = PhotosViewController()
             navigationController?.pushViewController(nvc, animated: true)
         }
-        if indexPath.section == 1 {
-            let post = localStorage[indexPath.row]
-            CoreDataManager.dataManager.addPost(post: post)
-        }
     }
 }

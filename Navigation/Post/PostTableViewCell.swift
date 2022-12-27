@@ -76,10 +76,17 @@ class PostTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
         configureConstraints()
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(addPostToFavorite))
+                doubleTap.numberOfTapsRequired = 2
+                self.addGestureRecognizer(doubleTap)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    @objc func addPostToFavorite(){
+        guard let post else { return }
+        CoreDataManager.dataManager.addPost(post: post)
     }
 }
 

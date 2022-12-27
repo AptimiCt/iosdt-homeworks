@@ -33,6 +33,7 @@ class FavoritesViewController: UIViewController {
         view.backgroundColor = .red
         #endif
         self.tabBarItem = tabBarItemProfileView
+        self.title = "Favorites"
     }
     
     required init?(coder: NSCoder) {
@@ -44,7 +45,6 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         localStorage = CoreDataManager.dataManager.posts.map { mappingPost(postDataModel: $0) }
         setupView()
-        addFavoriteAction()
     }
     override func viewWillAppear(_ animated: Bool) {
         localStorage = CoreDataManager.dataManager.posts.map { mappingPost(postDataModel: $0) }
@@ -53,7 +53,6 @@ class FavoritesViewController: UIViewController {
     //MARK: - funcs
     private func setupView() {
         tableView.dataSource = self
-        tableView.delegate = self
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         configureConstraints()
     }
@@ -67,18 +66,7 @@ class FavoritesViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ]
-        
         NSLayoutConstraint.activate(constraints)
-    }
-    
-    @objc private func addFavorite(sender: UITapGestureRecognizer){
-
-        
-    }
-    
-    private func addFavoriteAction(){
-        
-         
     }
     
     private func mappingPost(postDataModel: PostCoreData) -> Post {
@@ -98,12 +86,4 @@ extension FavoritesViewController: UITableViewDataSource {
         cell.post = localStorage[indexPath.row]
         return cell
     }
-}
-
-extension FavoritesViewController: UITableViewDelegate {
-
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.cellForRow(at: indexPath)?.selectionStyle = .none
-//
-//    }
 }
