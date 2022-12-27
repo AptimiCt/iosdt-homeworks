@@ -171,7 +171,8 @@ extension ProfileViewController: UITableViewDataSource {
         }
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForPost) as? PostTableViewCell else { return UITableViewCell() }
-        cell.post = localStorage[indexPath.row]
+        let post = localStorage[indexPath.row]
+        cell.post = post
         return cell
     }
     

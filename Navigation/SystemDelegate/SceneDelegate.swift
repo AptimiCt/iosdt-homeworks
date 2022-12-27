@@ -28,13 +28,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarController = UITabBarController()
         let feedViewController = FeedViewController(post: post)
         let loginViewController = LoginViewController()
+        let profileVC = FavoritesViewController()
         let currentLoginFactory = CurrentLoginFactory()
         loginViewController.delegate = currentLoginFactory.create()
         
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
         let profileNavigationController = UINavigationController(rootViewController: loginViewController)
         
-        tabBarController.viewControllers = [feedNavigationController,profileNavigationController]
+        let favoritesNavigationController = UINavigationController(rootViewController: profileVC)
+        
+        tabBarController.viewControllers = [feedNavigationController,profileNavigationController,favoritesNavigationController]
         tabBarController.selectedIndex = 1
         
         if #available(iOS 15.0, *) {
