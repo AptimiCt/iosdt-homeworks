@@ -9,6 +9,8 @@ import UIKit
 
 final class InfoViewController: UIViewController {
     
+    weak var coordinator: FeedCoordinator!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemTeal
@@ -29,19 +31,6 @@ final class InfoViewController: UIViewController {
     }
     
     @objc private func setupAlert(){
-        let title = "Уведомление!"
-        let message = "Нажата кнопка в InfoViewController"
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: "Cancel", style: .destructive) { _ in
-            print("Нажата кнопка Cancel")
-        }
-        let actionOk = UIAlertAction(title: "Ok", style: .default) { _ in
-            print("Нажата кнопка Ок")
-        }
-        alert.addAction(actionCancel)
-        alert.addAction(actionOk)
-        self.present(alert, animated: true, completion: nil)
+        coordinator.showAlert(in: self)
     }
 }

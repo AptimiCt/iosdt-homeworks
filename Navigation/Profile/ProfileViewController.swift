@@ -8,9 +8,9 @@
 import UIKit
 import StorageService
 
-class ProfileViewController: UIViewController, SetupViewProtocol {
+class ProfileViewController: UIViewController {
     
-    
+    private var coordinator: LoginCoordinator
     //MARK: - vars
     private let tabBarItemProfileView = UITabBarItem(title: "Profile",
                                                      image: UIImage(systemName: "person.crop.circle.fill"),
@@ -33,8 +33,9 @@ class ProfileViewController: UIViewController, SetupViewProtocol {
     
     //MARK: - init
     
-    init(loginName: String, userService: UserService) {
+    init(loginName: String, userService: UserService, coordinator: LoginCoordinator) {
         self.userService = userService
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
         #if DEBUG
         view.backgroundColor = .systemGray6
@@ -199,8 +200,7 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.selectionStyle = .none
         if indexPath.section == 0 {
-            let nvc = PhotosViewController()
-            navigationController?.pushViewController(nvc, animated: true)
+            coordinator.showPhotosVC()
         }
     }
 }

@@ -12,6 +12,8 @@ final class PostViewController: UIViewController {
     
     private var post: Post?
     
+    weak var coordinator: FeedCoordinator!
+    
     init(post: Post) {
         self.post = post
         super.init(nibName: nil, bundle: nil)
@@ -36,7 +38,6 @@ final class PostViewController: UIViewController {
     }
     
     @objc private func openInfoVC(){
-        let infoVC = InfoViewController()
-        present(infoVC, animated: true, completion: nil)
+        coordinator.showInfo()
     }
 }

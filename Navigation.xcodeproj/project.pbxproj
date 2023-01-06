@@ -18,7 +18,7 @@
 		BB1578CD28195B7500579E09 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1578CC28195B7500579E09 /* LoginFactory.swift */; };
 		BB1578D0281B341400579E09 /* CurrentLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1578CF281B341400579E09 /* CurrentLoginFactory.swift */; };
 		BB38BC4D2794180600FF4B2E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38BC4C2794180600FF4B2E /* LoginViewController.swift */; };
-		BB47EFF52888C12400FFB5EC /* ViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47EFF42888C12400FFB5EC /* ViewControllersFactory.swift */; };
+		BB47EFF52888C12400FFB5EC /* ControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47EFF42888C12400FFB5EC /* ControllersFactory.swift */; };
 		BB47EFF82889EA4B00FFB5EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47EFF72889EA4B00FFB5EC /* TabBarController.swift */; };
 		BB47EFFA288A002000FFB5EC /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47EFF9288A002000FFB5EC /* FeedCoordinator.swift */; };
 		BB47EFFC288A003400FFB5EC /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47EFFB288A003400FFB5EC /* LoginCoordinator.swift */; };
@@ -85,7 +85,7 @@
 		BB1578CC28195B7500579E09 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		BB1578CF281B341400579E09 /* CurrentLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLoginFactory.swift; sourceTree = "<group>"; };
 		BB38BC4C2794180600FF4B2E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		BB47EFF42888C12400FFB5EC /* ViewControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllersFactory.swift; sourceTree = "<group>"; };
+		BB47EFF42888C12400FFB5EC /* ControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllersFactory.swift; sourceTree = "<group>"; };
 		BB47EFF72889EA4B00FFB5EC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		BB47EFF9288A002000FFB5EC /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		BB47EFFB288A003400FFB5EC /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 			children = (
 				BB1578CC28195B7500579E09 /* LoginFactory.swift */,
 				BB1578CF281B341400579E09 /* CurrentLoginFactory.swift */,
-				BB47EFF42888C12400FFB5EC /* ViewControllersFactory.swift */,
+				BB47EFF42888C12400FFB5EC /* ControllersFactory.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -489,7 +489,7 @@
 			files = (
 				BB152511282FBFF90045275F /* SetupViewProtocol.swift in Sources */,
 				BBD68B7F281742B1007BD77E /* LoginInspector.swift in Sources */,
-				BB47EFF52888C12400FFB5EC /* ViewControllersFactory.swift in Sources */,
+				BB47EFF52888C12400FFB5EC /* ControllersFactory.swift in Sources */,
 				BBD735CD27AEE22A002397A0 /* PhotosTableViewCell.swift in Sources */,
 				BB47EFFA288A002000FFB5EC /* FeedCoordinator.swift in Sources */,
 				BBD68B7D281726C0007BD77E /* Checker.swift in Sources */,

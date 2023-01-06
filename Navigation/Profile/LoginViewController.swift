@@ -13,9 +13,9 @@ protocol LoginViewControllerDelegate: AnyObject {
 
 class LoginViewController: UIViewController {
     
-    private weak var flowCoordinator: FlowCoordinator?
     //MARK: - vars
-    var delegate: LoginViewControllerDelegate?
+    var delegate: LoginViewControllerDelegate
+    var coordinator: LoginCoordinator
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -75,7 +75,9 @@ class LoginViewController: UIViewController {
                                        tag: 1)
     
     //MARK: - init
-    init(){
+    init(coordinator: LoginCoordinator, delegate: LoginViewControllerDelegate){
+        self.coordinator = coordinator
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
         self.tabBarItem = tabBarItemLocal
     }
@@ -177,12 +179,11 @@ class LoginViewController: UIViewController {
             let check = true
             let userService = TestUserService()
         #else
-            guard let check = delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
+            let check = delegate.checkerLoginInspector(for: passwordText, login: loginText)
             let userService = CurrentUserService()
         #endif
         if check {
-            let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
-            navigationController?.pushViewController(profileViewController, animated: true)
+            coordinator.showProfileVC(loginName: loginText, userService: userService)
         } else {
             let alert = UIAlertController(title: Constants.titleAlert, message: Constants.message, preferredStyle: .alert)
             let actionOk = UIAlertAction(title: "Ok", style: .default)

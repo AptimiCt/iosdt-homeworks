@@ -8,16 +8,23 @@
 import Foundation
 import UIKit
 
-protocol MainCoordinator {
-    func startApp() -> UITabBarController
-}
-protocol FlowCoordinator: AnyObject {
-    func startFlow(coordinator: FlowCoordinator)
+protocol Coordinator: AnyObject {
+    var childCoordinators: [Coordinator] { get set }
 }
 
-final class AppCoordinator: MainCoordinator {
+final class AppCoordinator: Coordinator {
     
-    func startApp() -> UITabBarController {
-        return TabBarController()
+    let window: UIWindow
+    let rootViewController: UIViewController
+    var childCoordinators: [Coordinator] = []
+    
+    init(window: UIWindow) {
+        self.window = window
+        self.rootViewController = ControllersFactory.createTabBarController()
+    }
+    
+    func start(){
+        window.rootViewController = rootViewController
+        window.makeKeyAndVisible()
     }
 }

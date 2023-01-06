@@ -8,12 +8,13 @@
 import UIKit
 
 class TabBarController: UITabBarController {
+    
     private var feedViewController: UIViewController
     private var loginViewController: UIViewController
     
     init() {
-        self.feedViewController = ViewControllersFactory(navigationController: UINavigationController(), tab: .feed).navigationController
-        self.loginViewController = ViewControllersFactory(navigationController: UINavigationController(), tab: .login).navigationController
+        self.feedViewController = ControllersFactory(navigationController: UINavigationController(), tab: .feed).controller
+        self.loginViewController = ControllersFactory(navigationController: UINavigationController(), tab: .login).controller
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -24,7 +25,9 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setControllers()
+        configTabBar()
     }
+    
     
     
     private func setControllers() {
@@ -33,6 +36,10 @@ class TabBarController: UITabBarController {
             loginViewController
         ]
         selectedIndex = 1
+    }
+    
+    private func configTabBar(){
+        tabBar.backgroundColor = .white
     }
     
 }

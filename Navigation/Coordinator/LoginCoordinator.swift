@@ -6,12 +6,26 @@
 //
 
 import Foundation
+import UIKit
+import StorageService
 
-class LoginCoordinator: FlowCoordinator {
+class LoginCoordinator: Coordinator {
     
-    private weak var loginCoordinator: FlowCoordinator? = nil
+    var childCoordinators: [Coordinator] = []
     
-    func startFlow(coordinator: FlowCoordinator) {
-//        let loginVC = 
+    private var navController: UINavigationController
+    
+    init(navController: UINavigationController) {
+        self.navController = navController
+    }
+    
+    func showProfileVC(loginName: String, userService: UserService) {
+            let profileViewController = ProfileViewController(loginName: loginName, userService: userService, coordinator: self)
+            navController.pushViewController(profileViewController, animated: true)
+    }
+    
+    func showPhotosVC(){
+        let nvc = PhotosViewController()
+        navController.pushViewController(nvc, animated: true)
     }
 }

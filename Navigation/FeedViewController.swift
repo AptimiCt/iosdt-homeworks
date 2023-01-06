@@ -10,7 +10,7 @@ import StorageService
 
 final class FeedViewController: UIViewController {
     
-    private weak var mainCoordinator: AppCoordinator?
+    private var coordinator: FeedCoordinator
     
     private let post = Post(author: "Post", description: "Post", image: "bars", likes: 1, views: 1)
     private let tabBarItemLocal = UITabBarItem(title: "Feed",
@@ -22,7 +22,8 @@ final class FeedViewController: UIViewController {
     
     private let stackView = UIStackView()
     
-    init(){
+    init(coordinator: FeedCoordinator){
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
         self.tabBarItem = tabBarItemLocal
     }
@@ -76,7 +77,6 @@ final class FeedViewController: UIViewController {
     }
     
     @objc private func pressed(){
-        let postViewController = PostViewController(post: post)
-        navigationController?.pushViewController(postViewController, animated: true)
+        coordinator.showPostVC(post: post)
     }
 }
