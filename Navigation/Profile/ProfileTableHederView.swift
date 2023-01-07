@@ -61,6 +61,18 @@ class ProfileHeaderView: UIView {
         return statusLabel
     }()
     
+    let statusTextField: TextFieldWithPadding = {
+        let statusTextField = TextFieldWithPadding()
+        statusTextField.placeholder = Constants.status
+        statusTextField.font = .systemFont(ofSize: 15, weight: .regular)
+        statusTextField.textColor = .black
+        statusTextField.layer.cornerRadius = 12
+        statusTextField.layer.borderWidth = 1
+        statusTextField.layer.borderColor = UIColor.black.cgColor
+        statusTextField.backgroundColor = .white
+        return statusTextField
+    }()
+    
     lazy var backgroundView: UIView = {
         let backgroundView = UIView(frame: UIScreen.main.bounds)
         backgroundView.alpha = 0
@@ -82,8 +94,13 @@ class ProfileHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubviews(fullNameLabel, statusLabel, setStatusButton, backgroundView, closeButton, avatarImageView)
+        addSubviews(
+            fullNameLabel, statusLabel,
+            statusTextField, setStatusButton,
+            backgroundView, closeButton, avatarImageView
+        )
         setStatusButton.addTarget(self, action: #selector(didTapedStatusButton), for: .touchUpInside)
+        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         snpConstraints()
     }
     
@@ -93,6 +110,14 @@ class ProfileHeaderView: UIView {
     //MARK: - @objc private func
     @objc private func didTapedStatusButton(){
         self.delegate?.didTapedButton()
+    }
+    @objc func statusTextChanged(_ textField: UITextField) {
+        guard let statusText = textField.text else { return }
+        if statusText != "" {
+            self.statusLabel.text = statusText
+        } else {
+            self.statusLabel.text = statusTextField.placeholder
+        }
     }
 }
 
@@ -114,7 +139,6 @@ extension ProfileHeaderView{
             make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(Constants.leadingMarginForAvatarImageView)
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(Constants.topMarginForAvatarImageView)
             make.trailing.equalTo(fullNameLabel.snp.leading).offset(Constants.leadingMarginForFullNameLabel)
-            make.bottom.equalTo(setStatusButton.snp.top).offset(-Constants.topMarginForSetStatusButton)
             make.width.height.equalTo(Constants.heightForAvatarImageView)
         }
         fullNameLabel.snp.makeConstraints { make in
@@ -124,11 +148,20 @@ extension ProfileHeaderView{
         statusLabel.snp.makeConstraints { make in
             make.leading.equalTo(fullNameLabel.snp.leading)
             make.trailing.equalTo(fullNameLabel.snp.trailing)
-            make.bottom.equalTo(setStatusButton.snp.top).offset(Constants.bottomMarginForStatusLabel)
+            make.bottom.equalTo(statusTextField.snp.top).offset(-10)
+            make.bottom.equalTo(avatarImageView.snp.bottom).offset(-18)
         }
+        
+        statusTextField.snp.makeConstraints { make in
+            make.leading.equalTo(statusLabel.snp.leading)
+            make.trailing.equalTo(self.safeAreaLayoutGuide.snp.trailing).offset(Constants.trailingMarginForSetStatusButton)
+            make.height.equalTo(40)
+            make.bottom.equalTo(setStatusButton.snp.top).offset(-10)
+        }
+        
         setStatusButton.snp.makeConstraints { make in
             make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(Constants.leadingMarginForSetStatusButton)
-            make.top.equalTo(avatarImageView.snp.bottom).offset(Constants.topMarginForSetStatusButton)
+            make.top.greaterThanOrEqualTo(avatarImageView.snp.bottom).offset(Constants.topMarginForSetStatusButton)
             make.trailing.greaterThanOrEqualTo(self.safeAreaLayoutGuide.snp.trailing).offset(Constants.trailingMarginForSetStatusButton)
             make.height.equalTo(Constants.heightForSetStatusButton)
         }
