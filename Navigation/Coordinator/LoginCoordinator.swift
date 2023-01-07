@@ -20,8 +20,8 @@ class LoginCoordinator: Coordinator {
     }
     
     func showProfileVC(loginName: String, userService: UserService) {
-            let profileViewController = ProfileViewController(loginName: loginName, userService: userService, coordinator: self)
-            navController.pushViewController(profileViewController, animated: true)
+        let profileViewController = ControllersFactory.createProfileViewController(loginName: loginName, userService: userService, coordinator: self)
+        navController.pushViewController(profileViewController, animated: true)
     }
     
     func showPhotosVC(){

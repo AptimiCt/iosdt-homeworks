@@ -6,9 +6,16 @@
 //
 
 import Foundation
+import StorageService
 
 protocol UserService{
     func userService(loginName: String) -> User?
+}
+
+enum State {
+    case initial
+    case loaded(ProfileViewModelProtocol)
+    case error
 }
 
 final class User {

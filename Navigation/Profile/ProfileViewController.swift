@@ -11,6 +11,9 @@ import StorageService
 class ProfileViewController: UIViewController {
     
     private var coordinator: LoginCoordinator
+    private var viewModel: ProfileViewModelProtocol!
+    
+    
     //MARK: - vars
     private let tabBarItemProfileView = UITabBarItem(title: "Profile",
                                                      image: UIImage(systemName: "person.crop.circle.fill"),
@@ -19,6 +22,11 @@ class ProfileViewController: UIViewController {
     private var avatar: UIImageView?
     private var offsetAvatar: CGFloat = 0
     private var userService: UserService
+    private var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.toAutoLayout()
+        return activityIndicator
+    }()
     
     let profileTableHeaderView = ProfileHeaderView()
     
@@ -28,12 +36,17 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
-    var localStorage:[Post] = []
     var photos: [UIImage] = []
     
     //MARK: - init
     
-    init(loginName: String, userService: UserService, coordinator: LoginCoordinator) {
+    init(
+        loginName: String,
+        userService: UserService,
+        coordinator: LoginCoordinator,
+        viewModel: ProfileViewModel
+    ) {
+        self.viewModel = viewModel
         self.userService = userService
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
@@ -56,9 +69,15 @@ class ProfileViewController: UIViewController {
     //MARK: - override funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-        localStorage = Storage.posts
         photos = Photos.fetchPhotos()
         setupView()
+        setupViewModel()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.changeState { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
     //MARK: - funcs
     func setupView() {
@@ -70,10 +89,14 @@ class ProfileViewController: UIViewController {
     }
     
     func configureConstraints(){
+        
         view.addSubview(tableView)
+        view.addSubview(activityIndicator)
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: Cells.cellForPost)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: Cells.cellForSection)
         let constraints: [NSLayoutConstraint] = [
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -155,12 +178,34 @@ class ProfileViewController: UIViewController {
         tableView.allowsSelection = toggle
         tableView.isScrollEnabled = toggle
     }
+    //MARK: - setupViewModel
+    private func setupViewModel(){
+        viewModel.stateChanged = { [weak self] state in
+            guard let self else { return }
+            switch state {
+                case .initial:
+                    self.activityIndicator(animate: true)
+                case .loaded(let viewModel):
+                    self.viewModel = viewModel
+                    self.activityIndicator(animate: false)
+                    self.tableView.reloadData()
+                case .error:
+                    break
+            }
+        }
+    }
+    private func activityIndicator(animate: Bool){
+        activityIndicator.isHidden = !animate
+        DispatchQueue.main.async {
+            animate ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+        }
+    }
 }
 
 //MARK: - extensions
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 1 : localStorage.count
+        section == 0 ? 1 : viewModel.numberOfRowsInSection()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -172,7 +217,8 @@ extension ProfileViewController: UITableViewDataSource {
         }
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cellForPost) as? PostTableViewCell else { return UITableViewCell() }
-        cell.post = localStorage[indexPath.row]
+        cell.post = viewModel.getPostFor(indexPath)
+        
         return cell
     }
     

@@ -33,11 +33,22 @@ final class ControllersFactory {
                 let loginCoordinator = LoginCoordinator(navController: controller)
                 let currentLoginFactory = CurrentLoginFactory()
                 let loginViewController = LoginViewController(coordinator: loginCoordinator, delegate: currentLoginFactory.create())
-                //loginViewController.coordinator = loginCoordinator
-                //loginViewController.delegate = currentLoginFactory.create()
                 controller.setViewControllers([loginViewController], animated: true)
         }
     }
+    
+    static func createProfileViewController(loginName: String, userService: UserService, coordinator: LoginCoordinator) -> UIViewController {
+        let posts = Storage.posts
+        let viewModel = ProfileViewModel(posts: posts)
+        let profileViewController = ProfileViewController(
+            loginName: loginName,
+            userService: userService,
+            coordinator: coordinator,
+            viewModel: viewModel
+        )
+        return profileViewController
+    }
+    
     static func createTabBarController() -> TabBarController {
         return TabBarController()
     }
