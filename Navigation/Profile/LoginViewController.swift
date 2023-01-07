@@ -26,8 +26,8 @@ class LoginViewController: UIViewController {
         return imageView
     }()
     
-    private let loginTextView: UITextField = {
-        let textField = UITextField()
+    private let loginTextView: TextFieldWithPadding = {
+        let textField = TextFieldWithPadding()
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.backgroundColor = .systemGray6
@@ -38,8 +38,8 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
-    private let passwordTextView: UITextField = {
-        let textField = UITextField()
+    private let passwordTextView: TextFieldWithPadding = {
+        let textField = TextFieldWithPadding()
         textField.backgroundColor = .systemGray6
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.placeholder = "Password"
