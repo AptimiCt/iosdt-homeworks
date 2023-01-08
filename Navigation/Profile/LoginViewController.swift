@@ -8,7 +8,7 @@
 import UIKit
 //MARK: - protocol
 protocol LoginViewControllerDelegate: AnyObject {
-    func checkerLoginInspector(for password: String, login: String) -> Bool
+    func checkerLoginInspector(for password: String, login: String) throws
 }
 
 class LoginViewController: UIViewController {
@@ -215,25 +215,30 @@ class LoginViewController: UIViewController {
     }
     
     //MARK: - private funcs
-    private func loginButtonTapped(){
+    private func loginButtonTapped() {
         loginButton.action = { [weak self] in
-            guard let passwordText = self?.passwordTextView.text, let loginText = self?.loginTextView.text else { return }
+            guard let self, let passwordText = self.passwordTextView.text, let loginText = self.loginTextView.text else { return }
             #if DEBUG
-            let check = true
             let userService = TestUserService()
+            self.showPVC(loginName: loginText, userService: userService)
             #else
-            guard let check = self?.delegate?.checkerLoginInspector(for: passwordText, login: loginText) else { return }
-            let userService = CurrentUserService()
+            do {
+                try self.delegate?.checkerLoginInspector(for: passwordText, login: loginText)
+                let userService = CurrentUserService()
+                self.showPVC(loginName: loginText, userService: userService)
+            } catch LoginError.incorrectCredentials {
+                self.handle(error: .incorrectCredentials)
+            } catch {
+                print(error.localizedDescription)
+            }
             #endif
-//            if check {
-//                let profileViewController = ProfileViewController(loginName: loginText, userService: userService)
-//                self?.navigationController?.pushViewController(profileViewController, animated: true)
-//            } else {
-//                self?.handle(error: .incorrectCredentials)
-//            }
-            
         }
     }
+    private func showPVC(loginName: String, userService: UserService){
+        let profileViewController = ProfileViewController(loginName: loginName, userService: userService)
+        navigationController?.pushViewController(profileViewController, animated: true)
+    }
+    
     private func handle(error: LoginError) {
         switch error {
             case .incorrectCredentials:

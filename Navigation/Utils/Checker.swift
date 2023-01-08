@@ -16,10 +16,9 @@ class Checker {
     
     private init () {}
     
-    func checkCredential(for pass: String, login: String ) -> Bool {
-        if self.login == login.hash && self.password == pass.hash {
-            return true
+    func checkCredential(for pass: String, login: String ) throws {
+        if !(self.login == login.hash && self.password == pass.hash) {
+            throw LoginError.incorrectCredentials
         }
-        return false
     }
 }

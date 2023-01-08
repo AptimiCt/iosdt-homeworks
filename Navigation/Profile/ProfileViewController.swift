@@ -55,7 +55,13 @@ class ProfileViewController: UIViewController {
     //MARK: - override funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-        localStorage = Storage.posts
+        Storage().fetchPosts { [weak self] result in
+            switch result {
+                case .success(let posts):
+                    localStorage = posts
+                    self?.tableView.reloadData()
+            }
+        }
         photos = Photos.fetchPhotos()
         setupView()
         closeButtonTaped()
